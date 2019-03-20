@@ -52,6 +52,7 @@ namespace BatchSystemMNGNT_Asimco.Editors
 
                 exchange.PassWord = edtPassword.Text;
                 exchange.PromisedDate = edtPromisedDate.Text;
+                exchange.PONumber = edtPONumber.Text;
 
                 return true;
             }
