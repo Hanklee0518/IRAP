@@ -1360,13 +1360,13 @@ namespace IRAP.Client.GUI.MESPDC
                 #region 维修结论和维修项目中的维修模式一致性校验
                 Dictionary<int, int> counts = RepairModeCount(repairWIPIDs[i].TSItems);
 
-                int c10699 = 0;
-                int c10700 = 0;
-                int c10701 = 0;
-                int c10702 = 0;
-                int c10703 = 0;
-                int c10718 = 0;
-                int c10737 = 0;
+                int c10699 = 0; // 修复
+                int c10700 = 0; // 换元器件
+                int c10701 = 0; // 换结构件
+                int c10702 = 0; // 无故障
+                int c10703 = 0; // 维修失败
+                int c10718 = 0; // 拆解重装
+                int c10737 = 0; // 重新焊接
 
                 counts.TryGetValue(10699, out c10699);
                 counts.TryGetValue(10700, out c10700);
