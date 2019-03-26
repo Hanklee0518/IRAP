@@ -191,6 +191,7 @@ namespace IRAP.Entities.MES
             Ordinal = origin.Ordinal;
             PartNumber = origin.PartNumber;
             SubWIPIDCode = origin.SubWIPIDCode;
+            SerialNumber = origin.SerialNumber;
             LinkedFactID = origin.LinkedFactID;
             PWOCategoryLeaf = origin.PWOCategoryLeaf;
             T132Leaf = origin.T132Leaf;

@@ -1028,7 +1028,7 @@ namespace IRAP.BL.MES
                         auxFact.WFInstanceID = wipIDCode.PWONo;
                         auxFact.WIPCode = wipIDCode.SubWIPIDCode;
                         auxFact.AltWIPCode = "";
-                        auxFact.SerialNumber = "";
+                        auxFact.SerialNumber = wipIDCode.SerialNumber;
                         auxFact.LotNumber = "";
                         auxFact.ContainerNo = "";
                         WriteLog.Instance.Write("开始保存辅助事实", strProcedureName);
