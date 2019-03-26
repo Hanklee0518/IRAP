@@ -268,15 +268,33 @@ namespace Softland.Tools.Print
             CharSet = CharSet.Auto, 
             ExactSpelling = true, 
             CallingConvention = CallingConvention.StdCall)]
-        public static extern bool StartDocPrinter(IntPtr intptrPrinter, Int32 level, [In, MarshalAs(UnmanagedType.LPStruct)] DocInfo docInfo);
+        public static extern bool StartDocPrinter(
+            IntPtr intptrPrinter, 
+            int level, 
+            [In, MarshalAs(UnmanagedType.LPStruct)] DocInfo docInfo);
 
-        [DllImport("winspool.Drv", EntryPoint = "EndDocPrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "winspool.Drv", 
+            EntryPoint = "EndDocPrinter", 
+            SetLastError = true, 
+            ExactSpelling = true, 
+            CallingConvention = CallingConvention.StdCall)]
         public static extern bool EndDocPrinter(IntPtr intptrPrinter);
 
-        [DllImport("winspool.Drv", EntryPoint = "StartPagePrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "winspool.Drv", 
+            EntryPoint = "StartPagePrinter", 
+            SetLastError = true, 
+            ExactSpelling = true, 
+            CallingConvention = CallingConvention.StdCall)]
         public static extern bool StartPagePrinter(IntPtr intptrPrinter);
 
-        [DllImport("winspool.Drv", EntryPoint = "EndPagePrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "winspool.Drv", 
+            EntryPoint = "EndPagePrinter", 
+            SetLastError = true, 
+            ExactSpelling = true, 
+            CallingConvention = CallingConvention.StdCall)]
         public static extern bool EndPagePrinter(IntPtr intptrPrinter);
 
         [DllImport(
@@ -302,7 +320,8 @@ namespace Softland.Tools.Print
         /// <summary>  
         /// 字节流传递时采用的字符编码  
         /// </summary>  
-        private static readonly Encoding TransferFormat = Encoding.GetEncoding("iso-8859-1");
+        private static readonly Encoding TransferFormat = 
+            Encoding.GetEncoding("iso-8859-1");
 
         #endregion
 
@@ -314,7 +333,7 @@ namespace Softland.Tools.Print
         public static ProgrammingLanguage PrinterProgrammingLanguage { get; set; }
 
         /// <summary>  
-        /// 日志保存目录，WEB应用注意不能放在BIN目录下。  
+        /// 日志保存目录，WEB 应用注意不能放在 BIN 目录下。  
         /// </summary>  
         public static string LogsDirectory { get; set; }
 
@@ -356,9 +375,12 @@ namespace Softland.Tools.Print
         #endregion
 
         #region 定义发送原始数据到打印机的方法  
-        private static bool SendBytesToPrinter(string printerName, IntPtr intptrBytes, Int32 count)
+        private static bool SendBytesToPrinter(
+            string printerName, 
+            IntPtr intptrBytes,
+            int count)
         {
-            Int32 error = 0, written = 0;
+            int error = 0, written = 0;
             IntPtr intptrPrinter = new IntPtr(0);
             DocInfo docInfo = new DocInfo();
             bool bSuccess = false;
@@ -367,7 +389,11 @@ namespace Softland.Tools.Print
             docInfo.DataType = "RAW";
 
             // Open the printer.  
-            if (OpenPrinter(printerName.Normalize(), out intptrPrinter, IntPtr.Zero))
+            if (
+                OpenPrinter(
+                    printerName.Normalize(), 
+                    out intptrPrinter, 
+                    IntPtr.Zero))
             {
                 // Start a document.  
                 if (StartDocPrinter(intptrPrinter, 1, docInfo))
@@ -376,7 +402,12 @@ namespace Softland.Tools.Print
                     if (StartPagePrinter(intptrPrinter))
                     {
                         // Write your bytes.  
-                        bSuccess = WritePrinter(intptrPrinter, intptrBytes, count, out written);
+                        bSuccess = 
+                            WritePrinter(
+                                intptrPrinter, 
+                                intptrBytes, 
+                                count, 
+                                out written);
                         EndPagePrinter(intptrPrinter);
                     }
                     EndDocPrinter(intptrPrinter);
@@ -454,21 +485,35 @@ namespace Softland.Tools.Print
         #region 日志记录方法  
         private static void WriteLog(string text, LogType logType)
         {
-            string endTag = string.Format("\r\n{0}\r\n", new string('=', 80));
-            string path = string.Format("{0}\\{1}-{2}.log", LogsDirectory, DateTime.Now.ToString("yyyy-MM-dd"), logType);
+            string endTag = 
+                string.Format(
+                    "\r\n{0}\r\n", 
+                    new string('=', 80));
+            string path = 
+                string.Format(
+                    "{0}\\{1}-{2}.log", 
+                    LogsDirectory, 
+                    DateTime.Now.ToString("yyyy-MM-dd"), 
+                    logType);
             if (!Directory.Exists(LogsDirectory))
             {
                 Directory.CreateDirectory(LogsDirectory);
             }
             if (logType == LogType.Error)
             {
-                File.AppendAllText(path, string.Format("{0}{1}", text, endTag), Encoding.Default);
+                File.AppendAllText(
+                    path, 
+                    string.Format("{0}{1}", text, endTag),
+                    Encoding.Default);
             }
             if (logType == LogType.Print)
             {
                 if (text.StartsWith("N\r\nGW"))
                 {
-                    using (FileStream fs = new FileStream(path, FileMode.Append))
+                    using (
+                        FileStream fs = 
+                            new FileStream(
+                                path, FileMode.Append))
                     {
                         byte[] bytes = TransferFormat.GetBytes(text);
                         byte[] tag = TransferFormat.GetBytes(endTag);
@@ -479,22 +524,39 @@ namespace Softland.Tools.Print
                 }
                 else
                 {
-                    File.AppendAllText(path, string.Format("{0}{1}", text, endTag), Encoding.Default);
+                    File.AppendAllText(
+                        path, 
+                        string.Format("{0}{1}", text, endTag), 
+                        Encoding.Default);
                 }
             }
         }
 
         private static void WriteLog(byte[] bytes, LogType logType)
         {
-            string endTag = string.Format("\r\n{0}\r\n", new string('=', 80));
-            string path = string.Format("{0}\\{1}-{2}.log", LogsDirectory, DateTime.Now.ToString("yyyy-MM-dd"), logType);
+            string endTag = 
+                string.Format(
+                    "\r\n{0}\r\n", 
+                    new string('=', 80));
+            string path = 
+                string.Format(
+                    "{0}\\{1}-{2}.log", 
+                    LogsDirectory, 
+                    DateTime.Now.ToString("yyyy-MM-dd"), 
+                    logType);
             if (!Directory.Exists(LogsDirectory))
             {
                 Directory.CreateDirectory(LogsDirectory);
             }
             if (logType == LogType.Error)
             {
-                File.AppendAllText(path, string.Format("{0}{1}", Encoding.Default.GetString(bytes), endTag), Encoding.Default);
+                File.AppendAllText(
+                    path, 
+                    string.Format(
+                        "{0}{1}", 
+                        Encoding.Default.GetString(bytes), 
+                        endTag), 
+                    Encoding.Default);
             }
             if (logType == LogType.Print)
             {
@@ -511,7 +573,13 @@ namespace Softland.Tools.Print
                 }
                 else
                 {
-                    File.AppendAllText(path, string.Format("{0}{1}", Encoding.Default.GetString(bytes), endTag), Encoding.Default);
+                    File.AppendAllText(
+                        path, 
+                        string.Format(
+                            "{0}{1}", 
+                            Encoding.Default.GetString(bytes), 
+                            endTag), 
+                        Encoding.Default);
                 }
             }
         }
@@ -526,7 +594,11 @@ namespace Softland.Tools.Print
             return PrintCommand(cmd);
         }
 
-        public static bool PrintWithCOM(byte[] bytes, int port, bool isWriteLog, ProgrammingLanguage progLanguage)
+        public static bool PrintWithCOM(
+            byte[] bytes, 
+            int port, 
+            bool isWriteLog, 
+            ProgrammingLanguage progLanguage)
         {
             PrinterType = DeviceType.COM;
             Port = port;
@@ -543,7 +615,11 @@ namespace Softland.Tools.Print
             return PrintCommand(cmd);
         }
 
-        public static bool PrintWithLPT(byte[] bytes, int port, bool isWriteLog, ProgrammingLanguage progLanguage)
+        public static bool PrintWithLPT(
+            byte[] bytes, 
+            int port, 
+            bool isWriteLog, 
+            ProgrammingLanguage progLanguage)
         {
             PrinterType = DeviceType.LPT;
             Port = port;
@@ -552,7 +628,10 @@ namespace Softland.Tools.Print
             return PrintGraphics(bytes);
         }
 
-        public static bool PrintWithDRV(string cmd, string printerName, bool isWriteLog)
+        public static bool PrintWithDRV(
+            string cmd, 
+            string printerName, 
+            bool isWriteLog)
         {
             PrinterType = DeviceType.DRV;
             PrinterName = printerName;
@@ -560,7 +639,11 @@ namespace Softland.Tools.Print
             return PrintCommand(cmd);
         }
 
-        public static bool PrintWithDRV(byte[] bytes, string printerName, bool isWriteLog, ProgrammingLanguage progLanguage)
+        public static bool PrintWithDRV(
+            byte[] bytes, 
+            string printerName, 
+            bool isWriteLog, 
+            ProgrammingLanguage progLanguage)
         {
             PrinterType = DeviceType.DRV;
             PrinterName = printerName;
@@ -600,7 +683,13 @@ namespace Softland.Tools.Print
                     //记录日志  
                     if (IsWriteLog)
                     {
-                        WriteLog(string.Format("{0} => {1}\r\n{2}", DateTime.Now, ex.Message, ex), LogType.Error);
+                        WriteLog(
+                            string.Format(
+                                "{0} => {1}\r\n{2}", 
+                                DateTime.Now, 
+                                ex.Message, 
+                                ex), 
+                            LogType.Error);
                     }
                 }
                 finally
@@ -652,7 +741,13 @@ namespace Softland.Tools.Print
                     //记录日志  
                     if (IsWriteLog)
                     {
-                        WriteLog(string.Format("{0} => {1}\r\n{2}", DateTime.Now, ex.Message, ex), LogType.Error);
+                        WriteLog(
+                            string.Format(
+                                "{0} => {1}\r\n{2}", 
+                                DateTime.Now, 
+                                ex.Message, 
+                                ex), 
+                            LogType.Error);
                     }
                 }
                 finally
@@ -685,7 +780,13 @@ namespace Softland.Tools.Print
         private static bool comPrint(byte[] cmdBytes)
         {
             bool result = false;
-            SerialPort com = new SerialPort(string.Format("{0}{1}", PrinterType, Port), 9600, Parity.None, 8, StopBits.One);
+            SerialPort com = 
+                new SerialPort(
+                    string.Format("{0}{1}", PrinterType, Port), 
+                    9600, 
+                    Parity.None, 
+                    8, 
+                    StopBits.One);
             try
             {
                 com.Open();
@@ -714,7 +815,15 @@ namespace Softland.Tools.Print
             SafeFileHandle handle = null;
             try
             {
-                handle = CreateFile(string.Format("{0}{1}", PrinterType, Port), GENERIC_WRITE, 0, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
+                handle = 
+                    CreateFile(
+                        string.Format("{0}{1}", PrinterType, Port),
+                        GENERIC_WRITE, 
+                        0, 
+                        IntPtr.Zero, 
+                        OPEN_EXISTING, 
+                        0, 
+                        IntPtr.Zero);
                 if (!handle.IsInvalid)
                 {
                     fileStream = new FileStream(handle, FileAccess.ReadWrite);
@@ -755,15 +864,25 @@ namespace Softland.Tools.Print
             byte[] result = new byte[0];
             byte[] bmpData = getBitmapData();
             string textBitmap = string.Empty;
-            string textHex = BitConverter.ToString(bmpData).Replace("-", string.Empty);
+            string textHex = 
+                BitConverter
+                    .ToString(bmpData)
+                    .Replace("-", string.Empty);
             for (int i = 0; i < GraphHeight; i++)
             {
-                textBitmap += textHex.Substring(i * RowRealBytesCount * 2, RowRealBytesCount * 2) + "\r\n";
+                textBitmap += 
+                    textHex
+                        .Substring(
+                            i * RowRealBytesCount * 2, 
+                            RowRealBytesCount * 2) + "\r\n";
             }
-            string text = string.Format("~DGR:IMAGE.GRF,{0},{1},\r\n{2}^XGR:IMAGE.GRF,1,1^FS\r\n^IDR:IMAGE.GRF\r\n",
-                GraphHeight * RowRealBytesCount,
-                RowRealBytesCount,
-                textBitmap);
+            string text = 
+                string.Format(
+                    "~DGR:IMAGE.GRF,{0},{1},\r\n{2}^XGR:IMAGE.GRF,"+
+                    "1,1^FS\r\n^IDR:IMAGE.GRF\r\n",
+                    GraphHeight * RowRealBytesCount,
+                    RowRealBytesCount,
+                    textBitmap);
             result = Encoding.Default.GetBytes(text);
             return result;
         }
@@ -774,12 +893,14 @@ namespace Softland.Tools.Print
         {
             byte[] result = new byte[0];
             byte[] buffer = getBitmapData();
-            string text = string.Format("N\r\nGW{0},{1},{2},{3},{4}\r\nP\r\n",
-                0,
-                0,
-                RowRealBytesCount,
-                GraphHeight,
-                TransferFormat.GetString(buffer));
+            string text = 
+                string.Format(
+                    "N\r\nGW{0},{1},{2},{3},{4}\r\nP\r\n",
+                    0,
+                    0,
+                    RowRealBytesCount,
+                    GraphHeight,
+                    TransferFormat.GetString(buffer));
             result = TransferFormat.GetBytes(text);
             return result;
         }
@@ -806,7 +927,10 @@ namespace Softland.Tools.Print
                 srcBuffer = srcStream.ToArray();
                 GraphWidth = srcBmp.Width;
                 GraphHeight = srcBmp.Height;
-                dstBmp = srcBmp.Clone(new Rectangle(0, 0, srcBmp.Width, srcBmp.Height), PixelFormat.Format1bppIndexed);
+                dstBmp = 
+                    srcBmp.Clone(
+                        new Rectangle(0, 0, srcBmp.Width, srcBmp.Height), 
+                        PixelFormat.Format1bppIndexed);
                 dstBmp.Save(dstStream, ImageFormat.Bmp);
                 dstBuffer = dstStream.ToArray();
 
@@ -818,7 +942,12 @@ namespace Softland.Tools.Print
                 //读取时需要反向读取每行字节实现上下翻转的效果，打印机打印顺序需要这样读取。  
                 for (int i = 0; i < GraphHeight; i++)
                 {
-                    Array.Copy(dstBuffer, bfOffBits + (GraphHeight - 1 - i) * RowSize, result, i * RowRealBytesCount, RowRealBytesCount);
+                    Array.Copy(
+                        dstBuffer, 
+                        bfOffBits + (GraphHeight - 1 - i) * RowSize, 
+                        result, 
+                        i * RowRealBytesCount, 
+                        RowRealBytesCount);
                 }
             }
             catch (Exception ex)
