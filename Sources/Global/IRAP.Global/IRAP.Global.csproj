@@ -94,6 +94,7 @@
     <Compile Include="WriteLog.cs" />
     <Compile Include="XmlFile.cs" />
     <Compile Include="XMLHelper.cs" />
+    <Compile Include="ZebraPrintHelper.cs" />
     <Compile Include="ZPLPrint.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRAP.Entity.MES", "..\..\Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRAP.Entity.SSO", "..\..\Server\IRAP.Entities\IRAP.Entity.SSO\IRAP.Entity.SSO.csproj", "{DA96959D-CDD1-4533-B5E8-CF235C2D1C61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendMessageToESB", "..\..\Demo\SendMessageToESB\SendMessageToESB.csproj", "{078EF08F-1169-4AAA-8E94-69DC955550B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{DA96959D-CDD1-4533-B5E8-CF235C2D1C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA96959D-CDD1-4533-B5E8-CF235C2D1C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA96959D-CDD1-4533-B5E8-CF235C2D1C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{078EF08F-1169-4AAA-8E94-69DC955550B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078EF08F-1169-4AAA-8E94-69DC955550B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078EF08F-1169-4AAA-8E94-69DC955550B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078EF08F-1169-4AAA-8E94-69DC955550B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
