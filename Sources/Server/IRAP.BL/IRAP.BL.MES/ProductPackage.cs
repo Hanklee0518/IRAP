@@ -405,7 +405,7 @@ namespace IRAP.BL.MES
                 paramList.Add(new IRAPProcParameter("@LayerSerialNumber", DbType.String, layerSerialNumber));
                 paramList.Add(new IRAPProcParameter("@PalletSerialNumber", DbType.String, palletSerialNumber));
                 paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
-                paramList.Add(new IRAPProcParameter("@OutputStr", DbType.Xml,ParameterDirection.Output,2000));
+                paramList.Add(new IRAPProcParameter("@OutputStr", DbType.Xml, ParameterDirection.Output, 2000));
                 paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
                 paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
                 WriteLog.Instance.Write(
@@ -450,7 +450,7 @@ namespace IRAP.BL.MES
                         conn.CallProc("IRAPMES..usp_SaveFact_Packaging", ref paramList);
                         errCode = error.ErrCode;
                         errText = error.ErrText;
-                        string  outputStr = paramList[20].Value.ToString();
+                        string outputStr = paramList[20].Value.ToString();
                         WriteLog.Instance.Write(
                             $"OutpuStr={outputStr}",
                             strProcedureName);
