@@ -510,6 +510,7 @@ namespace VA_ITCMS2000
                     fileWav,
                     fileMP3);
             Process p = Process.Start(psi);
+            p.WaitForExit();    // 等待字符转语音进程完成转换
             p.Close();
             p.Dispose();
 
