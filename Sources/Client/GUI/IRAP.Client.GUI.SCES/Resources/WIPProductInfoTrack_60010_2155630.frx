@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/07/2014 12:57:33" ReportInfo.Modified="04/24/2019 12:02:50" ReportInfo.CreatorVersion="2013.2.5.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/07/2014 12:57:33" ReportInfo.Modified="04/24/2019 12:55:30" ReportInfo.CreatorVersion="2013.2.5.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,12 +22,13 @@ namespace FastReport
 
     private void Page1_StartPage(object sender, EventArgs e)
     {                                                                                 
+      Barcode.Text = ((string)Report.GetParameterValue(&quot;BarCode&quot;));
     }
   }
 }
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8ZXatoTOPV/vQdiBMsyUstMQ/HNifsWbuWuzkTXmKRH2o1w15QKMnHGgEldtKEA730OqosVbqhBdcYGLTsIKn8r8+Y0xvx++djKtnqgV/DXt2gr09j4HTHlzvTlRLG+moYPEFzDYRx2Nf/NBtnrwnU3wJSRYLMGk5XUC9cV2tFYKXh0d+hvGe+eyZXzuvQEYuA==">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8ZXatoTOPV/vQdiBMsyUstMQ/HNifsWbuWuzkTXmKRH2o1w15QKMnHGgEldtKEA730OqosVbqhBdcYGLTsIKn8r8+Y0xvx++djKtnqgV/DXt2gr09j4HTHlzvTlRLG+moYPEFzDYRx2Nf/NBtnrwnU3wJSRYLMGk5XUC9cV2tFYKXTOaRTwsk6H0Zj+32O/q6Q==">
       <TableDataSource Name="Temp_WIPProductInfoTrack" Alias="WIPProductInfoTrack" DataType="System.Int32" Enabled="true" TableName="Temp_WIPProductInfoTrack">
         <Column Name="BarCode" DataType="System.String"/>
         <Column Name="DeliveryWorkShop" DataType="System.String"/>
