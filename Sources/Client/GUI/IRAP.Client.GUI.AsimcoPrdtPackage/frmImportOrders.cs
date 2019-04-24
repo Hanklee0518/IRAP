@@ -154,6 +154,8 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage
                 throw new Exception("文件中未找到 LOT 字段");
             if (!dt.Columns.Contains("STK_QTY"))
                 throw new Exception("文件中未找到 STK_QTY 字段");
+            if (!dt.Columns.Contains("CPLOT"))
+                throw new Exception("文件中未找到 CPLOT 字段");
 
             long partitioningKey = IRAPUser.Instance.CommunityID * 10000;
             foreach (DataRow row in dt.Rows)
@@ -186,6 +188,8 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage
                     data.Location = row["KW"].ToString().Trim();
                 if (row["LOT"] != null)
                     data.LotNumber = row["LOT"].ToString().Trim();
+                if (row["CPLOT"] != null)
+                    data.CPLot = row["CPLOT"].ToString().Trim();
                 try
                 {
                     data.OrderQty = Convert.ToDecimal(row["STK_QTY"].ToString());
@@ -248,7 +252,12 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage
             }
             else
             {
-                dbfFileName = "D:\\Pick\\_zxkwslz.dbf";
+                XtraMessageBox.Show(
+                    "导入文件名未在配置文件中定义，不能执行导入功能",
+                    "提示信息",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
 
             List<dpa_DBF_MO> datas = null;

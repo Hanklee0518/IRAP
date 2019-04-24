@@ -15,6 +15,7 @@ namespace IRAP.Entities.DPA
         public string Treasury { get; set; }
         public string Location { get; set; }
         public string LotNumber { get; set; }
+        public string CPLot { get; set; }
         public decimal OrderQty { get; set; }
         public int ErrCode { get; set; }
         public string ErrText { get; set; }
