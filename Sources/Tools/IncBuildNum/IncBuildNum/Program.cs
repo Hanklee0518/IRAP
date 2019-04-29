@@ -235,9 +235,13 @@ namespace IncBuildNum
 
                             if (strSplitter.Length >= 3)
                             {
+                                /*
+                                /* 不再判断当前的编译配置是否需要编译 RELEASE，即进行 RELEASE 编译时
+                                /* 不再自动增加 Release 域的值
                                 if (isReleased)
                                     version += "." + ((int.Parse(strSplitter[2])) + 1).ToString();
                                 else
+                                */
                                     version += "." + strSplitter[2];
                             }
                             else
