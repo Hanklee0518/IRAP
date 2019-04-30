@@ -16,26 +16,26 @@ namespace IRAP.Client.GUI.MESPDC.Entities
         {
             Scale = 2,
         };
- 
+
         /// <summary>
         /// 序号
         /// </summary>
-        public int Ordinal { get; set; }
+        public int Ordinal { get; set; } = 0;
 
         /// <summary>
         /// 原材料叶标识
         /// </summary>
-        public int T101LeafID { get; set; }
+        public int T101LeafID { get; set; } = 0;
 
         /// <summary>
         /// 原材料代码
         /// </summary>
-        public string T101Code { get; set; }
+        public string T101Code { get; set; } = "";
 
         /// <summary>
         /// 原材料名称
         /// </summary>
-        public string T101Name { get; set; }
+        public string T101Name { get; set; } = "";
 
         /// <summary>
         /// 默认放大数量级
@@ -64,12 +64,12 @@ namespace IRAP.Client.GUI.MESPDC.Entities
         /// <summary>
         /// 历史记录  暂时不用考略
         /// </summary>
-        public string DataXML { get; set; }
+        public string DataXML { get; set; } = "";
 
         /// <summary>
         /// 批次号
         /// </summary>
-        public string LotNumber { get; set; }
+        public string LotNumber { get; set; } = "";
 
         /// <summary>
         /// 数量
@@ -131,42 +131,42 @@ namespace IRAP.Client.GUI.MESPDC.Entities
         /// <summary>
         /// 序号
         /// </summary>
-        public int Ordinal { get; set; }
+        public int Ordinal { get; set; } = 0;
 
         /// <summary>
         /// 检验项目叶标识
         /// </summary>
-        public int T20LeafID { get; set; }
+        public int T20LeafID { get; set; } = 0;
 
         /// <summary>
         /// 检验项目代码
         /// </summary>
-        public string T20Code { get; set; }
+        public string T20Code { get; set; } = "";
 
         /// <summary>
         /// 检验项目名称
         /// </summary>
-        public string T20Name { get; set; }
+        public string T20Name { get; set; } = "";
 
         /// <summary>
         /// 默认放大数量级
         /// </summary>
-        public int Scale { get; set; }
+        public int Scale { get; set; } = 0;
 
         /// <summary>
         /// 计量单位
         /// </summary>
-        public string UnitOfMeasure { get; set; }
+        public string UnitOfMeasure { get; set; } = "";
 
         /// <summary>
         /// 历史记录  暂时不用考略
         /// </summary>
-        public string DataXML { get; set; }
+        public string DataXML { get; set; } = "";
 
         /// <summary>
         /// 生产开炉参数值
         /// </summary>
-        public string Value { get; set; }
+        public string Value { get; set; } = "";
 
         public static SmeltMethodItemClient Mapper<SmeltMethodItemClient, SmeltMethodItem>(SmeltMethodItem s)
         {

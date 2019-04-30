@@ -1521,7 +1521,18 @@ namespace IRAP.Client.GUI.MESPDC.UserControls
                         "请确认",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning) != DialogResult.Yes)
+                    {
                         return;
+                    }
+                }
+                else
+                {
+                    XtraMessageBox.Show(
+                        "在开炉生产前，必须输入开炉配料，否则无法开始生产！",
+                        "提示",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
                 }
             }
             #endregion
