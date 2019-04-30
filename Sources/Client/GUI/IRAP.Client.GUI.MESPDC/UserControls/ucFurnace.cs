@@ -1501,7 +1501,8 @@ namespace IRAP.Client.GUI.MESPDC.UserControls
                 string strTemp = "";                
                 foreach (SmeltMaterialItemClient data in datas)
                 {
-                    if (data.LotNumber.Trim() != "")
+                    if (!string.IsNullOrEmpty(data.LotNumber) || 
+                        data.LotNumber.Trim() != "")
                     {
                         strTemp +=
                             $"\t代码:{data.T101Code}," +
