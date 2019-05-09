@@ -94,6 +94,10 @@ namespace IRAP.Client.GUI.MDM
             CreateFRParameter(report, "ProductDate", "2016年10月20日", "生产日期");
             CreateFRParameter(report, "CustomerSN", "16B00002L211393500310U2263", "客户条码");
             CreateFRParameter(report, "SupplierCode", "ABCD1234", "供应商代码");
+            CreateFRParameter(report, "ProductPNo", "ABCDEFG", "产品图号");
+            CreateFRParameter(report, "BatchNumber", "B20190312001", "批次号");
+            CreateFRParameter(report, "PWONo", "M-MD123-001", "订单号");
+            CreateFRParameter(report, "PWOLineNo", "130", "订单行号");
         }
 
         private string LoadTemplateFromDB(int t117LeafID)
