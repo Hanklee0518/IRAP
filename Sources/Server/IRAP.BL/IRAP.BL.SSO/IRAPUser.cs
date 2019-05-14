@@ -918,22 +918,24 @@ namespace IRAP.BL.SSO
                 #region 执行数据库函数或存储过程
                 try
                 {
-                    using (IRAPOracleConnection conn = new IRAPOracleConnection())
-                    {
-                        IList<EntityCIDInfo> lstDatas = conn.CallFunction<EntityCIDInfo>("sfn_CIDInfo", paramList);
-                        if (lstDatas.Count > 0)
-                        {
-                            data = lstDatas[0].Clone();
-                            errCode = 0;
-                            errText = string.Format("调用成功！共获得 {0} 条记录", lstDatas.Count);
-                        }
-                        else
-                        {
-                            errCode = 99001;
-                            errText = string.Format("身份证号[{0}]解析失败！", idCardNo);
-                        }
-                        WriteLog.Instance.Write(errText, strProcedureName);
-                    }
+                    //using (IRAPOracleConnection conn = new IRAPOracleConnection())
+                    //{
+                    //    IList<EntityCIDInfo> lstDatas = conn.CallFunction<EntityCIDInfo>("sfn_CIDInfo", paramList);
+                    //    if (lstDatas.Count > 0)
+                    //    {
+                    //        data = lstDatas[0].Clone();
+                    //        errCode = 0;
+                    //        errText = string.Format("调用成功！共获得 {0} 条记录", lstDatas.Count);
+                    //    }
+                    //    else
+                    //    {
+                    //        errCode = 99001;
+                    //        errText = string.Format("身份证号[{0}]解析失败！", idCardNo);
+                    //    }
+                    //    WriteLog.Instance.Write(errText, strProcedureName);
+                    //}
+                    errCode = 99001;
+                    errText = $"身份证号[{idCardNo}]解析失败，未找到 sfn_CIDInfo 函数";
                 }
                 catch (Exception error)
                 {
@@ -1184,6 +1186,82 @@ namespace IRAP.BL.SSO
                 #endregion
 
                 return Json(datas);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 切换当前登录用户
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="newUserBarCode">新登录用户的登录条码</param>
+        public IRAPJsonResult usp_SwapUserLogin(
+            int communityID, 
+            long sysLogID, 
+            string newUserBarCode, 
+            out int errCode, 
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                Hashtable rlt = new Hashtable();
+
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@NewUserBarCode", DbType.String, newUserBarCode));
+                paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
+                paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
+                paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
+                paramList.Add(new IRAPProcParameter("@NewSysLogID", DbType.Int64, ParameterDirection.Output, 8));
+                paramList.Add(new IRAPProcParameter("@NewUserCode", DbType.String, ParameterDirection.Output, 100));
+                paramList.Add(new IRAPProcParameter("@NewUserName", DbType.String, ParameterDirection.Output, 40));
+                paramList.Add(new IRAPProcParameter("@NewLanguageID", DbType.Int32, ParameterDirection.Output, 4));
+                paramList.Add(new IRAPProcParameter("@NewNickName", DbType.String, ParameterDirection.Output, 40));
+                paramList.Add(new IRAPProcParameter("@NewOPhoneNo", DbType.String, ParameterDirection.Output, 20));
+                paramList.Add(new IRAPProcParameter("@NewHPhoneNo", DbType.String, ParameterDirection.Output, 20));
+                paramList.Add(new IRAPProcParameter("@NewMPhoneNo", DbType.String, ParameterDirection.Output, 20));
+                WriteLog.Instance.Write(
+                    $"执行存储过程 IRAP..usp_SwapUserLogin，参数：" +
+                    $"CommunityID={communityID}|NewUserBarCode={newUserBarCode}|" +
+                    $"SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        IRAPError error =
+                            conn.CallProc(
+                                "IRAP..usp_SwapUserLogin",
+                                ref paramList);
+                        errCode = error.ErrCode;
+                        errText = error.ErrText;
+
+                        rlt = DBUtils.DBParamsToHashtable(paramList);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText =
+                        string.Format(
+                            "调用 IRAP..usp_SwapUserLogin 函数发生异常：{0}",
+                            error.Message);
+                    WriteLog.Instance.Write(errText, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                }
+                #endregion
+
+                return Json(rlt);
             }
             finally
             {

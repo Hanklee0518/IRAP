@@ -85,6 +85,12 @@
     <Compile Include="frmIRAPMain.Designer.cs">
       <DependentUpon>frmIRAPMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSwitchLoginUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSwitchLoginUser.Designer.cs">
+      <DependentUpon>frmSwitchLoginUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmIRAPMain.en-US.resx">
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmIRAPMain.resx">
       <DependentUpon>frmIRAPMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSwitchLoginUser.resx">
+      <DependentUpon>frmSwitchLoginUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

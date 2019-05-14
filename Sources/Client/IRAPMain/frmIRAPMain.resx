@@ -149,6 +149,9 @@
   <data name="backstageViewControl1.Font" type="System.Drawing.Font, System.Drawing">
     <value>微软雅黑, 10.5pt</value>
   </data>
+  <data name="cmdSwitchLoginUser.Caption" xml:space="preserve">
+    <value>切换登录用户</value>
+  </data>
   <data name="cmdAbout.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>微软雅黑, 10.5pt</value>
   </data>
@@ -215,13 +218,13 @@
     <value>0, 0</value>
   </data>
   <data name="ribbonControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 54</value>
+    <value>1171, 54</value>
   </data>
   <data name="ribbonStatusBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 698</value>
+    <value>0, 695</value>
   </data>
   <data name="ribbonStatusBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 33</value>
+    <value>1171, 33</value>
   </data>
   <data name="&gt;&gt;ribbonStatusBar1.Name" xml:space="preserve">
     <value>ribbonStatusBar1</value>
@@ -258,7 +261,7 @@
     <value>0, 54</value>
   </data>
   <data name="ucOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 47</value>
+    <value>1171, 47</value>
   </data>
   <data name="ucOptions.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -270,7 +273,7 @@
     <value>ucOptions</value>
   </data>
   <data name="&gt;&gt;ucOptions.Type" xml:space="preserve">
-    <value>IRAP.Client.SubSystem.ucOptions, IRAP.Client.SubSystem, Version=6.2.91.637, Culture=neutral, PublicKeyToken=null</value>
+    <value>IRAP.Client.SubSystem.ucOptions, IRAP.Client.SubSystem, Version=6.2.159.1120, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucOptions.Parent" xml:space="preserve">
     <value>$this</value>
@@ -285,7 +288,7 @@
     <value>45</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 731</value>
+    <value>1171, 728</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -399,6 +402,12 @@
   </data>
   <data name="&gt;&gt;defaultLookAndFeel.Type" xml:space="preserve">
     <value>DevExpress.LookAndFeel.DefaultLookAndFeel, DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;cmdSwitchLoginUser.Name" xml:space="preserve">
+    <value>cmdSwitchLoginUser</value>
+  </data>
+  <data name="&gt;&gt;cmdSwitchLoginUser.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewButtonItem, DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmIRAPMain</value>
