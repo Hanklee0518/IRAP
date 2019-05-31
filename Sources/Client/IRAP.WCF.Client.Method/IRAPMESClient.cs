@@ -3620,5 +3620,88 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
+        /// <summary>
+        /// 根据工单号获取该工单的信息
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="pwoNo">工单号</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        /// <param name="data">工单信息</param>
+        public void ufn_GetInfo_OpenPWO(
+            int communityID, 
+            string pwoNo, 
+            long sysLogID, 
+            ref OpenPWOInfoEx data, 
+            out int errCode, 
+            out string errText)
+        {
+            string strProcedureName =
+                string.Format(
+                    "{0}.{1}",
+                    className,
+                    MethodBase.GetCurrentMethod().Name);
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                data = new OpenPWOInfoEx();
+
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("pwoNo", pwoNo);
+                hashParams.Add("sysLogID", sysLogID);
+                WriteLog.Instance.Write(
+                    $"调用 ufn_GetInfo_OpenPWO 函数，参数：" +
+                    $"CommunityID={communityID}|PWONo={pwoNo}|" +
+                    $"SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行存储过程或者函数
+                using (WCFClient client = new WCFClient())
+                {
+
+                    object rlt =
+                        client.WCFRESTFul(
+                            "IRAP.BL.MES.dll",
+                            "IRAP.BL.MES.WorkOrder",
+                            "ufn_GetInfo_OpenPWO",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format(
+                            "({0}){1}", errCode, errText),
+                        strProcedureName);
+
+                    if (errCode == 0)
+                    {
+                        if ((rlt as List<OpenPWOInfoEx>).Count >= 1)
+                        {
+                            data = (rlt as List<OpenPWOInfoEx>)[0];
+                        }
+                        else
+                        {
+                            errCode = -1;
+                            errText = $"没有找到工单号[{pwoNo}]的生产工单信息";
+                        }
+                    }
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

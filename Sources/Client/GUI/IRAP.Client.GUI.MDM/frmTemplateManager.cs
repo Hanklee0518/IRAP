@@ -226,10 +226,23 @@ namespace IRAP.Client.GUI.MDM
                 SetReportParameters(report);
                 report.Preview = previewControl;
 
-                if (report.Prepare())
+                try
                 {
-                    report.ShowPrepared();
-                    previewControl.ZoomWholePage();
+                    if (report.Prepare())
+                    {
+                        report.ShowPrepared();
+                        previewControl.ZoomWholePage();
+
+                        pnlUnpreviewed.Visible = false;
+                    }
+                }
+                catch (Exception error)
+                {
+                    WriteLog.Instance.Write(
+                        error.Message,
+                        $"{className}.{MethodBase.GetCurrentMethod().Name}");
+
+                    pnlUnpreviewed.Visible = true;
                 }
             }
         }
@@ -628,10 +641,23 @@ namespace IRAP.Client.GUI.MDM
                         SetReportParameters(report);
                         report.Preview = previewControl;
 
-                        if (report.Prepare())
+                        try
                         {
-                            report.ShowPrepared();
-                            previewControl.ZoomWholePage();
+                            if (report.Prepare())
+                            {
+                                report.ShowPrepared();
+                                previewControl.ZoomWholePage();
+
+                                pnlUnpreviewed.Visible = false;
+                            }
+                        }
+                        catch (Exception error)
+                        {
+                            WriteLog.Instance.Write(
+                                error.Message,
+                                $"{className}.{MethodBase.GetCurrentMethod().Name}");
+
+                            pnlUnpreviewed.Visible = true;
                         }
                     }
                 }

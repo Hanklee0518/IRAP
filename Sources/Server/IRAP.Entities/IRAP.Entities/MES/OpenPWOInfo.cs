@@ -10,108 +10,108 @@ namespace IRAP.Entities.MES
         /// <summary>
         /// 序号
         /// </summary>
-        public int Ordinal { get; set; }
+        public int Ordinal { get; set; } = 0;
         /// <summary>
         /// 工单签发/变更事实编号
         /// </summary>
-        public long PWOIssuingFactID { get; set; }
+        public long PWOIssuingFactID { get; set; } = 0;
         /// <summary>
         /// 工单签发/变更交易号
         /// </summary>
-        public long PWOIssuingTransNo { get; set; }
+        public long PWOIssuingTransNo { get; set; } = 0;
         /// <summary>
         /// 工单签发临时事实分区键
         /// </summary>
-        public long TF482PK { get; set; }
+        public long TF482PK { get; set; } = 0;
         /// <summary>
         /// 工单签发辅助事实分区键
         /// </summary>
-        public long AF482PK { get; set; }
+        public long AF482PK { get; set; } = 0;
         /// <summary>
         /// 产品叶标识
         /// </summary>
-        public int T102LeafID { get; set; }
+        public int T102LeafID { get; set; } = 0;
         /// <summary>
         /// 产线叶标识
         /// </summary>
-        public int T134LeafID { get; set; }
+        public int T134LeafID { get; set; } = 0;
         /// <summary>
         /// 班次叶标识
         /// </summary>
-        public int T126LeafID { get; set; }
+        public int T126LeafID { get; set; } = 0;
         /// <summary>
         /// 生产工单号
         /// </summary>
-        public string PWONo { get; set; }
+        public string PWONo { get; set; } = "";
         /// <summary>
         /// 替代工单号
         /// </summary>
-        public string AltPWONo { get; set; }
+        public string AltPWONo { get; set; } = "";
         /// <summary>
         /// 生产批次号
         /// </summary>
-        public string LotNumber { get; set; }
+        public string LotNumber { get; set; } = "";
         /// <summary>
         /// 工单类型(N-正常 T-试产 R-返工)
         /// </summary>
-        public string PWOTypeCode { get; set; }
+        public string PWOTypeCode { get; set; } = "";
         /// <summary>
         /// 制造订单号
         /// </summary>
-        public string MONumber { get; set; }
+        public string MONumber { get; set; } = "";
         /// <summary>
         /// 制造订单行号
         /// </summary>
-        public int MOLineNo { get; set; }
+        public int MOLineNo { get; set; } = 0;
         /// <summary>
         /// 产品编号
         /// </summary>
-        public string ProductNo { get; set; }
+        public string ProductNo { get; set; } = "";
         /// <summary>
         /// 订单数量
         /// </summary>
-        public long OrderQty { get; set; }
+        public long OrderQty { get; set; } = 0;
         /// <summary>
         /// 操作工人数
         /// </summary>
-        public decimal NumOperators { get; set; }
+        public decimal NumOperators { get; set; } = 0;
         /// <summary>
         /// 创建时Unix时间
         /// </summary>
-        public int CreatedUnixTime { get; set; }
+        public int CreatedUnixTime { get; set; } = 0;
         /// <summary>
         /// 排定生产开始时间
         /// </summary>
-        public string ScheduledStartTime { get; set; }
+        public string ScheduledStartTime { get; set; } = "";
         /// <summary>
         /// 排定生产结束时间
         /// </summary>
-        public string ScheduledCloseTime { get; set; }
+        public string ScheduledCloseTime { get; set; } = "";
         /// <summary>
         /// 实际生产开始时间
         /// </summary>
-        public string ActualStartTime { get; set; }
+        public string ActualStartTime { get; set; } = "";
         /// <summary>
         /// 在制品容器号
         /// </summary>
-        public string ContainerNo { get; set; }
+        public string ContainerNo { get; set; } = "";
         /// <summary>
         /// 生产工单状态
         /// </summary>
-        public int PWOStatus { get; set; }
+        public int PWOStatus { get; set; } = 0;
         /// <summary>
         /// 生产工单优先级
         /// </summary>
-        public int PWOPriority { get; set; }
+        public int PWOPriority { get; set; } = 0;
         /// <summary>
         /// 是否急单
         /// </summary>
-        public bool EmergencyOrder { get; set; }
+        public bool EmergencyOrder { get; set; } = false;
         /// <summary>
         /// 工单控制属性
         /// (1-计划 2-变更 3-插单 4-补单)
         /// </summary>
-        public int PWOCtrlAttr { get; set; }
+        public int PWOCtrlAttr { get; set; } = 0;
 
         public OpenPWOInfo Clone()
         {

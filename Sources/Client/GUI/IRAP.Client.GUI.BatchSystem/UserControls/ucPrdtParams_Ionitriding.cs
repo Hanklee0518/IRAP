@@ -881,8 +881,8 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
         {
             EntityBatchPWO newPWO = new EntityBatchPWO();
 
-            using (Dialogs.frmPWOInProductionEditor formEditor =
-                new Dialogs.frmPWOInProductionEditor(
+            using (Dialogs.frmPWOInProductionEditor_Ionitriding formEditor =
+                new Dialogs.frmPWOInProductionEditor_Ionitriding(
                     EditStatus.New,
                     stationInfo.T134LeafID,
                     stationInfo.T216LeafID,
@@ -907,8 +907,8 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
             {
                 EntityBatchPWO pwo = pwos[idx];
 
-                using (Dialogs.frmPWOInProductionEditor formEditor =
-                    new Dialogs.frmPWOInProductionEditor(
+                using (Dialogs.frmPWOInProductionEditor_Ionitriding formEditor =
+                    new Dialogs.frmPWOInProductionEditor_Ionitriding(
                         EditStatus.Edit,
                         stationInfo.T134LeafID,
                         stationInfo.T216LeafID,

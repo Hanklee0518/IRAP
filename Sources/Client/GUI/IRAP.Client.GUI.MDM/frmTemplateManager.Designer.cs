@@ -35,6 +35,8 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.lblCurrentTemplateName = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.pnlUnpreviewed = new DevExpress.XtraEditors.PanelControl();
+            this.lblUnpreviewed = new DevExpress.XtraEditors.LabelControl();
             this.previewControl = new FastReport.Preview.PreviewControl();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -55,6 +57,8 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlUnpreviewed)).BeginInit();
+            this.pnlUnpreviewed.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -100,6 +104,7 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.pnlUnpreviewed);
             this.groupControl2.Controls.Add(this.previewControl);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(5, 5);
@@ -108,6 +113,31 @@
             this.groupControl2.Size = new System.Drawing.Size(675, 558);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "标签预览";
+            // 
+            // pnlUnpreviewed
+            // 
+            this.pnlUnpreviewed.Controls.Add(this.lblUnpreviewed);
+            this.pnlUnpreviewed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlUnpreviewed.Location = new System.Drawing.Point(7, 26);
+            this.pnlUnpreviewed.Name = "pnlUnpreviewed";
+            this.pnlUnpreviewed.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlUnpreviewed.Size = new System.Drawing.Size(661, 525);
+            this.pnlUnpreviewed.TabIndex = 1;
+            this.pnlUnpreviewed.Visible = false;
+            // 
+            // lblUnpreviewed
+            // 
+            this.lblUnpreviewed.Appearance.Font = new System.Drawing.Font("新宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnpreviewed.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.lblUnpreviewed.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblUnpreviewed.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lblUnpreviewed.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblUnpreviewed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUnpreviewed.Location = new System.Drawing.Point(22, 22);
+            this.lblUnpreviewed.Name = "lblUnpreviewed";
+            this.lblUnpreviewed.Size = new System.Drawing.Size(617, 481);
+            this.lblUnpreviewed.TabIndex = 0;
+            this.lblUnpreviewed.Text = "无法显示标签预览，可能模板设计有问题";
             // 
             // previewControl
             // 
@@ -125,6 +155,7 @@
             this.previewControl.StatusbarVisible = false;
             this.previewControl.TabIndex = 0;
             this.previewControl.ToolbarVisible = false;
+            this.previewControl.UIStyle = FastReport.Utils.UIStyle.Office2007Black;
             // 
             // splitContainerControl
             // 
@@ -277,6 +308,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlUnpreviewed)).EndInit();
+            this.pnlUnpreviewed.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -313,5 +346,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem tsmiRename;
         private System.Windows.Forms.Timer tmrShowLabelTemplate;
+        private DevExpress.XtraEditors.PanelControl pnlUnpreviewed;
+        private DevExpress.XtraEditors.LabelControl lblUnpreviewed;
     }
 }

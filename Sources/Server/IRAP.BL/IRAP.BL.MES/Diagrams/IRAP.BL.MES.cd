@@ -17,7 +17,7 @@
   <Class Name="IRAP.BL.MES.TroubleShooting" Collapsed="true">
     <Position X="4" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAIAAIBAACIAIIAAAAAAACAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>EAIAAIBAACIAIIAAAAAAACAAAAABAAAAAAAACAAAAAA=</HashCode>
       <FileName>TroubleShooting.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,14 +38,14 @@
   <Class Name="IRAP.BL.MES.WorkOrder" Collapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIABAEACIAAADQAAAEIAAEAAEAAAAAAgAAACBAA=</HashCode>
+      <HashCode>AAAKAIADBEACIAAgDQAgAkIIAEAAEAAAAAAoAAACBgA=</HashCode>
       <FileName>WorkOrder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IRAP.BL.MES.WIP" Collapsed="true">
     <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAIAgACAAAAAAAAAAAAAAAAAAAAACAAgAAAgAAAA=</HashCode>
+      <HashCode>AAACAIAgCCAAAAAAAAAAAAAAAAAAAAACAAgAAAgAAAA=</HashCode>
       <FileName>WIP.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -70,10 +70,10 @@
       <FileName>SmeltingProduction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IRAP.BL.MES.BatchSystem_Asimco">
+  <Class Name="IRAP.BL.MES.BatchSystem_Asimco" Collapsed="true">
     <Position X="4" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEIAAABEEgAAEAEAAIAEAAAAEAAAJAABAAAAAEQA=</HashCode>
       <FileName>BatchSystem_Asimco.cs</FileName>
     </TypeIdentifier>
   </Class>

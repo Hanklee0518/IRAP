@@ -69,5 +69,15 @@ namespace IRAP.Client.User.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 芍园IRAP_生产异常事件快速响应软件 {
+            get {
+                object obj = ResourceManager.GetObject("芍园IRAP_生产异常事件快速响应软件", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
