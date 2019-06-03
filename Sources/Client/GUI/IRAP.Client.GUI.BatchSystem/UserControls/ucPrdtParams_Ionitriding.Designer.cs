@@ -47,6 +47,7 @@
             this.grdclmnProductName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,7 +60,6 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lblCurrentTime = new DevExpress.XtraEditors.LabelControl();
             this.btnBegin = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
@@ -319,6 +319,14 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
             // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "生产数量";
+            this.gridColumn7.FieldName = "Quantity";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 5;
+            // 
             // gridColumn5
             // 
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
@@ -449,14 +457,6 @@
             this.btnBegin.TabIndex = 3;
             this.btnBegin.Text = "生产开始";
             this.btnBegin.Click += new System.EventHandler(this.btnBegin_Click);
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "生产数量";
-            this.gridColumn7.FieldName = "Quantity";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 5;
             // 
             // ucPrdtParams_Ionitriding
             // 

@@ -3703,5 +3703,73 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
+        /// <summary>
+        /// 根据过滤条件字符串获取社区全部未结生产工单，并根据排序字符串进行排序
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        public void ufn_GetList_OpenProductionWorkOrders(
+            int communityID,
+            string filterString,
+            string orderString,
+            ref List<OpenProductionWorkOrder> datas,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =$"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                datas.Clear();
+
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("filterString", filterString);
+                hashParams.Add("orderString", orderString);
+                WriteLog.Instance.Write(
+                    $"调用函数 ufn_GetList_OpenProductionWorkOrders，参数：" +
+                    $"CommunityID={communityID}|FilterString={filterString}|" +
+                    $"OrderString={orderString}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行存储过程或者函数
+                using (WCFClient client = new WCFClient())
+                {
+
+                    object rlt =
+                        client.WCFRESTFul(
+                            "IRAP.BL.MES.dll",
+                            "IRAP.BL.MES.WorkOrder",
+                            "ufn_GetList_OpenProductionWorkOrders",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format(
+                            "({0}){1}", errCode, errText),
+                        strProcedureName);
+
+                    if (errCode == 0)
+                    {
+                        datas = rlt as List<OpenProductionWorkOrder>;
+                    }
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

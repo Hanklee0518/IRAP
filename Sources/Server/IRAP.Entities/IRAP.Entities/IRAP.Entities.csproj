@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APS\MaterialATP.cs" />
     <Compile Include="Asimco\BoxOfCarton.cs" />
     <Compile Include="Asimco\Carton.cs" />
     <Compile Include="Asimco\GetFactList_Inspect.cs" />

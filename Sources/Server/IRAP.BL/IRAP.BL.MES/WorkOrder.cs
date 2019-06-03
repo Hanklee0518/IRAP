@@ -33,6 +33,8 @@ namespace IRAP.BL.MES
         /// <returns>List[OpenProductionWorkOrder]</returns>
         public IRAPJsonResult ufn_GetList_OpenProductionWorkOrders(
             int communityID,
+            string filterString,
+            string orderString,
             out int errCode,
             out string errText)
         {
@@ -52,10 +54,9 @@ namespace IRAP.BL.MES
                 IList<IDataParameter> paramList = new List<IDataParameter>();
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
                 WriteLog.Instance.Write(
-                    string.Format(
-                        "调用函数 IRAPMES..ufn_GetList_OpenProductionWorkOrders，" +
-                        "参数：CommunityID={0}",
-                        communityID),
+                    $"调用函数 IRAPMES..ufn_GetList_OpenProductionWorkOrders，参数：" +
+                    $"CommunityID={communityID}|FilterString={filterString}|" +
+                    $"OrderString={orderString}",
                     strProcedureName);
                 #endregion
 
@@ -66,11 +67,19 @@ namespace IRAP.BL.MES
                     {
                         string strSQL = "SELECT * " +
                             "FROM IRAPMES..ufn_GetList_OpenProductionWorkOrders(" +
-                            "@CommunityID) ORDER BY Ordinal";
+                            "@CommunityID)";
+                        if (filterString != "")
+                        {
+                            strSQL += $" WHERE {filterString}";
+                        }
+                        if (orderString != "")
+                        {
+                            strSQL += $" ORDER BY {orderString}";
+                        }
 
                         IList<OpenProductionWorkOrder> lstDatas =
                             conn.CallTableFunc<OpenProductionWorkOrder>(strSQL, paramList);
-                        datas = lstDatas.ToList<OpenProductionWorkOrder>();
+                        datas = lstDatas.ToList();
                         errCode = 0;
                         errText = string.Format("调用成功！共获得 {0} 条记录", datas.Count);
                         WriteLog.Instance.Write(errText, strProcedureName);
