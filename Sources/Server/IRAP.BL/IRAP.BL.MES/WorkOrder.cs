@@ -2098,11 +2098,11 @@ namespace IRAP.BL.MES
         /// 根据工单号获取工单信息
         /// </summary>
         /// <param name="communityID">社区标识</param>
-        /// <param name="pwoNumber">工单号</param>
+        /// <param name="pwoNo">工单号</param>
         /// <param name="sysLogID">系统登录标识</param>
         public IRAPJsonResult ufn_GetInfo_OpenPWO(
             int communityID, 
-            string pwoNumber, 
+            string pwoNo, 
             long sysLogID, 
             out int errCode, 
             out string errText)
@@ -2118,11 +2118,11 @@ namespace IRAP.BL.MES
                 #region 创建数据库调用参数组，并赋值
                 IList<IDataParameter> paramList = new List<IDataParameter>();
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
-                paramList.Add(new IRAPProcParameter("@PWONumber", DbType.String, pwoNumber));
+                paramList.Add(new IRAPProcParameter("@PWONumber", DbType.String, pwoNo));
                 paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
                 WriteLog.Instance.Write(
                     "调用函数 IRAPMES..ufn_GetInfo_OpenPWO，参数：" +
-                    $"CommunityID={communityID}|PWONumber={pwoNumber}|" +
+                    $"CommunityID={communityID}|PWONumber={pwoNo}|" +
                     $"SysLogID={sysLogID}",
                     strProcedureName);
                 #endregion

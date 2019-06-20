@@ -140,6 +140,7 @@
     <Compile Include="MES\TSHistory.cs" />
     <Compile Include="MES\UncompletedPackage.cs" />
     <Compile Include="MES\WIPContext.cs" />
+    <Compile Include="RIMCS\ERPRealTimeMaterialStore.cs" />
     <Compile Include="SCES\RMTransferForPWO.cs" />
     <Compile Include="SCES\MaterialToDeliver.cs" />
     <Compile Include="MDM\DstDeliveryStoreSite.cs" />

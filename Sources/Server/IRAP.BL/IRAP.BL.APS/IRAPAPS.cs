@@ -251,7 +251,7 @@ namespace IRAP.BL.APS
         /// <param name="transactNo">交易号</param>
         /// <param name="factID">事实编号</param>
         /// <param name="opType">操作类型：1-新排；2-修改</param>
-        /// <param name="moNumbber">制造订单号</param>
+        /// <param name="moNumber">制造订单号</param>
         /// <param name="moLineNo">制造订单行号</param>
         /// <param name="productNo">产品编号</param>
         /// <param name="t134LeafID">生产线叶标识</param>
@@ -263,7 +263,7 @@ namespace IRAP.BL.APS
             long transactNo,
             long factID,
             int opType,
-            string moNumbber,
+            string moNumber,
             int moLineNo,
             string productNo,
             int t134LeafID,
@@ -284,7 +284,7 @@ namespace IRAP.BL.APS
                 paramList.Add(new IRAPProcParameter("@TransactNo", DbType.Int64, transactNo));
                 paramList.Add(new IRAPProcParameter("@FactID", DbType.Int64, factID));
                 paramList.Add(new IRAPProcParameter("@OpType", DbType.Int32, opType));
-                paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumbber));
+                paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
                 paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
                 paramList.Add(new IRAPProcParameter("@ProductNo", DbType.String, productNo));
                 paramList.Add(new IRAPProcParameter("@T134LeafID", DbType.Int32, t134LeafID));
@@ -296,7 +296,7 @@ namespace IRAP.BL.APS
                 WriteLog.Instance.Write(
                     $"执行存储过程 IRAPAPS..usp_SaveFact_MODispatching，参数：" +
                     $"CommunityID={communityID}|TransactNo={transactNo}|FactID={factID}|"+
-                    $"OpType={opType}|MONumber={moNumbber}|MOLineNo={moLineNo}|"+
+                    $"OpType={opType}|MONumber={moNumber}|MOLineNo={moLineNo}|"+
                     $"ProductNo={productNo}|T134LeafID={t134LeafID}|DispatchedQty={dispatchedQty}|"+
                     $"ScheduledStartTime={scheduledStartTime}|SysLogID={sysLogID}",
                     strProcedureName);

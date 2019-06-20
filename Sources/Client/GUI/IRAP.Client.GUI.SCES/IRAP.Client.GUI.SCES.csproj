@@ -88,6 +88,12 @@
     <Compile Include="Dialogs\frmPWOReprint_Asimco.Designer.cs">
       <DependentUpon>frmPWOReprint_Asimco.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\frmShowMaterialInERPStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frmShowMaterialInERPStore.Designer.cs">
+      <DependentUpon>frmShowMaterialInERPStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\frmT157R3Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     <EmbeddedResource Include="Dialogs\frmPWOReprint_Asimco.resx">
       <DependentUpon>frmPWOReprint_Asimco.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frmShowMaterialInERPStore.resx">
+      <DependentUpon>frmShowMaterialInERPStore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\frmT157R3Editor.resx">
       <DependentUpon>frmT157R3Editor.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,6 +204,7 @@
     <EmbeddedResource Include="frmMaterialsToDeliver.resx">
       <DependentUpon>frmMaterialsToDeliver.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -724,6 +724,7 @@
             this.Appearance.Options.UseFont = true;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1116, 562);
+            this.ControlBox = false;
             this.Controls.Add(this.btnT157R3);
             this.Controls.Add(this.btnActualQtyToDeliverModify);
             this.Controls.Add(this.btnCapacityModify);

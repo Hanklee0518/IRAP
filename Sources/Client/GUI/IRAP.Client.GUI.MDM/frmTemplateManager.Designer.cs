@@ -137,7 +137,7 @@
             this.lblUnpreviewed.Name = "lblUnpreviewed";
             this.lblUnpreviewed.Size = new System.Drawing.Size(617, 481);
             this.lblUnpreviewed.TabIndex = 0;
-            this.lblUnpreviewed.Text = "无法显示标签预览，可能模板设计有问题";
+            this.lblUnpreviewed.Text = "无法显示标签预览";
             // 
             // previewControl
             // 

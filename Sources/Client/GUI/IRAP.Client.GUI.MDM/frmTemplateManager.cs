@@ -98,6 +98,65 @@ namespace IRAP.Client.GUI.MDM
             CreateFRParameter(report, "BatchNumber", "B20190312001", "批次号");
             CreateFRParameter(report, "PWONo", "M-MD123-001", "订单号");
             CreateFRParameter(report, "PWOLineNo", "130", "订单行号");
+            CreateFRParameter(report, "ProductNo", "M-CP123-017", "产品编号");
+        }
+
+        private DataColumn CreateColumn(string name, string caption, Type dataType)
+        {
+            return
+                new DataColumn()
+                {
+                    ColumnName = name,
+                    Caption = name,
+                    DataType = dataType,
+                };
+        }
+
+        private void SetReportData(Report report)
+        {
+            DataTable dt = new DataTable();
+            dt.TableName = "DataSource";
+            dt.Columns.Add(CreateColumn("SendAddress","供货方地址", typeof(string)));
+            dt.Columns.Add(CreateColumn("CustomerCode", "客户代码", typeof(string)));
+            dt.Columns.Add(CreateColumn("CustomerName", "收货方名称", typeof(string)));
+            dt.Columns.Add(CreateColumn("ReceiveAddress", "收货方地址", typeof(string)));
+            dt.Columns.Add(CreateColumn("CustomerPartNumber", "客户零件号", typeof(string)));
+            dt.Columns.Add(CreateColumn("SupplierPartNumber", "供应商零件号", typeof(string)));
+            dt.Columns.Add(CreateColumn("PartName", "零件名称", typeof(string)));
+            dt.Columns.Add(CreateColumn("Quantity", "数量", typeof(int)));
+            dt.Columns.Add(CreateColumn("ContainerNo", "托盘号", typeof(string)));
+            dt.Columns.Add(CreateColumn("ProductDate", "生产日期", typeof(string)));
+            dt.Columns.Add(CreateColumn("CustomerSN", "客户条码", typeof(string)));
+            dt.Columns.Add(CreateColumn("SupplierCode", "供应商代码", typeof(string)));
+            dt.Columns.Add(CreateColumn("ProductPNo", "产品图号", typeof(string)));
+            dt.Columns.Add(CreateColumn("BatchNumber", "批次号", typeof(string)));
+            dt.Columns.Add(CreateColumn("PWONo", "订单号", typeof(string)));
+            dt.Columns.Add(CreateColumn("PWOLineNo", "订单行号", typeof(string)));
+            dt.Columns.Add(CreateColumn("ProductNo", "产品编号", typeof(string)));
+
+            DataRow dr = dt.NewRow();
+            dr["SendAddress"] = "上海浦东外高桥保税区华京路328号";
+            dr["CustomerCode"] = "123ABC456F";
+            dr["CustomerName"] = "深圳市比亚迪供应链管理有限公司";
+            dr["ReceiveAddress"] = "NO.2 YADI RD, HIGH TXC. & ABCD";
+            dr["CustomerPartNumber"] = "3500310U2263";
+            dr["SupplierPartNumber"] = "18122405";
+            dr["PartName"] = "前制动钳总成(左)";
+            dr["Quantity"] = 150;
+            dr["ContainerNo"] = "6OYK00427";
+            dr["ProductDate"] = "2016年10月20日";
+            dr["CustomerSN"] = "16B00002L211393500310U2263";
+            dr["SupplierCode"] = "ABCD1234";
+            dr["ProductPNo"] = "ABCDEFG";
+            dr["BatchNumber"] = "B20190312001";
+            dr["PWONo"] = "M-MD123-001";
+            dr["PWOLineNo"] = "130";
+            dr["ProductNo"] = "M-CP123-017";
+            dt.Rows.Add(dr);
+
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt);
+            report.RegisterData(ds);
         }
 
         private string LoadTemplateFromDB(int t117LeafID)
@@ -203,6 +262,54 @@ namespace IRAP.Client.GUI.MDM
             }
         }
 
+        private void PreviewReport(int t117LeafID)
+        {
+            if (t117LeafID == 0)
+            {
+                pnlUnpreviewed.Visible = true;
+                return;
+            }
+
+            string template = LoadTemplateFromDB(t117LeafID);
+            report.Clear();
+            report.LoadFromString(template);
+            report.Preview = previewControl;
+
+            SetReportParameters(report);
+            try
+            {
+                if (report.Prepare())
+                {
+                    report.ShowPrepared();
+                    previewControl.ZoomWholePage();
+                    pnlUnpreviewed.Visible = false;
+
+                    return;
+                }
+            }
+            catch { }
+
+            report.Parameters.Clear();
+            SetReportData(report);
+            try
+            {
+                if (report.Prepare())
+                {
+                    report.ShowPrepared();
+                    previewControl.ZoomWholePage();
+                    pnlUnpreviewed.Visible = false;
+                }
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(
+                    error.Message,
+                    $"{className}.{MethodBase.GetCurrentMethod().Name}");
+
+                pnlUnpreviewed.Visible = true;
+            }
+        }
+
         private void frmTemplateManager_Shown(object sender, EventArgs e)
         {
             lblCurrentTemplateName.Text = currentTemplate.T117Name;
@@ -218,33 +325,34 @@ namespace IRAP.Client.GUI.MDM
 
         private void lblCurrentTemplateName_Click(object sender, EventArgs e)
         {
-            if (currentTemplate.T117LeafID != 0)
-            {
-                string template = LoadTemplateFromDB(currentTemplate.T117LeafID);
-                report.Clear();
-                report.LoadFromString(template);
-                SetReportParameters(report);
-                report.Preview = previewControl;
+            PreviewReport(currentTemplate.T117LeafID);
+            //if (currentTemplate.T117LeafID != 0)
+            //{
+            //    string template = LoadTemplateFromDB(currentTemplate.T117LeafID);
+            //    report.Clear();
+            //    report.LoadFromString(template);
+            //    SetReportParameters(report);
+            //    report.Preview = previewControl;
 
-                try
-                {
-                    if (report.Prepare())
-                    {
-                        report.ShowPrepared();
-                        previewControl.ZoomWholePage();
+            //    try
+            //    {
+            //        if (report.Prepare())
+            //        {
+            //            report.ShowPrepared();
+            //            previewControl.ZoomWholePage();
 
-                        pnlUnpreviewed.Visible = false;
-                    }
-                }
-                catch (Exception error)
-                {
-                    WriteLog.Instance.Write(
-                        error.Message,
-                        $"{className}.{MethodBase.GetCurrentMethod().Name}");
+            //            pnlUnpreviewed.Visible = false;
+            //        }
+            //    }
+            //    catch (Exception error)
+            //    {
+            //        WriteLog.Instance.Write(
+            //            error.Message,
+            //            $"{className}.{MethodBase.GetCurrentMethod().Name}");
 
-                    pnlUnpreviewed.Visible = true;
-                }
-            }
+            //        pnlUnpreviewed.Visible = true;
+            //    }
+            //}
         }
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
@@ -633,33 +741,34 @@ namespace IRAP.Client.GUI.MDM
                     }
 
                     LeafSetEx item = lstTemplates.SelectedItem as LeafSetEx;
-                    if (item.LeafID != 0)
-                    {
-                        string template = LoadTemplateFromDB(item.LeafID);
-                        report.Clear();
-                        report.LoadFromString(template);
-                        SetReportParameters(report);
-                        report.Preview = previewControl;
+                    PreviewReport(item.LeafID);
+                    //if (item.LeafID != 0)
+                    //{
+                    //    string template = LoadTemplateFromDB(item.LeafID);
+                    //    report.Clear();
+                    //    report.LoadFromString(template);
+                    //    SetReportParameters(report);
+                    //    report.Preview = previewControl;
 
-                        try
-                        {
-                            if (report.Prepare())
-                            {
-                                report.ShowPrepared();
-                                previewControl.ZoomWholePage();
+                    //    try
+                    //    {
+                    //        if (report.Prepare())
+                    //        {
+                    //            report.ShowPrepared();
+                    //            previewControl.ZoomWholePage();
 
-                                pnlUnpreviewed.Visible = false;
-                            }
-                        }
-                        catch (Exception error)
-                        {
-                            WriteLog.Instance.Write(
-                                error.Message,
-                                $"{className}.{MethodBase.GetCurrentMethod().Name}");
+                    //            pnlUnpreviewed.Visible = false;
+                    //        }
+                    //    }
+                    //    catch (Exception error)
+                    //    {
+                    //        WriteLog.Instance.Write(
+                    //            error.Message,
+                    //            $"{className}.{MethodBase.GetCurrentMethod().Name}");
 
-                            pnlUnpreviewed.Visible = true;
-                        }
-                    }
+                    //        pnlUnpreviewed.Visible = true;
+                    //    }
+                    //}
                 }
             }
         }
