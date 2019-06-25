@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrdtBatchNumberTrack));
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -48,8 +47,11 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.vgrdMethodParams = new DevExpress.XtraVerticalGrid.VGridControl();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.imageList = new System.Windows.Forms.ImageList();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -281,12 +283,15 @@
             this.grdvPWOs.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdvPWOs.Appearance.Row.Options.UseFont = true;
             this.grdvPWOs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn7,
             this.grdclmnPWONo,
             this.gridColumn2,
             this.grdclmnProductName,
             this.gridColumn3,
             this.gridColumn4,
-            this.gridColumn5});
+            this.gridColumn5,
+            this.gridColumn1,
+            this.gridColumn6});
             this.grdvPWOs.GridControl = this.grdPWOs;
             this.grdvPWOs.Name = "grdvPWOs";
             this.grdvPWOs.OptionsBehavior.Editable = false;
@@ -299,7 +304,7 @@
             this.grdclmnPWONo.FieldName = "PWONo";
             this.grdclmnPWONo.Name = "grdclmnPWONo";
             this.grdclmnPWONo.Visible = true;
-            this.grdclmnPWONo.VisibleIndex = 0;
+            this.grdclmnPWONo.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
@@ -307,7 +312,7 @@
             this.gridColumn2.FieldName = "T102Code";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // grdclmnProductName
             // 
@@ -315,7 +320,7 @@
             this.grdclmnProductName.FieldName = "T102Name";
             this.grdclmnProductName.Name = "grdclmnProductName";
             this.grdclmnProductName.Visible = true;
-            this.grdclmnProductName.VisibleIndex = 2;
+            this.grdclmnProductName.VisibleIndex = 3;
             // 
             // gridColumn3
             // 
@@ -323,7 +328,7 @@
             this.gridColumn3.FieldName = "LotNumber";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 4;
             // 
             // gridColumn4
             // 
@@ -331,18 +336,34 @@
             this.gridColumn4.FieldName = "Texture";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             // 
             // gridColumn5
             // 
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.gridColumn5.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn5.Caption = "生产数量";
-            this.gridColumn5.FieldName = "Qty";
+            this.gridColumn5.Caption = "大头数量";
+            this.gridColumn5.FieldName = "Quantity1";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.VisibleIndex = 6;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "小头数量";
+            this.gridColumn1.FieldName = "Quantity2";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 7;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "备注";
+            this.gridColumn6.FieldName = "DisplayRemark";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 8;
             // 
             // vgrdMethodParams
             // 
@@ -367,6 +388,14 @@
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "机械设备.png");
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "操作工";
+            this.gridColumn7.FieldName = "Operator";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 0;
             // 
             // frmPrdtBatchNumberTrack
             // 
@@ -419,5 +448,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraVerticalGrid.VGridControl vgrdMethodParams;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

@@ -39,6 +39,10 @@ namespace IRAP.Entities.MDM
         /// </summary>
         public string UnitOfMeasure { get; set; }
         /// <summary>
+        /// 默认值
+        /// </summary>
+        public string DefaultValue { get; set; } = "";
+        /// <summary>
         /// 历史数据记录
         /// [RF25]
         ///     [Row FactID="" Metric01="" /]

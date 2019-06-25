@@ -150,7 +150,6 @@ namespace IRAP.Entities.MES
         /// 工单状态
         /// </summary>
         public int PWOStatus { get; set; }
-
         /// <summary>
         /// 备注
         /// </summary>
@@ -192,6 +191,15 @@ namespace IRAP.Entities.MES
             }
         }
         /// <summary>
+        /// 操作工工号
+        /// </summary>
+        public string OperatorCode { get; set; }
+        /// <summary>
+        /// 操作工姓名
+        /// </summary>
+        public string OperatorName { get; set; }
+
+        /// <summary>
         /// 大头数量
         /// </summary>
         [IRAPORMMap(ORMMap = false)]
@@ -216,6 +224,11 @@ namespace IRAP.Entities.MES
                 displayRemark = value;
                 GenerateRemark();
             }
+        }
+        [IRAPORMMap(ORMMap =false)]
+        public string Operator
+        {
+            get { return $"[{OperatorCode}]{OperatorName}"; }
         }
 
         public BatchPWOInfo Clone()

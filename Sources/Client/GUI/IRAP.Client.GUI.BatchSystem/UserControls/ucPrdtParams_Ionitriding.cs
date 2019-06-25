@@ -47,6 +47,10 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
         /// </summary>
         private List<ProductionProcessParam> ppp = new List<ProductionProcessParam>();
         /// <summary>
+        /// 生产过程参数缺省值集
+        /// </summary>
+        private Dictionary<string, string> defaultValues = new Dictionary<string, string>();
+        /// <summary>
         /// 指定批次中的生产工单集
         /// </summary>
         private List<EntityBatchPWO> pwos = new List<EntityBatchPWO>();
@@ -141,6 +145,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
             dtParams.Columns.Clear();
 
             vgrdMethodParams.Rows.Clear();
+            defaultValues.Clear();
 
             foreach (ProductionProcessParam param in ppParams)
             {
@@ -152,6 +157,8 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                 row.Properties.Caption = param.T20Name;
                 row.Properties.FieldName = colName;
                 vgrdMethodParams.Rows.Add(row);
+
+                defaultValues.Add(param.T20Name, param.DefaultValue);
             }
 
             for (int i = 0; i < dtParams.Columns.Count; i++)
@@ -958,6 +965,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                     EditStatus.New,
                     splitContainerControl1.Panel2.Text,
                     dtParams,
+                    defaultValues,
                     -1))
             {
                 if (formEditor.ShowDialog() == DialogResult.OK)
@@ -1020,6 +1028,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                         EditStatus.Edit,
                         splitContainerControl1.Panel2.Text,
                         dtParams,
+                        defaultValues,
                         idx))
                 {
                     if (formEditor.ShowDialog() == DialogResult.OK)
