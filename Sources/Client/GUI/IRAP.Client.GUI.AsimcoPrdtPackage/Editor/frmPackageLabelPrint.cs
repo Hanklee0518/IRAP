@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing.Printing;
 using System.Configuration;
+using System.IO;
 
 using FastReport;
 using DevExpress.XtraEditors;
@@ -206,7 +207,18 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
             Report rpt = new Report();
             try
             {
-                rpt.LoadFromString(labelTemplate);
+                Encoding encoding = Encoding.GetEncoding("GB2312");
+                int stringLength = encoding.GetBytes(cartonInfo.MaterialCategory).Length;
+
+                if (stringLength <= 25)
+                {
+                    rpt.LoadFromString(labelTemplate);
+                }
+                else
+                {
+                    Stream ms = new MemoryStream(Properties.Resources.外标签_折行);
+                    rpt.Load(ms);
+                }
             }
             catch (Exception error)
             {
@@ -331,7 +343,18 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
             Report rpt = new Report();
             try
             {
-                rpt.LoadFromString(labelTemplate);
+                Encoding encoding = Encoding.GetEncoding("GB2312");
+                int stringLength = encoding.GetBytes(box.MaterialCategory).Length;
+
+                if (stringLength <= 25)
+                {
+                    rpt.LoadFromString(labelTemplate);
+                }
+                else
+                {
+                    Stream ms = new MemoryStream(Properties.Resources.内标签_折行);
+                    rpt.Load(ms);
+                }
             }
             catch (Exception error)
             {

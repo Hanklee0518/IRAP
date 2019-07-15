@@ -1905,7 +1905,7 @@ namespace IRAP.BL.MES
                 {
                     using (IRAPSQLConnection conn = new IRAPSQLConnection())
                     {
-                        string strSQL = "SELECT * " +
+                        string strSQL = "SELECT *, '' AS OperatorCode, '' AS OperatorName " +
                             "FROM IRAPMES..ufn_GetList_BatchPWONo(" +
                             "@CommunityID, @BatchNumber, @SysLogID) " +
                             "ORDER BY Ordinal";
