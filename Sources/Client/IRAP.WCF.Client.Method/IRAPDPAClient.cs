@@ -378,7 +378,7 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("sysLogID", sysLogID);
                 WriteLog.Instance.Write(
                     $"调用 mfn_GetList_DBF_MO 函数， " +
-                    $"参数：CommunityID={communityID}|"+
+                    $"参数：CommunityID={communityID}|" +
                     $"ImportID={importID}|SysLogID={sysLogID}",
                     strProcedureName);
                 #endregion
@@ -495,7 +495,7 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("communityID", communityID);
                 hashParams.Add("importID", importID);
                 WriteLog.Instance.Write(
-                    $"执行 SQL: DELETE FROM IRAPDPA..dpa_DBF_MO "+
+                    $"执行 SQL: DELETE FROM IRAPDPA..dpa_DBF_MO " +
                     $"WHERE ImportID ={importID}",
                     strProcedureName);
                 #endregion
@@ -524,6 +524,72 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(error.Message, strProcedureName);
                 errCode = -1001;
                 errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 从四班中获取物料的表面处理特性代码
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="materialCode">物料号</param>
+        /// <param name="propertyCode">物料的表面处理特性代码(OUT)</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        public void ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift(
+            int communityID,
+            string materialCode,
+            out string propertyCode,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("materialCode", materialCode);
+                WriteLog.Instance.Write(
+                    $"调用 ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift，输入参数：" +
+                    $"CommunityID={communityID}|MaterialCode={materialCode}",
+                    strProcedureName);
+                #endregion
+
+                #region 调用应用服务过程，并解析返回值
+                using (WCFClient client = new WCFClient())
+                {
+                    object rlt = client.WCFRESTFul(
+                        "IRAP.BL.DPA.dll",
+                        "IRAP.BL.DPA.IRAPDPA",
+                        "ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        $"({errCode}){errText}，PropertyCode={(string)rlt}",
+                        strProcedureName);
+
+                    if (errCode == 0)
+                        propertyCode = (string)rlt;
+                    else
+                        propertyCode = "";
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                propertyCode = "";
+                errCode = -1001;
+                errText = error.Message;
+                WriteLog.Instance.Write(errText, strProcedureName);
+                WriteLog.Instance.Write(error.StackTrace, strProcedureName);
             }
             finally
             {

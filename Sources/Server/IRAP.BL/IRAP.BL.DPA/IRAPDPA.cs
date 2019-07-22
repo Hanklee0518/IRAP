@@ -522,7 +522,7 @@ namespace IRAP.BL.DPA
                 paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
                 WriteLog.Instance.Write(
                     "调用 IRAPDPA..usp_UploadMO，输入参数：" +
-                    $"CommunityID={communityID}|ImportID={importID}|"+
+                    $"CommunityID={communityID}|ImportID={importID}|" +
                     $"SysLogID={sysLogID}",
                     strProcedureName);
                 #endregion
@@ -555,6 +555,70 @@ namespace IRAP.BL.DPA
                 #endregion
 
                 return Json(rlt);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 从四班中获取物料的表面处理特性代码
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="materialCode">物料号</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        /// <returns>物料的表面处理特性代码</returns>
+        public IRAPJsonResult ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift(
+            int communityID,
+            string materialCode,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@MateiralCode", DbType.String, materialCode));
+                WriteLog.Instance.Write(
+                    $"调用函数 IRAPDPA.dbo.ufn_GetSurfaceProcessingPropertyCode" +
+                    $"FromERP_FourthShift，参数：CommunityID={communityID}|" +
+                    $"MaterialCode={1}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        string rlt =
+                            (string)conn.CallScalarFunc(
+                                "IRAPDPA.dbo.ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift",
+                                paramList);
+                        errCode = 0;
+                        errText = $"调用成功！Result=[{rlt}]";
+                        WriteLog.Instance.Write(errText, strProcedureName);
+                        return Json(rlt);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText =
+                        $"调用 IRAPDPA.dbo.ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift " +
+                        $"函数发生异常：{error.Message}";
+                    WriteLog.Instance.Write(errText, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                    return Json(0);
+                }
+                #endregion
             }
             finally
             {
