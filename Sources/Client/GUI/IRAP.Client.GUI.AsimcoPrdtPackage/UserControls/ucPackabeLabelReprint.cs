@@ -127,29 +127,29 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
 
             #region 根据 T117LeafID 获取标签打印模板
             TemplateContent template = new TemplateContent();
-            IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                IRAPUser.Instance.CommunityID,
-                cartonInfo.T117LeafID,
-                IRAPUser.Instance.SysLogID,
-                ref template,
-                out errCode,
-                out errText);
-            WriteLog.Instance.Write(
-                $"({errCode}){errText}",
-                strProcedureName);
-            if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-            {
-                XtraMessageBox.Show(
-                    $"无法获取到 [T117LeafID={cartonInfo.T117LeafID}] 的模板",
-                    "",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                PrintCartonLabel(cartonInfo, template.TemplateFMTStr);
-            }
+            //IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
+            //    IRAPUser.Instance.CommunityID,
+            //    cartonInfo.T117LeafID,
+            //    IRAPUser.Instance.SysLogID,
+            //    ref template,
+            //    out errCode,
+            //    out errText);
+            //WriteLog.Instance.Write(
+            //    $"({errCode}){errText}",
+            //    strProcedureName);
+            //if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
+            //{
+            //    XtraMessageBox.Show(
+            //        $"无法获取到 [T117LeafID={cartonInfo.T117LeafID}] 的模板",
+            //        "",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Error);
+            //    return;
+            //}
+            //else
+            //{
+            PrintCartonLabel(cartonInfo, template.TemplateFMTStr);
+            //}
             #endregion
         }
 
@@ -164,9 +164,11 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 Encoding encoding = Encoding.GetEncoding("GB2312");
                 int stringLength = encoding.GetBytes(cartonInfo.MaterialCategory).Length;
 
-                if (stringLength <= 25)
+                if (stringLength <= 30)
                 {
-                    rpt.LoadFromString(labelTemplate);
+                    Stream ms = new MemoryStream(Properties.Resources.外标签);
+                    rpt.Load(ms);
+                    //rpt.LoadFromString(labelTemplate);
                 }
                 else
                 {
@@ -262,41 +264,41 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 int t117LeafID = 0;
                 string boxLabelTemplate = "";
 
-                if (t117LeafID != box.T117LeafID)
-                {
-                    #region 根据 T117LeafID 获取标签打印模板
-                    TemplateContent template = new TemplateContent();
-                    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                        IRAPUser.Instance.CommunityID,
-                        box.T117LeafID,
-                        IRAPUser.Instance.SysLogID,
-                        ref template,
-                        out errCode,
-                        out errText);
-                    WriteLog.Instance.Write(
-                        $"({errCode}){errText}",
-                        strProcedureName);
-                    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-                    {
-                        XtraMessageBox.Show(
-                            $"无法获取到 [T117LeafID={box.T117LeafID}] 的模板",
-                            "",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        boxLabelTemplate = "";
-                    }
-                    else
-                    {
-                        t117LeafID = box.T117LeafID;
-                        boxLabelTemplate = template.TemplateFMTStr;
-                    }
-                    #endregion
-                }
+                //if (t117LeafID != box.T117LeafID)
+                //{
+                //    #region 根据 T117LeafID 获取标签打印模板
+                //    TemplateContent template = new TemplateContent();
+                //    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
+                //        IRAPUser.Instance.CommunityID,
+                //        box.T117LeafID,
+                //        IRAPUser.Instance.SysLogID,
+                //        ref template,
+                //        out errCode,
+                //        out errText);
+                //    WriteLog.Instance.Write(
+                //        $"({errCode}){errText}",
+                //        strProcedureName);
+                //    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
+                //    {
+                //        XtraMessageBox.Show(
+                //            $"无法获取到 [T117LeafID={box.T117LeafID}] 的模板",
+                //            "",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Error);
+                //        boxLabelTemplate = "";
+                //    }
+                //    else
+                //    {
+                //        t117LeafID = box.T117LeafID;
+                //        boxLabelTemplate = template.TemplateFMTStr;
+                //    }
+                //    #endregion
+                //}
 
-                if (boxLabelTemplate != "")
-                {
-                    PrintBoxLabel(box, boxLabelTemplate);
-                }
+                //if (boxLabelTemplate != "")
+                //{
+                PrintBoxLabel(box, boxLabelTemplate);
+                //}
             }
             #endregion
         }
@@ -312,9 +314,11 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 Encoding encoding = Encoding.GetEncoding("GB2312");
                 int stringLength = encoding.GetBytes(box.MaterialCategory).Length;
 
-                if (stringLength <= 25)
+                if (stringLength <= 30)
                 {
-                    rpt.LoadFromString(labelTemplate);
+                    Stream ms = new MemoryStream(Properties.Resources.内标签);
+                    rpt.Load(ms);
+                    //rpt.LoadFromString(labelTemplate);
                 }
                 else
                 {

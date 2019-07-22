@@ -161,39 +161,39 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
 
             foreach (Carton carton in cartons)
             {
-                if (t117LeafID != carton.T117LeafID)
-                {
-                    #region 根据 T117LeafID 获取标签打印模板
-                    TemplateContent template = new TemplateContent();
-                    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                        IRAPUser.Instance.CommunityID,
-                        carton.T117LeafID,
-                        IRAPUser.Instance.SysLogID,
-                        ref template,
-                        out errCode,
-                        out errText);
-                    WriteLog.Instance.Write(
-                        $"({errCode}){errText}",
-                        strProcedureName);
-                    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-                    {
-                        IRAPMessageBox.Instance.ShowErrorMessage(
-                            $"无法获取到 [T117LeafID={carton.T117LeafID}] 的模板");
-                        labelTemplate = "";
-                        return;
-                    }
-                    else
-                    {
-                        t117LeafID = carton.T117LeafID;
-                        labelTemplate = template.TemplateFMTStr;
-                    }
-                    #endregion
-                }
+                //if (t117LeafID != carton.T117LeafID)
+                //{
+                //    #region 根据 T117LeafID 获取标签打印模板
+                //    TemplateContent template = new TemplateContent();
+                //    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
+                //        IRAPUser.Instance.CommunityID,
+                //        carton.T117LeafID,
+                //        IRAPUser.Instance.SysLogID,
+                //        ref template,
+                //        out errCode,
+                //        out errText);
+                //    WriteLog.Instance.Write(
+                //        $"({errCode}){errText}",
+                //        strProcedureName);
+                //    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
+                //    {
+                //        IRAPMessageBox.Instance.ShowErrorMessage(
+                //            $"无法获取到 [T117LeafID={carton.T117LeafID}] 的模板");
+                //        labelTemplate = "";
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        t117LeafID = carton.T117LeafID;
+                //        labelTemplate = template.TemplateFMTStr;
+                //    }
+                //    #endregion
+                //}
 
-                if (labelTemplate != "")
-                {
-                    PrintCartonLabel(carton, labelTemplate);
-                }
+                //if (labelTemplate != "")
+                //{
+                PrintCartonLabel(carton, labelTemplate);
+                //}
             }
 
             IRAPMessageBox.Instance.ShowInformation("标签打印完成。");
@@ -210,9 +210,11 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
                 Encoding encoding = Encoding.GetEncoding("GB2312");
                 int stringLength = encoding.GetBytes(cartonInfo.MaterialCategory).Length;
 
-                if (stringLength <= 25)
+                if (stringLength <= 30)
                 {
-                    rpt.LoadFromString(labelTemplate);
+                    Stream ms = new MemoryStream(Properties.Resources.外标签);
+                    rpt.Load(ms);
+                    //rpt.LoadFromString(labelTemplate);
                 }
                 else
                 {
@@ -299,38 +301,38 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
 
             foreach (BoxOfCarton box in boxes)
             {
-                if (t117LeafID != box.T117LeafID)
-                {
-                    #region 根据 T117LeafID 获取标签打印模板
-                    TemplateContent template = new TemplateContent();
-                    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                        IRAPUser.Instance.CommunityID,
-                        box.T117LeafID,
-                        IRAPUser.Instance.SysLogID,
-                        ref template,
-                        out errCode,
-                        out errText);
-                    WriteLog.Instance.Write(
-                        $"({errCode}){errText}",
-                        strProcedureName);
-                    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-                    {
-                        IRAPMessageBox.Instance.ShowErrorMessage(
-                            $"无法获取到 [T117LeafID={box.T117LeafID}] 的模板");
-                        boxLabelTemplate = "";
-                    }
-                    else
-                    {
-                        t117LeafID = box.T117LeafID;
-                        boxLabelTemplate = template.TemplateFMTStr;
-                    }
-                    #endregion
-                }
+                //if (t117LeafID != box.T117LeafID)
+                //{
+                //    #region 根据 T117LeafID 获取标签打印模板
+                //    TemplateContent template = new TemplateContent();
+                //    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
+                //        IRAPUser.Instance.CommunityID,
+                //        box.T117LeafID,
+                //        IRAPUser.Instance.SysLogID,
+                //        ref template,
+                //        out errCode,
+                //        out errText);
+                //    WriteLog.Instance.Write(
+                //        $"({errCode}){errText}",
+                //        strProcedureName);
+                //    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
+                //    {
+                //        IRAPMessageBox.Instance.ShowErrorMessage(
+                //            $"无法获取到 [T117LeafID={box.T117LeafID}] 的模板");
+                //        boxLabelTemplate = "";
+                //    }
+                //    else
+                //    {
+                //        t117LeafID = box.T117LeafID;
+                //        boxLabelTemplate = template.TemplateFMTStr;
+                //    }
+                //    #endregion
+                //}
 
-                if (boxLabelTemplate != "")
-                {
-                    PrintBoxLabel(box, boxLabelTemplate);
-                }
+                //if (boxLabelTemplate != "")
+                //{
+                PrintBoxLabel(box, boxLabelTemplate);
+                //}
             }
             #endregion
         }
@@ -346,9 +348,11 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
                 Encoding encoding = Encoding.GetEncoding("GB2312");
                 int stringLength = encoding.GetBytes(box.MaterialCategory).Length;
 
-                if (stringLength <= 25)
+                if (stringLength <= 20)
                 {
-                    rpt.LoadFromString(labelTemplate);
+                    Stream ms = new MemoryStream(Properties.Resources.内标签);
+                    rpt.Load(ms);
+                    //rpt.LoadFromString(labelTemplate);
                 }
                 else
                 {
