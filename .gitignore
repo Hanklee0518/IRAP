@@ -6,9 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-licenses.licx
 *.bak
-*.licx
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

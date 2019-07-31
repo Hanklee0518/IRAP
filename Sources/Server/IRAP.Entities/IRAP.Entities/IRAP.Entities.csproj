@@ -85,6 +85,7 @@
     <Compile Include="MDM\DefectRootCause.cs" />
     <Compile Include="MDM\FailureModeByWorkUnit.cs" />
     <Compile Include="MDM\InspectionItem.cs" />
+    <Compile Include="MDM\LineOrWorkCenterForAProduct.cs" />
     <Compile Include="MDM\MFGOperation.cs" />
     <Compile Include="MDM\ProductionProcessParam.cs" />
     <Compile Include="MDM\ProductRepairMode.cs" />

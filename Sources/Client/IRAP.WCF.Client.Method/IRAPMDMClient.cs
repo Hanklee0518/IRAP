@@ -1122,6 +1122,84 @@ namespace IRAP.WCF.Client.Method
         }
 
         /// <summary>
+        /// 获取指定产品的生产线或工作中心清单
+        /// </summary>
+        /// <remarks>
+        /// ⒈ 资源树标识从菜单参数Parameters中获取；
+        /// ⒉ 如果资源树标识=134，界面上隐藏工作中心部分的内容；
+        /// ⒊ 如果资源树标识=211，界面上产线部分的内容禁止编辑，由选定的工作中心通过属性刷新出来。
+        /// </remarks>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="T102LeafID">产品叶标识</param>
+        /// <param name="resourceTreeID">生产资源树标识(134-产线，211-工作中心)</param>
+        /// <param name="shortTime">关注的时间点(yyyy-mm-dd hh:mm)，当前版本传空串</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        public void ufn_GetList_LineOrWorkCenterForAProduct(
+            int communityID,
+            int t102LeafID,
+            int resourceTreeID,
+            string shortTime,
+            long sysLogID,
+            ref List<LineOrWorkCenterForAProduct> datas,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                datas.Clear();
+
+                using (WCFClient client = new WCFClient())
+                {
+                    WriteLog.Instance.Write(
+                        $"调用 ufn_GetList_LineOrWorkCenterForAProduct 函数， " +
+                        $"参数：CommunityID={communityID}|T102LeafID={t102LeafID}|" +
+                        $"ResourceTreeID={resourceTreeID}|ShortTime={shortTime}|" +
+                        $"SysLogID={sysLogID}",
+                        strProcedureName);
+
+                    #region 将函数调用参数加入 HashTable 中
+                    Hashtable hashParams = new Hashtable();
+
+                    hashParams.Add("CommunityID", communityID);
+                    hashParams.Add("T102LeafID", t102LeafID);
+                    hashParams.Add("ResourceTreeID", resourceTreeID);
+                    hashParams.Add("ShortTime", shortTime);
+                    hashParams.Add("SysLogID", sysLogID);
+                    #endregion
+
+                    object d1 = client.WCFRESTFul(
+                        "IRAP.MDM.BL.dll",
+                        "IRAP.MDM.BL.ResourceAndMethod",
+                        "ufn_GetList_LineOrWorkCenterForAProduct",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write($"({errCode}){errText}", strProcedureName);
+
+                    if (errCode == 0)
+                    {
+                        datas = d1 as List<LineOrWorkCenterForAProduct>;
+                    }
+                    WriteLog.Instance.Write($"共获得 {datas.Count} 条记录。", strProcedureName);
+                }
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
         /// 获取失效模式清单的核心函数
         /// </summary>
         /// <param name="communityID">社区标识</param>
@@ -1816,7 +1894,7 @@ namespace IRAP.WCF.Client.Method
                                 strProcedureName);
                             #endregion
 
-                            object d1 = 
+                            object d1 =
                                 client.WCFRESTFul(
                                     "IRAP.BL.MDM.dll",
                                     "IRAP.BL.MDM.IRAPMDM",
@@ -4538,7 +4616,7 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 ufn_GetList_BatchRingCategory，输入参数：" +
-                        "CommunityID={0}|T216LeafID={1}|T102LeafID={2}|"+
+                        "CommunityID={0}|T216LeafID={1}|T102LeafID={2}|" +
                         "SysLogID={3}",
                         communityID,
                         t216LeafID,
@@ -5414,8 +5492,8 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 usp_SaveAttr_ProcessOperation，输入参数：" +
-                        "CommunityID={0}|T216Leaf={1}|T216Code={2}|"+
-                        "T216Name={3}|T116Leaf={4}|T124Leaf={5}|"+
+                        "CommunityID={0}|T216Leaf={1}|T216Code={2}|" +
+                        "T216Name={3}|T116Leaf={4}|T124Leaf={5}|" +
                         "T123Leaf={6}|SysLogID={7}",
                         communityID,
                         t216Leaf,
@@ -5517,7 +5595,7 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 ufn_GetList_CapacityForT101OrT102，输入参数：" +
-                        "CommunityID={0}|ProductCode={1}|ShotTime={2}|"+
+                        "CommunityID={0}|ProductCode={1}|ShotTime={2}|" +
                         "SysLogID={3}",
                         communityID,
                         productCode,
@@ -5805,8 +5883,8 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("productNo", productNo);
                 hashParams.Add("sysLogID", sysLogID);
                 WriteLog.Instance.Write(
-                    $"调用 ufn_GetList_ProductionLinesOfProduct 函数，参数："+
-                    $"CommunityID={communityID}|ProductNo={productNo}|"+
+                    $"调用 ufn_GetList_ProductionLinesOfProduct 函数，参数：" +
+                    $"CommunityID={communityID}|ProductNo={productNo}|" +
                     $"SysLogID={sysLogID}",
                     strProcedureName);
                 #endregion
