@@ -5924,5 +5924,179 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
+        /// <summary>
+        /// 获取指定产品的生产工序清单
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="productLeafID">产品标识</param>
+        public void ufn_GetList_OperationsOfAProduct(
+            int communityID,
+            int productLeafID,
+            ref List<OperationOfAProduct> datas,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                datas.Clear();
+
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("productLeafID", productLeafID);
+                WriteLog.Instance.Write(
+                    $"调用函数 ufn_GetList_OperationsOfAProduct，" +
+                    $"参数：CommunityID={communityID}|ProductLeafID={productLeafID}|",
+                    strProcedureName);
+                #endregion
+
+                #region 执行存储过程或者函数
+                using (WCFClient client = new WCFClient())
+                {
+
+                    object rlt =
+                        client.WCFRESTFul(
+                            "IRAP.BL.MDM.dll",
+                            "IRAP.BL.MDM.IRAPMDM",
+                            "ufn_GetList_OperationsOfAProduct",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format(
+                            "({0}){1}", errCode, errText),
+                        strProcedureName);
+
+                    if (errCode == 0)
+                    {
+                        datas = rlt as List<OperationOfAProduct>;
+                    }
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        public void usp_WIUpLoad(
+            int communityID,
+            int productLeaf,
+            int operationLeaf,
+            long sysLogID,
+            out int versionNo,
+            out string ftpAddress,
+            out int port,
+            out string ftpUser,
+            out string ftpPassword,
+            out string remotePath,
+            out string wiFileName,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            versionNo = 0;
+            ftpAddress = "";
+            port = 21;
+            ftpUser = "";
+            ftpPassword = "";
+            remotePath = "";
+            wiFileName = "";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("productLeaf", productLeaf);
+                hashParams.Add("operationLeaf", operationLeaf);
+                hashParams.Add("sysLogID", sysLogID);
+                WriteLog.Instance.Write(
+                    $"调用 usp_WIUpLoad，输入参数：CommunityID={communityID}|" +
+                    $"ProductLeaf={productLeaf}|OperationLeaf={operationLeaf}|SysLogID={2}",
+                    strProcedureName);
+                #endregion
+
+                #region 调用应用服务过程，并解析返回值
+                using (WCFClient client = new WCFClient())
+                {
+                    object rlt = client.WCFRESTFul(
+                        "IRAP.BL.MDM.dll",
+                        "IRAP.BL.MDM.IRAPMDM",
+                        "usp_WIUpLoad",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format("({0}){1}",
+                            errCode,
+                            errText),
+                        strProcedureName);
+                    if (errCode == 0)
+                    {
+                        if (rlt is Hashtable)
+                        {
+                            Hashtable rltHash = (Hashtable)rlt;
+                            #region 取返回值
+                            try
+                            {
+                                HashtableTools.Instance.GetValue(rltHash, "VersionNo", out versionNo);
+                                HashtableTools.Instance.GetValue(rltHash, "FTPAddress", out ftpAddress);
+                                HashtableTools.Instance.GetValue(rltHash, "Port", out port);
+                                HashtableTools.Instance.GetValue(rltHash, "FTPUser", out ftpUser);
+                                HashtableTools.Instance.GetValue(rltHash, "FTPPassword", out ftpPassword);
+                                HashtableTools.Instance.GetValue(rltHash, "RemotePath", out remotePath);
+                                HashtableTools.Instance.GetValue(rltHash, "WIFileName", out wiFileName);
+                                WriteLog.Instance.Write(
+                                    $"输出参数：VersionNo={versionNo}|FTPAddress={ftpAddress}|" +
+                                    $"Port={port}|FTPUser={ftpUser}|FTPPassword={ftpPassword}|" +
+                                    $"RemotePath={remotePath}|WIFileName={wiFileName}",
+                                    strProcedureName);
+                            }
+                            catch (Exception error)
+                            {
+                                errCode = -1003;
+                                errText = error.Message;
+                                WriteLog.Instance.Write(errText, strProcedureName);
+                                return;
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            errCode = -1002;
+                            errText = "应用服务 usp_WIUpLoad 返回的不是 Hashtable！";
+                            WriteLog.Instance.Write(errText, strProcedureName);
+                        }
+                    }
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                errCode = -1001;
+                errText = error.Message;
+                WriteLog.Instance.Write(errText, strProcedureName);
+                WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

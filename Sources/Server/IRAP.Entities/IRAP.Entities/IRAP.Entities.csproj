@@ -65,6 +65,7 @@
     <Compile Include="DPA\dpa_DBF_MO.cs" />
     <Compile Include="DPA\dpa_Imp_SmeltProductionPlan.cs" />
     <Compile Include="IRAP\STB006.cs" />
+    <Compile Include="IRAP\TreeViewEntity.cs" />
     <Compile Include="MDM\AndonCallPerson.cs" />
     <Compile Include="FVS\AndonRspedEventInfo.cs" />
     <Compile Include="APS\ManufacturingOrder.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="MDM\InspectionItem.cs" />
     <Compile Include="MDM\LineOrWorkCenterForAProduct.cs" />
     <Compile Include="MDM\MFGOperation.cs" />
+    <Compile Include="MDM\OperationOfAProduct.cs" />
     <Compile Include="MDM\ProductionProcessParam.cs" />
     <Compile Include="MDM\ProductRepairMode.cs" />
     <Compile Include="MDM\ProductViaStation.cs" />

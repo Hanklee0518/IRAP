@@ -893,6 +893,7 @@ namespace IRAP
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
+                    WIShow.Instance.HideWI();
                     e.Cancel = false;
                 }
                 else

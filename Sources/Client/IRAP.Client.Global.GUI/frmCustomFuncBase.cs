@@ -58,6 +58,8 @@ namespace IRAP.Client.Global.GUI
             {
                 barOptions.Visible = false;
                 barOptions.ShowSwitchButton();
+
+                WIShow.Instance.HideWI();
             }
         }
 

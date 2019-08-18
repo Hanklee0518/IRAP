@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.lblProductTimeSpan = new DevExpress.XtraEditors.LabelControl();
@@ -46,7 +48,7 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnProductName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.grdclmnTexture = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -268,11 +270,20 @@
             this.gridColumn2,
             this.grdclmnProductName,
             this.gridColumn3,
-            this.gridColumn4,
+            this.grdclmnTexture,
             this.gridColumn7,
             this.gridColumn5,
             this.gridColumn1,
             this.gridColumn6});
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Column = this.grdclmnTexture;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.Green;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = "YH22";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            this.grdvPWOs.FormatRules.Add(gridFormatRule1);
             this.grdvPWOs.GridControl = this.grdPWOs;
             this.grdvPWOs.Name = "grdvPWOs";
             this.grdvPWOs.OptionsBehavior.Editable = false;
@@ -311,13 +322,13 @@
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
             // 
-            // gridColumn4
+            // grdclmnTexture
             // 
-            this.gridColumn4.Caption = "材质";
-            this.gridColumn4.FieldName = "Texture";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.grdclmnTexture.Caption = "材质";
+            this.grdclmnTexture.FieldName = "Texture";
+            this.grdclmnTexture.Name = "grdclmnTexture";
+            this.grdclmnTexture.Visible = true;
+            this.grdclmnTexture.VisibleIndex = 4;
             // 
             // gridColumn7
             // 
@@ -505,7 +516,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn grdclmnProductName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn grdclmnTexture;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraEditors.SimpleButton btnParamRemove;
         private DevExpress.XtraEditors.SimpleButton btnParamNew;
