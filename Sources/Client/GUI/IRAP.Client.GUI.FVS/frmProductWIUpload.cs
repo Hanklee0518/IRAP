@@ -17,6 +17,8 @@ using System.Linq;
 using System.IO;
 using IRAP.Global;
 using IRAP.Entities.MDM;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraTreeList;
 
 namespace IRAP.Client.GUI.FVS
 {
@@ -85,6 +87,17 @@ namespace IRAP.Client.GUI.FVS
                     node.Tag = entity;
                 }
             }
+        }
+
+        private void AppendLog(string message)
+        {
+            if (tlLogs.Nodes.Count > 500)
+            {
+                tlLogs.Nodes.RemoveAt(0);
+            }
+
+            TreeListNode node = tlLogs.AppendNode(new object[] { message, }, null);
+            tlLogs.FocusedNode = node;
         }
 
         private void edtFilterText_KeyDown(object sender, KeyEventArgs e)
@@ -253,6 +266,12 @@ namespace IRAP.Client.GUI.FVS
                 XtraMessageBox.Show("未选择工序！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (edtUploadPath.Text.Trim() == "" ||
+                !File.Exists(edtUploadPath.Text.Trim()))
+            {
+                XtraMessageBox.Show("未指定上传的文件，或者指定的上传文件不存在！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             int t102LeafID = (tlProducts.FocusedNode.Tag as TreeViewEntity).NodeID * -1;
             int t216LeafID = (tlOperations.FocusedNode.Tag as OperationOfAProduct).T216LeafID;
@@ -327,18 +346,40 @@ namespace IRAP.Client.GUI.FVS
                         MessageBoxIcon.Error);
                     return;
                 }
+
+                client.Disconnect();
             }
             finally
             {
                 TWaitting.Instance.CloseWaitForm();
             }
 
-            XtraMessageBox.Show(
+            edtUploadPath.Text = "";
+
+            string message =
                 $"文件上传完毕，原文件名[{Path.GetFileName(edtUploadPath.Text)}]" +
-                $"更名为[{remoteFilePath}]，位于FTP服务器的[{remoteDirectory}]中",
+                $"更名为[{remoteFilePath}]，位于FTP服务器的[{remoteDirectory}]中";
+            XtraMessageBox.Show(
+                message,
                 "提示",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+            AppendLog(message);
+        }
+
+        private void edtFilterText_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            switch (e.Button.Kind)
+            {
+                case ButtonPredefines.Delete:
+                    edtFilterText.Text = "";
+                    InitTreeListNodes(null);
+                    tlProducts_FocusedNodeChanged(
+                        tlProducts, 
+                        new FocusedNodeChangedEventArgs(null, null));
+
+                    break;
+            }
         }
     }
 }

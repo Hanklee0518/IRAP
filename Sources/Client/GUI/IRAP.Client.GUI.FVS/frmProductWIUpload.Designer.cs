@@ -154,6 +154,11 @@
             this.edtFilterText.Properties.NullValuePrompt = "根据输入的内容进行模糊查询";
             this.edtFilterText.Size = new System.Drawing.Size(332, 22);
             this.edtFilterText.TabIndex = 0;
+            this.edtFilterText.ToolTip = "请在此处输入产品名称或者产品编号的部分内容，以便进行模糊查询过滤";
+            this.edtFilterText.ToolTipController = this.toolTipController;
+            this.edtFilterText.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
+            this.edtFilterText.ToolTipTitle = "提示";
+            this.edtFilterText.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.edtFilterText_ButtonClick);
             this.edtFilterText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtFilterText_KeyDown);
             // 
             // splitContainerControl2

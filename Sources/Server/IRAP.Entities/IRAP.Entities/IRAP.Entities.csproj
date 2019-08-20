@@ -96,6 +96,7 @@
     <Compile Include="MDM\SmeltInspectionItem.cs" />
     <Compile Include="MDM\Tables\Stb057.cs" />
     <Compile Include="MDM\Tables\Stb058.cs" />
+    <Compile Include="MDM\WIFile.cs" />
     <Compile Include="MDM\WIPStation.cs" />
     <Compile Include="MDM\WorkUnit.cs" />
     <Compile Include="MES\BatchByEquipment.cs" />

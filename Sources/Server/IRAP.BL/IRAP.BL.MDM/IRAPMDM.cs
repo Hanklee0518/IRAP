@@ -7170,5 +7170,77 @@ namespace IRAP.BL.MDM
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+        public IRAPJsonResult ufn_GetInfo_WIFile(
+            int communityID,
+            int productLeaf,
+            int operationLeaf,
+            long sysLogID,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                string.Format(
+                    "{0}.{1}",
+                    className,
+                    MethodBase.GetCurrentMethod().Name);
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                WIFile data = new WIFile();
+
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@ProductLeaf", DbType.Int32, productLeaf));
+                paramList.Add(new IRAPProcParameter("@OperationLeaf", DbType.Int32, operationLeaf));
+                paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
+                WriteLog.Instance.Write(
+                    $"调用函数 IRAPMDM..ufn_GetInfo_WIFile，参数：CommunityID={communityID}|" +
+                    $"ProductLeaf={productLeaf}|OperationLeaf={operationLeaf}|" +
+                    $"SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        string strSQL = "SELECT * " +
+                            "FROM IRAPMDM..ufn_GetInfo_WIFile(" +
+                            "@CommunityID, @ProductLeaf, @OperationLeaf, @SysLogID)";
+
+                        IList<WIFile> lstDatas = conn.CallTableFunc<WIFile>(strSQL, paramList);
+                        if (lstDatas.Count > 0)
+                        {
+                            data = lstDatas[0].Clone();
+                            errCode = 0;
+                            errText = "调用成功！";
+                        }
+                        else
+                        {
+                            errCode = -99001;
+                            errText = "没有当前站点的产线信息";
+                        }
+                        WriteLog.Instance.Write(errText, strProcedureName);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText = string.Format("调用 IRAPMDM..ufn_GetInfo_WIFile 函数发生异常：{0}", error.Message);
+                    WriteLog.Instance.Write(errText, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                }
+                #endregion
+
+                return Json(data);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }
