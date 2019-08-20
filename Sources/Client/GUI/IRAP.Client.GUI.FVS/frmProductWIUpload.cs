@@ -25,6 +25,7 @@ namespace IRAP.Client.GUI.FVS
     public partial class frmProductWIUpload : frmCustomFuncBase
     {
         private List<TreeViewEntity> nodes = new List<TreeViewEntity>();
+        private bool allowTreeLideNodeChanged = false;
 
         public frmProductWIUpload()
         {
@@ -67,6 +68,7 @@ namespace IRAP.Client.GUI.FVS
         private void InitTreeListNodes(List<TreeViewEntity> datas)
         {
             tlProducts.Nodes.Clear();
+            allowTreeLideNodeChanged = false;
 
             if (datas != null)
             {
@@ -86,6 +88,21 @@ namespace IRAP.Client.GUI.FVS
                             null);
                     node.Tag = entity;
                 }
+            }
+            allowTreeLideNodeChanged = true;
+            
+            if (tlProducts.Nodes.Count <= 0)
+            {
+                tlProducts_FocusedNodeChanged(
+                    tlProducts,
+                    new FocusedNodeChangedEventArgs(null, null));
+            }
+            else
+            {
+                tlProducts.FocusedNode = tlProducts.Nodes[0];
+                tlProducts_FocusedNodeChanged(
+                    tlProducts,
+                    new FocusedNodeChangedEventArgs(null, tlProducts.FocusedNode));
             }
         }
 
@@ -121,7 +138,6 @@ namespace IRAP.Client.GUI.FVS
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
                             InitTreeListNodes(null);
-                            return;
                         }
                     }
                     else
@@ -141,9 +157,9 @@ namespace IRAP.Client.GUI.FVS
             }
         }
 
-        private void tlProducts_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
+        private void tlProducts_FocusedNodeChanged(object sender, FocusedNodeChangedEventArgs e)
         {
-            if (e.Node != null && e.Node.Tag != null)
+            if (e.Node != null && e.Node.Tag != null && allowTreeLideNodeChanged)
             {
                 if (e.Node.Tag is TreeViewEntity)
                 {
@@ -214,7 +230,7 @@ namespace IRAP.Client.GUI.FVS
             }
         }
 
-        private void edtUploadPath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void edtUploadPath_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
             switch ((string)e.Button.Tag)
             {
@@ -225,11 +241,25 @@ namespace IRAP.Client.GUI.FVS
                         dialog.Filter =
                             "Microsoft Office Excel 文件(*.xls)|*.xls|" +
                             "Adobe PDF 文件(*.pdf)|*.pdf|" +
-                            "JPEG 图片文件(*.jpg)|*.jpg|所有文件(*.*)|*.*";
+                            "JPEG 图片文件(*.jpg)|*.jpg";
                         dialog.CheckFileExists = true;
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            edtUploadPath.Text = dialog.FileName;
+                            switch (Path.GetExtension(dialog.FileName).ToUpper())
+                            {
+                                case ".XLS":
+                                case ".PDF":
+                                case ".JPG":
+                                    edtUploadPath.Text = dialog.FileName;
+                                    break;
+                                default:
+                                    XtraMessageBox.Show(
+                                        "现在只支持 Excel/PDF/JPG 格式的文件，其它格式的文件暂不支持",
+                                        "提示",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                                    break;
+                            }
                         }
                     }
                     break;
@@ -313,52 +343,70 @@ namespace IRAP.Client.GUI.FVS
 
             try
             {
-                TWaitting.Instance.ShowWaitForm("登录FTP服务器...");
-                FTPClient client = new FTPClient(ipAddress, port, userID, userPWD);
-                if (!client.Connect())
-                {
-                    XtraMessageBox.Show(
-                        client.errormessage,
-                        "出错啦",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
+                //TWaitting.Instance.ShowWaitForm("登录FTP服务器...");
+                //FTPClient client = new FTPClient(ipAddress, port, userID, userPWD);
+                //if (!client.Connect())
+                //{
+                //    XtraMessageBox.Show(
+                //        client.errormessage,
+                //        "出错啦",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Error);
+                //    return;
+                //}
 
-                TWaitting.Instance.ShowWaitForm("切换FTP服务器的当前目录");
-                if (!client.ChangeDir(remoteDirectory))
-                {
-                    XtraMessageBox.Show(
-                        client.errormessage,
-                        "出错啦",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
+                //TWaitting.Instance.ShowWaitForm("切换FTP服务器的当前目录");
+                //if (!client.ChangeDir(remoteDirectory))
+                //{
+                //    XtraMessageBox.Show(
+                //        client.errormessage,
+                //        "出错啦",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Error);
+                //    return;
+                //}
+
+                FTPHelper client = new FTPHelper(ipAddress, userID, userPWD);
 
                 TWaitting.Instance.ShowWaitForm("正在上传文件......");
-                if (!client.OpenUpload(edtUploadPath.Text, remoteFilePath))
+
+                try
+                {
+                    if (
+                        !client.Upload(
+                            new FileInfo(edtUploadPath.Text),
+                            $"{remoteDirectory}{remoteFilePath}"))
+                    {
+                        XtraMessageBox.Show(
+                            "上传文件失败",
+                            "出错啦",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                catch (Exception error)
                 {
                     XtraMessageBox.Show(
-                        client.errormessage,
+                        error.Message,
                         "出错啦",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     return;
                 }
 
-                client.Disconnect();
+                //client.Disconnect();
             }
             finally
             {
                 TWaitting.Instance.CloseWaitForm();
             }
 
-            edtUploadPath.Text = "";
-
             string message =
                 $"文件上传完毕，原文件名[{Path.GetFileName(edtUploadPath.Text)}]" +
                 $"更名为[{remoteFilePath}]，位于FTP服务器的[{remoteDirectory}]中";
+            edtUploadPath.Text = "";
+
             XtraMessageBox.Show(
                 message,
                 "提示",
@@ -374,9 +422,6 @@ namespace IRAP.Client.GUI.FVS
                 case ButtonPredefines.Delete:
                     edtFilterText.Text = "";
                     InitTreeListNodes(null);
-                    tlProducts_FocusedNodeChanged(
-                        tlProducts, 
-                        new FocusedNodeChangedEventArgs(null, null));
 
                     break;
             }

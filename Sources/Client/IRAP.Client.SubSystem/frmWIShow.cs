@@ -47,6 +47,18 @@ namespace IRAP.Client.SubSystem
         {
             ShowOnMonitor();
         }
+
+        private void picWI_MouseDown(object sender, MouseEventArgs e)
+        {
+            picWI.Visible = false;
+            lblMessage.Visible = true;
+        }
+
+        private void picWI_MouseUp(object sender, MouseEventArgs e)
+        {
+            lblMessage.Visible = false;
+            picWI.Visible = true;
+        }
     }
 
     internal class WIScreen
@@ -96,6 +108,7 @@ namespace IRAP.Client.SubSystem
     {
         private static WIShow _instance = null;
         private frmWIShow showWI = null;
+        private Image defaultImage = null;
 
         public static WIShow Instance
         {
@@ -115,54 +128,52 @@ namespace IRAP.Client.SubSystem
         {
             try
             {
-                TWaitting.Instance.ShowWaitForm("登录FTP服务器...");
-                FTPClient client = new FTPClient(wi.Host, wi.Port, wi.UserName, wi.UserPass);
-                if (!client.Connect())
-                {
-                    throw new Exception(client.errormessage);
-                }
+                //TWaitting.Instance.ShowWaitForm("登录FTP服务器...");
+                FTPHelper client = new FTPHelper(wi.Host, wi.UserName, wi.UserPass);
 
-                TWaitting.Instance.ShowWaitForm("切换FTP服务器的当前目录");
-                if (!client.ChangeDir(wi.RemotePath))
-                {
-                    throw new Exception(client.errormessage);
-                }
-
-                TWaitting.Instance.ShowWaitForm("正在下载文件......");
                 try
                 {
-                    client.OpenDownload(wi.WIFileName, localPath);
+                    if (client.Download($"{wi.RemotePath}{wi.WIFileName}", localPath))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (Exception error)
                 {
-                    throw new Exception(error.Message);
+                    throw error;
                 }
-
-                client.Disconnect();
-                return true;
             }
             finally
             {
-                TWaitting.Instance.CloseWaitForm();
+                //TWaitting.Instance.CloseWaitForm();
             }
         }
 
         private Image LoadPicture(string localPath)
         {
+            Image rlt = null;
             if (File.Exists(localPath))
             {
-                FileStream fs = new FileStream(localPath, FileMode.Open, FileAccess.Read);
-                int byteLength = (int)fs.Length;
-                byte[] fileBytes = new byte[byteLength];
-                fs.Read(fileBytes, 0, byteLength);
-                fs.Close();
+                try
+                {
+                    FileStream fs = new FileStream(localPath, FileMode.Open, FileAccess.Read);
+                    int byteLength = (int)fs.Length;
+                    byte[] fileBytes = new byte[byteLength];
+                    fs.Read(fileBytes, 0, byteLength);
+                    fs.Close();
 
-                return Image.FromStream(new MemoryStream(fileBytes));
+                    rlt = Image.FromStream(new MemoryStream(fileBytes));
+                }
+                catch
+                {
+                    rlt = null;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return rlt;
         }
 
         public void ShowWI(int t102LeafID, int t1216LeafID)
@@ -172,6 +183,7 @@ namespace IRAP.Client.SubSystem
                 if (showWI == null)
                 {
                     showWI = new frmWIShow(WIScreen.CreateInstance());
+                    defaultImage = showWI.picWI.Image.Clone() as Image;
                 }
 
                 showWI.DesktopBounds = Screen.AllScreens[1].Bounds;
@@ -210,6 +222,11 @@ namespace IRAP.Client.SubSystem
                         else
                         {
                             string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}WI\\";
+                            if (!Directory.Exists(basePath))
+                            {
+                                Directory.CreateDirectory(basePath);
+                            }
+
                             string path = $"{basePath}{wiFile.WIFileName}";
                             if (!File.Exists(path))
                             {
@@ -219,23 +236,40 @@ namespace IRAP.Client.SubSystem
                                     {
                                         showWI.lblMessage.Text =
                                             $"本地和远程都未找到电子作业指导书[{wiFile}]文件";
-                                        showWI.lblMessage.Visible = true;
-                                        showWI.picWI.Visible = false;
+                                        //showWI.lblMessage.Visible = true;
+                                        //showWI.picWI.Visible = false;
+
+                                        showWI.picWI.Image = defaultImage;
+
                                         return;
                                     }
                                 }
                                 catch (Exception error)
                                 {
                                     showWI.lblMessage.Text = error.Message;
-                                    showWI.lblMessage.Visible = true;
-                                    showWI.picWI.Visible = false;
+                                    //showWI.lblMessage.Visible = true;
+                                    //showWI.picWI.Visible = false;
+                                    showWI.picWI.Image = defaultImage;
                                     return;
                                 }
                             }
 
                             showWI.picWI.Image = LoadPicture(path);
-                            showWI.lblMessage.Visible = false;
-                            showWI.picWI.Visible = true;
+                            if (showWI.picWI.Image == null)
+                            {
+                                showWI.lblMessage.Text =
+                                    $"无法加载图片文件[{path}]，该文件内容为" +
+                                    "空或者无法识别图片文件格式";
+                                //showWI.lblMessage.Visible = true;
+                                //showWI.picWI.Visible = false;
+                                showWI.picWI.Image = defaultImage;
+                            }
+                            else
+                            {
+                                showWI.lblMessage.Text = "图片加载成功";
+                                showWI.lblMessage.Visible = false;
+                                showWI.picWI.Visible = true;
+                            }
                         }
                     }
                 }
