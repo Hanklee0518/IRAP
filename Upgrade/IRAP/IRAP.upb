@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.exe" version="6.2.819.152" md5="65a09673e0d91dae8b62759a772d070d" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.exe" version="6.2.820.174" md5="72e8ed170c57c9871dabfecfa04b9a77" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\CH375Controller.dll" version="1.0.0.0" md5="c7dcc5695944dfcae0da13af76ca3b48" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\CH375DLL.DLL" version="2.2" md5="43f2bc6828b177477c2f98b8973460e8" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\DevExpress.BonusSkins.v15.2.dll" version="15.2.4.0" md5="05bc509ab00e39fd947a3d9283d09ed6" selected="True"/>
@@ -23,31 +23,31 @@
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\FastReport.dll" version="0.0.0.0" md5="c9201ed67a011e7433c91bfadeb3c71f" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\FastReport.Editor.dll" version="2013.2.5.0" md5="7a76c332fab99cfbe9753c8dafbbea39" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\ftplib.dll" version="4.0.0.0" md5="9cf37fb829d6cf791eab4570a86c6a81" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.AutoUpgrade.dll" version="6.1.819.196" md5="b18158fc486fe782d9ea9b6907a1f9d3" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.dll" version="6.1.819.1255" md5="9f96ca5703982f9350c2cf282336321a" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.GUI.dll" version="6.1.819.1242" md5="cc77b9ae3c3f40f5b7120b986085fd0c" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.Resources.dll" version="6.1.819.1259" md5="f378fa98020b2444d017d2378c78d6da" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.AutoUpgrade.dll" version="6.1.820.218" md5="9f56d9431ff4b34da057730d6e87d6b3" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.dll" version="6.1.823.1303" md5="6018d4ff410f1009a441b18c058ba716" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.GUI.dll" version="6.1.823.1290" md5="a6f2e02c92213abb8b7373116af65799" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.Global.Resources.dll" version="6.1.823.1307" md5="25fa2d94b0265c535f11371718651f78" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.APS.dll" version="6.1.603.20" md5="8bb74f9315dc44e2093c1cce7320ed34" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.CAS.dll" version="6.1.326.9" md5="3a633fa49fd37dffcf7e1f6502a287f4" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.FVS.dll" version="6.2.817.8" md5="327d7fb2b11384384201c516bc2434e0" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.FVS.dll" version="6.2.820.47" md5="417322c0559aa7745f27ce1f77139941" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.MDM.dll" version="6.1.620.22" md5="0d481c60a636da038082d2a7d60b15d7" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.MESPDC.dll" version="6.2.620.292" md5="46a71622ee29a73b829b1afbd81e7577" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.MESRMM.dll" version="6.1.326.21" md5="3717b2246962e921f047046b124bb00d" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.SCES.dll" version="6.1.722.164" md5="6cc9f5748ff0064d263e7d6adbcfab18" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.SubSystem.dll" version="6.2.819.1247" md5="0d207b491163aac1feae66073fb21bc4" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.User.dll" version="6.1.819.1250" md5="b91f9146a7a83c0bbe4336d421d728c2" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.SubSystem.dll" version="6.2.823.1294" md5="ac175922dce7bb2d97e169a965c18615" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.User.dll" version="6.1.823.1298" md5="cf52ea0086be7f433657359c94873802" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Components.WorkFlow.dll" version="6.1.620.27" md5="360a773c97ed25762e308fe4d49b3ee4" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entities.dll" version="6.1.819.1444" md5="5ca25816213857b7f58059aa447fe345" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entities.dll" version="6.1.823.1492" md5="12db64bbb1da835f1412efb0b8e48c07" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.APS.dll" version="0.0.0.0" md5="" selected="False"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.FVS.dll" version="6.1.819.1281" md5="5a8f792ccd46ba523e9679d2bc4c1fad" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.Kanban.dll" version="6.1.819.1307" md5="e3972ddfe038867c42fcc923d4c1c169" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.MDM.dll" version="6.1.819.1380" md5="7e05810ac7ec91f34622158a7fabc4b0" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.MES.dll" version="6.1.819.1403" md5="d48e13b102c952fa14684a0d160484e9" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.SSO.dll" version="6.1.819.1316" md5="9d42bc003f6eb2fc7d1b7214d62e4572" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Global.dll" version="6.1.819.1502" md5="74b59ec8615ed0faa19b67db5c3b70ae" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.WCF.Client.dll" version="6.1.819.1259" md5="7b24a93f980f0affdac09161cea91d67" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.WCF.Client.Method.dll" version="6.1.819.1257" md5="68f3901be23ae8490382d4af9135e636" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAPShared.dll" version="6.0.819.1478" md5="26ae9f4ea041f45f7f1e60a8d33b70f4" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.FVS.dll" version="6.1.823.1329" md5="f158dd507b9c864fbc8ab6a74bce2adb" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.Kanban.dll" version="6.1.823.1355" md5="774b98c15a387cf3cba1d0cf33152973" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.MDM.dll" version="6.1.823.1428" md5="2d6a1f561966635092778aa2a2c3f88d" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.MES.dll" version="6.1.823.1451" md5="e0ff1bf68ad0913c30925cc33b3de3ab" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Entity.SSO.dll" version="6.1.823.1364" md5="c9137b4ac33a99054aad6bde109457bc" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Global.dll" version="6.1.823.1552" md5="e07caedddc4c8164ee2924eab87e2813" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.WCF.Client.dll" version="6.1.823.1307" md5="9e8c7a40268f23869bfd413901adef35" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.WCF.Client.Method.dll" version="6.1.823.1305" md5="5046115bd11fe40335aed91247b68b6b" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAPShared.dll" version="6.0.823.1526" md5="1821893b4b7cbeb39d3257e58b592c91" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\Newtonsoft.Json.dll" version="10.0.3.21018" md5="07e04fd870cee6f9994921b5af243b7f" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\Oracle.DataAccess.dll" version="4.112.3.0" md5="3bf768bc471e2effa78594703d12be89" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\PrintLabel.dll" version="0.0.0.0" md5="117cd85344f94909a4ab8e80bda15d3d" selected="True"/>
@@ -76,5 +76,5 @@
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\ICSharpCode.SharpZipLib.dll" version="0.86.0.518" md5="c8164876b6f66616d68387443621510c" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\AxInterop.AcroPDFLib.dll" version="1.0.0.0" md5="0cb1e3b5c11e1d6089d43d644273393e" selected="True"/>
 <UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\Interop.AcroPDFLib.dll" version="1.0.0.0" md5="511e3a7340cefb2fb01fceeda4698b7a" selected="True"/>
-<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.AsimcoPrdtPackage.dll" version="6.2.717.144" md5="554dd3342476be52e0efc187588d3a82" selected="True"/>
+<UpgradeFile name="C:\Users\Hanklee\source\repos\Hanklee0518\IRAP.Winform\Bin\Client\Release\IRAP.Client.GUI.AsimcoPrdtPackage.dll" version="6.2.823.146" md5="41667d43b22d1d51f3c4ff7b981b4ad9" selected="True"/>
 </root>

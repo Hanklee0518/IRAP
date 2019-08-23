@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="12/14/2018 20:14:03" ReportInfo.Modified="07/17/2019 12:13:07" ReportInfo.CreatorVersion="2013.2.5.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/14/2018 20:14:03" ReportInfo.Modified="08/23/2019 11:41:05" ReportInfo.CreatorVersion="2013.2.5.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,12 +44,12 @@ namespace FastReport
       <TextObject Name="Text2" Left="7.56" Top="49.14" Width="52.92" Height="11.34" Text="零件号：" Font="黑体, 8pt"/>
       <TextObject Name="Text3" Left="7.56" Top="75.6" Width="52.92" Height="11.34" Text="环  别：" Font="黑体, 8pt"/>
       <BarcodeObject Name="Barcode" Left="283.5" Top="96.39" Width="68.04" Height="68.04" AutoSize="false" Text="DataSource.BarCode" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
-      <TextObject Name="Text4" Left="45.36" Top="17.01" Width="247.59" Height="20.79" Text="[Model]" VertAlign="Center" Font="黑体, 14pt"/>
+      <TextObject Name="Text4" Left="45.36" Top="17.01" Width="306.18" Height="20.79" Text="[Model]" VertAlign="Center" Font="黑体, 14pt"/>
       <TextObject Name="Text5" Left="7.56" Top="102.06" Width="52.92" Height="11.34" Text="数  量：" Font="黑体, 8pt"/>
       <TextObject Name="Text6" Left="7.56" Top="126.63" Width="52.92" Height="11.34" Text="物料号：" Font="黑体, 8pt"/>
       <TextObject Name="Text8" Left="7.56" Top="149.31" Width="52.92" Height="11.34" Text="筒  号：" Font="黑体, 8pt"/>
       <TextObject Name="Text9" Left="7.56" Top="171.99" Width="52.92" Height="11.34" Text="供应商：" Font="黑体, 8pt"/>
-      <TextObject Name="Text10" Left="45.36" Top="45.36" Width="207.9" Height="18.9" Text="[DrawingID]" VertAlign="Center" Font="黑体, 14pt"/>
+      <TextObject Name="Text10" Left="45.36" Top="45.36" Width="306.18" Height="18.9" Text="[DrawingID]" VertAlign="Center" Font="黑体, 14pt"/>
       <TextObject Name="Text11" Left="45.36" Top="66.15" Width="306.18" Height="30.24" Text="[MaterialCategory]" VertAlign="Center" Font="黑体, 10pt"/>
       <TextObject Name="Text12" Left="45.36" Top="98.28" Width="207.9" Height="18.9" Text="[BoxQty]" VertAlign="Center" Font="黑体, 14pt"/>
       <TextObject Name="Text13" Left="45.36" Top="124.74" Width="207.9" Height="13.23" Text="[MaterialCode]" Font="黑体, 11pt"/>
