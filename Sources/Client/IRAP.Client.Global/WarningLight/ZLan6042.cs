@@ -121,7 +121,7 @@ namespace IRAP.Client.Global.WarningLight
                 {
                     WriteLog.Instance.Write(
                         string.Format(
-                            "无法连接ZLan6042控制盒[{0}:{1}]，原因：[{2}]", 
+                            "无法连接ZLan6042控制盒[{0}:{1}]，原因：[{2}]",
                             ipAddress,
                             port,
                             ex.Message),
@@ -133,11 +133,12 @@ namespace IRAP.Client.Global.WarningLight
             if (clientSocket.Connected)
             {
                 try
-                { byte[] data = new byte[12]
                 {
+                    byte[] data = new byte[12]
+                    {
                         0x00, 0x00, 0x00, 0x00, 0x00, 0x06,
                         0x01, 0x05, 0x00, 0x10, 0x00, 0x00,
-                };
+                    };
 
                     if (red != redStatus)
                     {
@@ -187,7 +188,8 @@ namespace IRAP.Client.Global.WarningLight
                 finally
                 {
                     clientSocket.Close();
-                    clientSocket.Dispose();
+                    //clientSocket.Dispose();
+                    clientSocket = null;
                 }
             }
         }
