@@ -802,7 +802,7 @@ namespace IRAP.Client.GUI.MESPDC
             }
 
             int idx = grdvProducts.GetFocusedDataSourceRowIndex();
-            using (Dialogs.frmRepairItemEditor formEditor = 
+            using (Dialogs.frmRepairItemEditor formEditor =
                 new Dialogs.frmRepairItemEditor(Global.Enums.EditStatus.New))
             {
                 formEditor.Symbols = risluSymbol.DataSource as DataTable;
@@ -1376,15 +1376,26 @@ namespace IRAP.Client.GUI.MESPDC
                 counts.TryGetValue(10718, out c10718);
                 counts.TryGetValue(10737, out c10737);
 
-                if ((repairWIPIDs[i].TSItems.Count == 0 ||
-                    c10702 == repairWIPIDs[i].TSItems.Count) &&
-                    (int)dtRepairWIPs.Rows[i]["RepairStatus"] != 3)
+                if (
+                        (repairWIPIDs[i].TSItems.Count == 0 ||
+                        c10702 == repairWIPIDs[i].TSItems.Count) &&
+                    (
+                        (int)dtRepairWIPs.Rows[i]["RepairStatus"] != 3 &&
+                        (int)dtRepairWIPs.Rows[i]["RepairStatus"] != 6))
                 {
-                    XtraMessageBox.Show(
-                        "子在制品维修状态不是“无故障”时，必须填写维修项目或者维修项目中的维修模式不能全是“无故障”！",
-                        caption,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    switch (IRAPUser.Instance.CommunityID)
+                    {
+                        case 60006:
+                            XtraMessageBox.Show(
+                                "子在制品维修状态不是“重测”或“拼版返回”时，" +
+                                "必须填写维修项目或者维修项目中的维修模式不能全是“无故障”！",
+                                caption,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            break;
+                        default:
+                            break;
+                    }
                     grdvProducts.FocusedRowHandle = i;
                     return;
                 }
@@ -1427,6 +1438,7 @@ namespace IRAP.Client.GUI.MESPDC
                         }
                         break;
                     case 3:
+                    case 6:
                         if (c10702 != repairWIPIDs[i].TSItems.Count)
                         {
                             XtraMessageBox.Show(
@@ -1570,7 +1582,7 @@ namespace IRAP.Client.GUI.MESPDC
     internal class PokaYokeResult
     {
         public string T102Code { get; set; }
-        public string RoutingCheckInfo { get; set; }    
+        public string RoutingCheckInfo { get; set; }
         public string T107Info { get; set; }
         public string T134Info { get; set; }
 
@@ -1593,7 +1605,7 @@ namespace IRAP.Client.GUI.MESPDC
                 XmlNode node = xml.SelectSingleNode("Variables/Row");
                 if (node != null)
                 {
-                    if (node.Attributes["T102Code"]!=null)
+                    if (node.Attributes["T102Code"] != null)
                     {
                         rlt.T102Code = node.Attributes["T102Code"].Value;
                     }
