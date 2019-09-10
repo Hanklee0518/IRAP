@@ -99,5 +99,15 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 成品包装统一标签 {
+            get {
+                object obj = ResourceManager.GetObject("成品包装统一标签", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

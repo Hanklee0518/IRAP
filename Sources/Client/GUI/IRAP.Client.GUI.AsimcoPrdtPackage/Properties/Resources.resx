@@ -130,4 +130,7 @@
   <data name="外标签_折行" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\外标签_折行.frx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="成品包装统一标签" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\成品包装统一标签.frx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

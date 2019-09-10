@@ -19,6 +19,7 @@ using IRAP.Entities.MES;
 using IRAP.Entity.MES;
 using IRAP.WCF.Client.Method;
 using System.IO;
+using IRAP.Client.GUI.MESPDC.Actions;
 
 namespace IRAP.Client.GUI.MESPDC
 {
@@ -927,13 +928,13 @@ namespace IRAP.Client.GUI.MESPDC
                     {
                         int boxRow = i + 1;
                         int boxCol = j + 1;
-                        ordinal = 
+                        ordinal =
                             GetBoxIndex(
                                 cartonLayer,
-                                cartonRow, 
-                                cartonCol, 
-                                boxLayer, 
-                                boxRow, 
+                                cartonRow,
+                                cartonCol,
+                                boxLayer,
+                                boxRow,
                                 boxCol);
                         dr[j] = ordinal;
                     }
@@ -1148,13 +1149,13 @@ namespace IRAP.Client.GUI.MESPDC
             int maxBoxRow = objPackageType.QtyPerRowOfBox;
             int maxBoxCol = objPackageType.QtyPerColOfBox;
             int maxBoxLayer = objPackageType.NumLayersOfBox;
-            ordinal = 
+            ordinal =
                 GetBoxIndex(
-                    cartonLayer, 
-                    cartonRow, 
+                    cartonLayer,
+                    cartonRow,
                     cartonCol,
-                    maxBoxLayer, 
-                    maxBoxRow, 
+                    maxBoxLayer,
+                    maxBoxRow,
                     maxBoxCol);
 
             int.TryParse(palletUnitTables[palletUnitIndex].Rows[ordinal - 1]["Do"].ToString(), out doMaxStatus);
@@ -1421,7 +1422,7 @@ namespace IRAP.Client.GUI.MESPDC
                 WriteLog.Instance.Write(
                     string.Format("({0}){1}", errCode, errText),
                     strProcedureName);
-                
+
                 if (errCode == 0)
                 {
                     WriteLog.Instance.Write(
@@ -1969,7 +1970,7 @@ namespace IRAP.Client.GUI.MESPDC
         /// 复核交易
         /// </summary>
         /// <param name="transactNo">待复核的交易号</param>
-        private bool ssp_CheckTransaction(long transactNo)
+        private bool ssp_CheckTrans_Packaging(long transactNo)
         {
             string strProcedureName =
                 string.Format(
@@ -1986,10 +1987,11 @@ namespace IRAP.Client.GUI.MESPDC
 
                 try
                 {
-                    IRAPUTSClient.Instance.ssp_CheckTransaction(
+                    IRAPMESPKGClient.Instance.usp_CheckTran_Packaging(
                         IRAPUser.Instance.CommunityID,
                         transactNo,
                         IRAPUser.Instance.SysLogID,
+                        out OutputStr,
                         out errCode,
                         out errText);
                 }
@@ -2280,7 +2282,7 @@ namespace IRAP.Client.GUI.MESPDC
                         objPackageType.NumLayersOfCarton,
                         objPackageType.NumBoxPerRowOfCarton,
                         objPackageType.NumBoxPerColOfCarton);
-                    lblPalletPackageType.Text = 
+                    lblPalletPackageType.Text =
                         string.Format(
                             "托包装： {0} 层 {1} 个大包装每层",
                             objPackageType.NumLayersOfPallet,
@@ -2826,8 +2828,12 @@ namespace IRAP.Client.GUI.MESPDC
                                 if (ordinal == allBoxNum)
                                 {
                                     //Carton包满或点包装完成按钮时复核交易
-                                    if (ssp_CheckTransaction(transactNo))
+                                    if (ssp_CheckTrans_Packaging(transactNo))
                                     {
+                                        if (OutputStr != "")
+                                        {
+                                            PrintCartonOrPalletLabel(OutputStr);
+                                        }
                                         //if (!string.IsNullOrEmpty(OutputStr))
                                         //PrintLabel(objPackageType.T117LabelID_Carton, cartonSerialNumber, OutputStr);
                                     }
@@ -2925,6 +2931,43 @@ namespace IRAP.Client.GUI.MESPDC
             }
         }
 
+        private void PrintCartonOrPalletLabel(string outputStr)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                WriteLog.Instance.Write($"OutputStr={outputStr}", strProcedureName);
+                if (outputStr.Contains("ROOT") && outputStr.Contains("<Action"))
+                {
+                    try
+                    {
+                        object tag = new object();
+                        UDFActions.DoActions(
+                            outputStr,
+                            null,
+                            ref tag);
+                    }
+                    catch (Exception error)
+                    {
+                        outputStr = "";
+                        WriteLog.Instance.Write(
+                            string.Format("错误信息:{0}。跟踪堆栈:{1}。",
+                                error.Message,
+                                error.StackTrace),
+                            strProcedureName);
+                        throw error;
+                    }
+                }
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
         private void chkAllowRePrint_EditValueChanged(object sender, EventArgs e)
         {
             if (chkAllowRePrint.Checked)
@@ -2971,9 +3014,16 @@ namespace IRAP.Client.GUI.MESPDC
 
             if (!chkStorePackage.Checked)
             {
-                if (!ssp_CheckTransaction(transactNo))
+                if (!ssp_CheckTrans_Packaging(transactNo))
+                {
                     return;
+                }
+                else if (OutputStr != "")
+                {
+                    PrintCartonOrPalletLabel(OutputStr);
+                }
 
+                /*
                 //打标签
                 //寻找最新大包装标签和小包装标签
                 string cartonSerialNumber = "";
@@ -3025,8 +3075,8 @@ namespace IRAP.Client.GUI.MESPDC
                         }
                         if (bk) break;
                     }
-                    if (boxRow != objPackageType.QtyPerRowOfBox || 
-                        boxCol != objPackageType.QtyPerColOfBox || 
+                    if (boxRow != objPackageType.QtyPerRowOfBox ||
+                        boxCol != objPackageType.QtyPerColOfBox ||
                         boxLayer != objPackageType.NumLayersOfBox)
                     {
                         if (objPackageType.T117LabelID_Box > 0)
@@ -3050,6 +3100,7 @@ namespace IRAP.Client.GUI.MESPDC
                     //IniFile.INIDeleteKey("OutputStr", transactNo.ToString(), attributeFileName);
                     XmlFile.SavaConfig(transactNo.ToString(), null, attributeFileName);
                 }
+                */
             }
 
             InitPackageStart(true);

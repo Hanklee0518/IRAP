@@ -183,6 +183,7 @@
     <None Include="Resources\内标签_折行.frx" />
     <None Include="Resources\外标签.frx" />
     <None Include="Resources\外标签_折行.frx" />
+    <None Include="Resources\成品包装统一标签.frx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
