@@ -630,7 +630,7 @@ namespace IRAP.BL.MES
                         conn.CallProc("IRAPMES..usp_CheckTran_Packaging", ref paramList);
                         errCode = error.ErrCode;
                         errText = error.ErrText;
-                        string outputStr = paramList[20].Value.ToString();
+                        string outputStr = paramList[2].Value.ToString();
                         WriteLog.Instance.Write(
                             $"OutpuStr={outputStr}",
                             strProcedureName);
