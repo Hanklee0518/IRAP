@@ -57,7 +57,7 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 ufn_GetKanban_PackageTypes，输入参数：" +
-                        "CommunityID={0}|ProductLeaf={1}|WorkUnitLeaf={2}|"+
+                        "CommunityID={0}|ProductLeaf={1}|WorkUnitLeaf={2}|" +
                         "SysLogID={3}",
                         communityID, productLeaf, workUnitLeaf, sysLogID),
                     strProcedureName);
@@ -115,7 +115,7 @@ namespace IRAP.WCF.Client.Method
             out int errCode,
             out string errText)
         {
-            string strProcedureName = 
+            string strProcedureName =
                 string.Format(
                     "{0}.{1}",
                     className,
@@ -304,7 +304,6 @@ namespace IRAP.WCF.Client.Method
             out int errCode,
             out string errText)
         {
-            // new NotImplementedException();
             string strProcedureName =
                 string.Format(
                     "{0}.{1}",
@@ -333,13 +332,13 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("colNumOfBox", colNumOfBox);
                 hashParams.Add("boxSerialNumber", boxSerialNumber);
                 hashParams.Add("cartonSerialNumber", cartonSerialNumber);
-                hashParams.Add("layerSerialNumber", layerSerialNumber); 
+                hashParams.Add("layerSerialNumber", layerSerialNumber);
                 hashParams.Add("palletSerialNumber", palletSerialNumber);
                 hashParams.Add("sysLogID", sysLogID);
 
                 WriteLog.Instance.Write(
                     string.Format(
-                                                "调用 IRAPMES..usp_SaveFact_Packaging，输入参数：" +
+                        "调用 IRAPMES..usp_SaveFact_Packaging，输入参数：" +
                         "CommunityID={0}|TransactNo={1}|FactID={2}|" +
                         "ProductLeaf={3}|WorkUnitLeaf={4}|PackagingSpecNo={5}|" +
                         "WIPPattern={6}|LayerNumOfPallet={7}|CartonNumOfLayer={8}|" +
@@ -396,6 +395,78 @@ namespace IRAP.WCF.Client.Method
                 errCode = -1001;
                 errText = error.Message;
                 return "";
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 产品包装交易复核
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="transactNo">交易号</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        /// <param name="outputStr">输出文本</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        public void usp_CheckTran_Packaging(
+            int communityID,
+            long transactNo,
+            long sysLogID,
+            out string outputStr,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                string.Format(
+                    "{0}.{1}",
+                    className,
+                    MethodBase.GetCurrentMethod().Name);
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 将函数参数加入 Hashtable 中
+                Hashtable hashParams = new Hashtable();
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("transactNo", transactNo);
+                hashParams.Add("sysLogID", sysLogID);
+
+                WriteLog.Instance.Write(
+                    $"调用 IRAPMES..usp_CheckTran_Packaging，输入参数：" +
+                    $"CommunityID={communityID}|TransactNo={transactNo}|" +
+                    $"SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 调用应用服务过程，并解析返回值
+                using (WCFClient client = new WCFClient())
+                {
+                    object rlt = client.WCFRESTFul(
+                        "IRAP.BL.MES.dll",
+                        "IRAP.BL.MES.ProductPackage",
+                        "usp_CheckTran_Packaging",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format(
+                            "({0}){1}",
+                            errCode,
+                            errText),
+                        strProcedureName);
+                    outputStr = rlt as string;
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+                outputStr = "";
             }
             finally
             {
@@ -512,7 +583,7 @@ namespace IRAP.WCF.Client.Method
         {
             sequenceNo = "";
 
-            string strProcedureName = 
+            string strProcedureName =
                 string.Format(
                     "{0}.{1}",
                     className,

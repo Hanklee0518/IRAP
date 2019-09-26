@@ -33,6 +33,8 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mitmDeliver = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSeprater = new System.Windows.Forms.ToolStripSeparator();
+            this.mitmCheckERPStoreQty = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mitmRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSyncMO = new DevExpress.XtraEditors.SimpleButton();
             this.btnReprint = new DevExpress.XtraEditors.SimpleButton();
@@ -56,10 +58,10 @@
             this.grdclmnPlannedCloseDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnScheduleStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.report = new FastReport.Report();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.tcMain = new DevExpress.XtraTab.XtraTabControl();
+            this.tpByStoreSite = new DevExpress.XtraTab.XtraTabPage();
             this.btnDeletePWO = new DevExpress.XtraEditors.SimpleButton();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.tpBySubMaterial = new DevExpress.XtraTab.XtraTabPage();
             this.btnDeletePWO1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnReprint1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearchByMaterialCode = new DevExpress.XtraEditors.SimpleButton();
@@ -82,6 +84,20 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.edtSubMaterialCode = new DevExpress.XtraEditors.TextEdit();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.grdERPStore = new DevExpress.XtraGrid.GridControl();
+            this.grdvERPStore = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -93,10 +109,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdvOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.report)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tcMain)).BeginInit();
+            this.tcMain.SuspendLayout();
+            this.tpByStoreSite.SuspendLayout();
+            this.tpBySubMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPWOs)).BeginInit();
@@ -104,6 +120,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edtSubMaterialCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdERPStore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdvERPStore)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFuncName
@@ -112,12 +132,12 @@
             this.lblFuncName.Appearance.ForeColor = System.Drawing.Color.Green;
             this.lblFuncName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblFuncName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.lblFuncName.Size = new System.Drawing.Size(827, 56);
+            this.lblFuncName.Size = new System.Drawing.Size(910, 56);
             this.lblFuncName.Text = "物料配送管理";
             // 
             // panelControl1
             // 
-            this.panelControl1.Size = new System.Drawing.Size(827, 56);
+            this.panelControl1.Size = new System.Drawing.Size(910, 56);
             // 
             // toolTipController
             // 
@@ -132,26 +152,41 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mitmDeliver,
             this.tsmiSeprater,
+            this.mitmCheckERPStoreQty,
+            this.toolStripSeparator1,
             this.mitmRefresh});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(107, 58);
+            this.contextMenuStrip.Size = new System.Drawing.Size(163, 88);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // mitmDeliver
             // 
             this.mitmDeliver.Name = "mitmDeliver";
-            this.mitmDeliver.Size = new System.Drawing.Size(106, 24);
+            this.mitmDeliver.Size = new System.Drawing.Size(162, 24);
             this.mitmDeliver.Text = "配送";
             this.mitmDeliver.Click += new System.EventHandler(this.mitmDeliver_Click);
             // 
             // tsmiSeprater
             // 
             this.tsmiSeprater.Name = "tsmiSeprater";
-            this.tsmiSeprater.Size = new System.Drawing.Size(103, 6);
+            this.tsmiSeprater.Size = new System.Drawing.Size(159, 6);
+            // 
+            // mitmCheckERPStoreQty
+            // 
+            this.mitmCheckERPStoreQty.Name = "mitmCheckERPStoreQty";
+            this.mitmCheckERPStoreQty.Size = new System.Drawing.Size(162, 24);
+            this.mitmCheckERPStoreQty.Text = "查询四班库存";
+            this.mitmCheckERPStoreQty.Click += new System.EventHandler(this.mitmCheckERPStoreQty_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
             // mitmRefresh
             // 
             this.mitmRefresh.Name = "mitmRefresh";
-            this.mitmRefresh.Size = new System.Drawing.Size(106, 24);
+            this.mitmRefresh.Size = new System.Drawing.Size(162, 24);
             this.mitmRefresh.Text = "刷新";
             this.mitmRefresh.Click += new System.EventHandler(this.mitmRefresh_Click);
             // 
@@ -160,7 +195,7 @@
             this.btnSyncMO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSyncMO.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnSyncMO.Appearance.Options.UseFont = true;
-            this.btnSyncMO.Location = new System.Drawing.Point(706, 178);
+            this.btnSyncMO.Location = new System.Drawing.Point(789, 178);
             this.btnSyncMO.Name = "btnSyncMO";
             this.btnSyncMO.Size = new System.Drawing.Size(108, 28);
             this.btnSyncMO.TabIndex = 4;
@@ -172,7 +207,7 @@
             this.btnReprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReprint.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnReprint.Appearance.Options.UseFont = true;
-            this.btnReprint.Location = new System.Drawing.Point(706, 343);
+            this.btnReprint.Location = new System.Drawing.Point(789, 345);
             this.btnReprint.Name = "btnReprint";
             this.btnReprint.Size = new System.Drawing.Size(108, 28);
             this.btnReprint.TabIndex = 5;
@@ -184,7 +219,7 @@
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnRefresh.Appearance.Options.UseFont = true;
-            this.btnRefresh.Location = new System.Drawing.Point(706, 126);
+            this.btnRefresh.Location = new System.Drawing.Point(789, 126);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(108, 28);
             this.btnRefresh.TabIndex = 3;
@@ -203,7 +238,7 @@
             this.groupControl1.Location = new System.Drawing.Point(9, 12);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupControl1.Size = new System.Drawing.Size(691, 65);
+            this.groupControl1.Size = new System.Drawing.Size(774, 65);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "目标仓储地点";
             // 
@@ -221,7 +256,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDstStoreSites.Properties.DropDownItemHeight = 28;
             this.cboDstStoreSites.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboDstStoreSites.Size = new System.Drawing.Size(677, 28);
+            this.cboDstStoreSites.Size = new System.Drawing.Size(760, 28);
             this.cboDstStoreSites.TabIndex = 0;
             this.cboDstStoreSites.SelectedIndexChanged += new System.EventHandler(this.cboDstStoreSites_SelectedIndexChanged);
             // 
@@ -230,7 +265,7 @@
             this.btnDeliver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeliver.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnDeliver.Appearance.Options.UseFont = true;
-            this.btnDeliver.Location = new System.Drawing.Point(706, 83);
+            this.btnDeliver.Location = new System.Drawing.Point(789, 83);
             this.btnDeliver.Name = "btnDeliver";
             this.btnDeliver.Size = new System.Drawing.Size(108, 28);
             this.btnDeliver.TabIndex = 2;
@@ -250,7 +285,7 @@
             this.gpcAndonEvents.Location = new System.Drawing.Point(9, 83);
             this.gpcAndonEvents.Name = "gpcAndonEvents";
             this.gpcAndonEvents.Padding = new System.Windows.Forms.Padding(5);
-            this.gpcAndonEvents.Size = new System.Drawing.Size(691, 288);
+            this.gpcAndonEvents.Size = new System.Drawing.Size(774, 290);
             this.gpcAndonEvents.TabIndex = 1;
             this.gpcAndonEvents.Text = "待处理的配料单列表";
             // 
@@ -262,7 +297,7 @@
             this.grdOrders.Location = new System.Drawing.Point(7, 28);
             this.grdOrders.MainView = this.grdvOrders;
             this.grdOrders.Name = "grdOrders";
-            this.grdOrders.Size = new System.Drawing.Size(677, 253);
+            this.grdOrders.Size = new System.Drawing.Size(760, 255);
             this.grdOrders.TabIndex = 1;
             this.grdOrders.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdvOrders});
@@ -299,6 +334,7 @@
             this.grdvOrders.OptionsView.EnableAppearanceEvenRow = true;
             this.grdvOrders.OptionsView.EnableAppearanceOddRow = true;
             this.grdvOrders.OptionsView.ShowGroupPanel = false;
+            this.grdvOrders.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.grdvOrders_RowClick);
             this.grdvOrders.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grdvOrders_FocusedRowChanged);
             this.grdvOrders.DoubleClick += new System.EventHandler(this.grdvOrders_DoubleClick);
             // 
@@ -543,75 +579,75 @@
             // 
             this.report.ReportResourceString = resources.GetString("report.ReportResourceString");
             // 
-            // xtraTabControl1
+            // tcMain
             // 
-            this.xtraTabControl1.Appearance.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xtraTabControl1.Appearance.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.Header.Font = new System.Drawing.Font("新宋体", 12F);
-            this.xtraTabControl1.AppearancePage.Header.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.HeaderActive.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("新宋体", 12F);
-            this.xtraTabControl1.AppearancePage.HeaderDisabled.ForeColor = System.Drawing.Color.Silver;
-            this.xtraTabControl1.AppearancePage.HeaderDisabled.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.HeaderDisabled.Options.UseForeColor = true;
-            this.xtraTabControl1.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Underline);
-            this.xtraTabControl1.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.PageClient.Font = new System.Drawing.Font("新宋体", 12F);
-            this.xtraTabControl1.AppearancePage.PageClient.Options.UseFont = true;
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 56);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(827, 410);
-            this.xtraTabControl1.TabIndex = 6;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.tcMain.Appearance.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tcMain.Appearance.Options.UseFont = true;
+            this.tcMain.AppearancePage.Header.Font = new System.Drawing.Font("新宋体", 12F);
+            this.tcMain.AppearancePage.Header.Options.UseFont = true;
+            this.tcMain.AppearancePage.HeaderActive.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Bold);
+            this.tcMain.AppearancePage.HeaderActive.Options.UseFont = true;
+            this.tcMain.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("新宋体", 12F);
+            this.tcMain.AppearancePage.HeaderDisabled.ForeColor = System.Drawing.Color.Silver;
+            this.tcMain.AppearancePage.HeaderDisabled.Options.UseFont = true;
+            this.tcMain.AppearancePage.HeaderDisabled.Options.UseForeColor = true;
+            this.tcMain.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Underline);
+            this.tcMain.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+            this.tcMain.AppearancePage.PageClient.Font = new System.Drawing.Font("新宋体", 12F);
+            this.tcMain.AppearancePage.PageClient.Options.UseFont = true;
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.Location = new System.Drawing.Point(0, 0);
+            this.tcMain.Name = "tcMain";
+            this.tcMain.SelectedTabPage = this.tpByStoreSite;
+            this.tcMain.Size = new System.Drawing.Size(910, 412);
+            this.tcMain.TabIndex = 6;
+            this.tcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tpByStoreSite,
+            this.tpBySubMaterial});
             // 
-            // xtraTabPage1
+            // tpByStoreSite
             // 
-            this.xtraTabPage1.Controls.Add(this.btnDeletePWO);
-            this.xtraTabPage1.Controls.Add(this.btnReprint);
-            this.xtraTabPage1.Controls.Add(this.btnSyncMO);
-            this.xtraTabPage1.Controls.Add(this.groupControl1);
-            this.xtraTabPage1.Controls.Add(this.gpcAndonEvents);
-            this.xtraTabPage1.Controls.Add(this.btnRefresh);
-            this.xtraTabPage1.Controls.Add(this.btnDeliver);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(821, 379);
-            this.xtraTabPage1.Text = "按目标仓储地点";
+            this.tpByStoreSite.Controls.Add(this.btnDeletePWO);
+            this.tpByStoreSite.Controls.Add(this.btnReprint);
+            this.tpByStoreSite.Controls.Add(this.btnSyncMO);
+            this.tpByStoreSite.Controls.Add(this.groupControl1);
+            this.tpByStoreSite.Controls.Add(this.gpcAndonEvents);
+            this.tpByStoreSite.Controls.Add(this.btnRefresh);
+            this.tpByStoreSite.Controls.Add(this.btnDeliver);
+            this.tpByStoreSite.Name = "tpByStoreSite";
+            this.tpByStoreSite.Size = new System.Drawing.Size(904, 381);
+            this.tpByStoreSite.Text = "按目标仓储地点";
             // 
             // btnDeletePWO
             // 
             this.btnDeletePWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeletePWO.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnDeletePWO.Appearance.Options.UseFont = true;
-            this.btnDeletePWO.Location = new System.Drawing.Point(706, 259);
+            this.btnDeletePWO.Location = new System.Drawing.Point(789, 259);
             this.btnDeletePWO.Name = "btnDeletePWO";
             this.btnDeletePWO.Size = new System.Drawing.Size(108, 28);
             this.btnDeletePWO.TabIndex = 6;
             this.btnDeletePWO.Text = "删除订单";
             this.btnDeletePWO.Click += new System.EventHandler(this.btnDeletePWO_Click);
             // 
-            // xtraTabPage2
+            // tpBySubMaterial
             // 
-            this.xtraTabPage2.Controls.Add(this.btnDeletePWO1);
-            this.xtraTabPage2.Controls.Add(this.btnReprint1);
-            this.xtraTabPage2.Controls.Add(this.btnSearchByMaterialCode);
-            this.xtraTabPage2.Controls.Add(this.btnDeliver1);
-            this.xtraTabPage2.Controls.Add(this.groupControl3);
-            this.xtraTabPage2.Controls.Add(this.groupControl2);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(821, 379);
-            this.xtraTabPage2.Text = "按子项物料";
+            this.tpBySubMaterial.Controls.Add(this.btnDeletePWO1);
+            this.tpBySubMaterial.Controls.Add(this.btnReprint1);
+            this.tpBySubMaterial.Controls.Add(this.btnSearchByMaterialCode);
+            this.tpBySubMaterial.Controls.Add(this.btnDeliver1);
+            this.tpBySubMaterial.Controls.Add(this.groupControl3);
+            this.tpBySubMaterial.Controls.Add(this.groupControl2);
+            this.tpBySubMaterial.Name = "tpBySubMaterial";
+            this.tpBySubMaterial.Size = new System.Drawing.Size(904, 381);
+            this.tpBySubMaterial.Text = "按子项物料";
             // 
             // btnDeletePWO1
             // 
             this.btnDeletePWO1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeletePWO1.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnDeletePWO1.Appearance.Options.UseFont = true;
-            this.btnDeletePWO1.Location = new System.Drawing.Point(706, 259);
+            this.btnDeletePWO1.Location = new System.Drawing.Point(789, 259);
             this.btnDeletePWO1.Name = "btnDeletePWO1";
             this.btnDeletePWO1.Size = new System.Drawing.Size(108, 28);
             this.btnDeletePWO1.TabIndex = 9;
@@ -623,7 +659,7 @@
             this.btnReprint1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReprint1.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnReprint1.Appearance.Options.UseFont = true;
-            this.btnReprint1.Location = new System.Drawing.Point(706, 343);
+            this.btnReprint1.Location = new System.Drawing.Point(789, 345);
             this.btnReprint1.Name = "btnReprint1";
             this.btnReprint1.Size = new System.Drawing.Size(108, 28);
             this.btnReprint1.TabIndex = 8;
@@ -635,7 +671,7 @@
             this.btnSearchByMaterialCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearchByMaterialCode.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnSearchByMaterialCode.Appearance.Options.UseFont = true;
-            this.btnSearchByMaterialCode.Location = new System.Drawing.Point(706, 40);
+            this.btnSearchByMaterialCode.Location = new System.Drawing.Point(789, 40);
             this.btnSearchByMaterialCode.Name = "btnSearchByMaterialCode";
             this.btnSearchByMaterialCode.Size = new System.Drawing.Size(108, 28);
             this.btnSearchByMaterialCode.TabIndex = 2;
@@ -647,7 +683,7 @@
             this.btnDeliver1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeliver1.Appearance.Font = new System.Drawing.Font("新宋体", 12F);
             this.btnDeliver1.Appearance.Options.UseFont = true;
-            this.btnDeliver1.Location = new System.Drawing.Point(706, 83);
+            this.btnDeliver1.Location = new System.Drawing.Point(789, 83);
             this.btnDeliver1.Name = "btnDeliver1";
             this.btnDeliver1.Size = new System.Drawing.Size(108, 28);
             this.btnDeliver1.TabIndex = 3;
@@ -667,7 +703,7 @@
             this.groupControl3.Location = new System.Drawing.Point(9, 83);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Padding = new System.Windows.Forms.Padding(5);
-            this.groupControl3.Size = new System.Drawing.Size(691, 288);
+            this.groupControl3.Size = new System.Drawing.Size(774, 290);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "待处理的配料单列表";
             // 
@@ -679,7 +715,7 @@
             this.grdPWOs.Location = new System.Drawing.Point(7, 28);
             this.grdPWOs.MainView = this.grdvPWOs;
             this.grdPWOs.Name = "grdPWOs";
-            this.grdPWOs.Size = new System.Drawing.Size(677, 253);
+            this.grdPWOs.Size = new System.Drawing.Size(760, 255);
             this.grdPWOs.TabIndex = 1;
             this.grdPWOs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdvPWOs});
@@ -717,6 +753,7 @@
             this.grdvPWOs.OptionsView.EnableAppearanceEvenRow = true;
             this.grdvPWOs.OptionsView.EnableAppearanceOddRow = true;
             this.grdvPWOs.OptionsView.ShowGroupPanel = false;
+            this.grdvPWOs.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.grdvPWOs_RowClick);
             // 
             // gridColumn13
             // 
@@ -989,16 +1026,162 @@
             this.edtSubMaterialCode.TabIndex = 1;
             this.edtSubMaterialCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtSubMaterialCode_KeyDown);
             // 
+            // splitContainerControl1
+            // 
+            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
+            this.splitContainerControl1.Horizontal = false;
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 56);
+            this.splitContainerControl1.Name = "splitContainerControl1";
+            this.splitContainerControl1.Panel1.Controls.Add(this.tcMain);
+            this.splitContainerControl1.Panel1.Text = "Panel1";
+            this.splitContainerControl1.Panel2.AppearanceCaption.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.splitContainerControl1.Panel2.AppearanceCaption.Options.UseFont = true;
+            this.splitContainerControl1.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.splitContainerControl1.Panel2.Controls.Add(this.grdERPStore);
+            this.splitContainerControl1.Panel2.ShowCaption = true;
+            this.splitContainerControl1.Panel2.Text = "子项物料四班库存";
+            this.splitContainerControl1.Size = new System.Drawing.Size(910, 560);
+            this.splitContainerControl1.SplitterPosition = 143;
+            this.splitContainerControl1.TabIndex = 7;
+            this.splitContainerControl1.Text = "splitContainerControl1";
+            // 
+            // grdERPStore
+            // 
+            this.grdERPStore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdERPStore.Location = new System.Drawing.Point(0, 0);
+            this.grdERPStore.MainView = this.grdvERPStore;
+            this.grdERPStore.Name = "grdERPStore";
+            this.grdERPStore.Size = new System.Drawing.Size(906, 118);
+            this.grdERPStore.TabIndex = 1;
+            this.grdERPStore.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grdvERPStore});
+            // 
+            // grdvERPStore
+            // 
+            this.grdvERPStore.Appearance.HeaderPanel.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdvERPStore.Appearance.HeaderPanel.Options.UseFont = true;
+            this.grdvERPStore.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.grdvERPStore.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.grdvERPStore.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.grdvERPStore.Appearance.Row.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdvERPStore.Appearance.Row.Options.UseFont = true;
+            this.grdvERPStore.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16,
+            this.gridColumn17,
+            this.gridColumn18,
+            this.gridColumn19,
+            this.gridColumn20,
+            this.gridColumn21,
+            this.gridColumn22,
+            this.gridColumn23,
+            this.gridColumn24});
+            this.grdvERPStore.GridControl = this.grdERPStore;
+            this.grdvERPStore.Name = "grdvERPStore";
+            this.grdvERPStore.OptionsBehavior.Editable = false;
+            this.grdvERPStore.OptionsView.ColumnAutoWidth = false;
+            this.grdvERPStore.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "序号";
+            this.gridColumn14.FieldName = "Ordinal";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 0;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "物料代码";
+            this.gridColumn15.FieldName = "MaterialCode";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 1;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "物料名称";
+            this.gridColumn16.FieldName = "MaterialDesc";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 2;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "仓储地点代码";
+            this.gridColumn17.FieldName = "SiteCode";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 3;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "ERP库位代码";
+            this.gridColumn18.FieldName = "ERPStoreLoc";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 4;
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "ERP储位代码";
+            this.gridColumn19.FieldName = "T106AltCode";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 5;
+            // 
+            // gridColumn20
+            // 
+            this.gridColumn20.Caption = "生产批次号";
+            this.gridColumn20.FieldName = "LotNumber";
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 6;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.Caption = "生产日期";
+            this.gridColumn21.FieldName = "MFGDate";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 7;
+            // 
+            // gridColumn22
+            // 
+            this.gridColumn22.Caption = "收料批次号";
+            this.gridColumn22.FieldName = "RecvBatchNo";
+            this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.Visible = true;
+            this.gridColumn22.VisibleIndex = 8;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.Caption = "实时库存";
+            this.gridColumn23.FieldName = "QtyInStore";
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 9;
+            // 
+            // gridColumn24
+            // 
+            this.gridColumn24.Caption = "供应商寄售库存";
+            this.gridColumn24.FieldName = "QtyConsigned";
+            this.gridColumn24.Name = "gridColumn24";
+            this.gridColumn24.Visible = true;
+            this.gridColumn24.VisibleIndex = 10;
+            // 
             // frmDeliveryMngmt_30
             // 
             this.Appearance.Options.UseFont = true;
-            this.ClientSize = new System.Drawing.Size(827, 466);
-            this.Controls.Add(this.xtraTabControl1);
+            this.ClientSize = new System.Drawing.Size(910, 616);
+            this.Controls.Add(this.splitContainerControl1);
             this.Name = "frmDeliveryMngmt_30";
             this.Text = "物料配送管理";
             this.Shown += new System.EventHandler(this.frmDeliveryMngmt_30_Shown);
             this.Controls.SetChildIndex(this.panelControl1, 0);
-            this.Controls.SetChildIndex(this.xtraTabControl1, 0);
+            this.Controls.SetChildIndex(this.splitContainerControl1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
@@ -1010,10 +1193,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdvOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.report)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tcMain)).EndInit();
+            this.tcMain.ResumeLayout(false);
+            this.tpByStoreSite.ResumeLayout(false);
+            this.tpBySubMaterial.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdPWOs)).EndInit();
@@ -1021,6 +1204,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.edtSubMaterialCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
+            this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdERPStore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdvERPStore)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1053,9 +1240,9 @@
         private DevExpress.XtraEditors.SimpleButton btnReprint;
         private DevExpress.XtraGrid.Columns.GridColumn grdclmnSubMaterialCode;
         private DevExpress.XtraEditors.SimpleButton btnSyncMO;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabControl tcMain;
+        private DevExpress.XtraTab.XtraTabPage tpByStoreSite;
+        private DevExpress.XtraTab.XtraTabPage tpBySubMaterial;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.TextEdit edtSubMaterialCode;
         private DevExpress.XtraEditors.GroupControl groupControl3;
@@ -1079,5 +1266,21 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraEditors.SimpleButton btnDeletePWO;
         private DevExpress.XtraEditors.SimpleButton btnDeletePWO1;
+        private System.Windows.Forms.ToolStripMenuItem mitmCheckERPStoreQty;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        private DevExpress.XtraGrid.GridControl grdERPStore;
+        private DevExpress.XtraGrid.Views.Grid.GridView grdvERPStore;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
     }
 }

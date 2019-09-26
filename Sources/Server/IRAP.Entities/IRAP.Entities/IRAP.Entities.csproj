@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APS\MaterialATP.cs" />
     <Compile Include="Asimco\BoxOfCarton.cs" />
     <Compile Include="Asimco\Carton.cs" />
     <Compile Include="Asimco\GetFactList_Inspect.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="DPA\dpa_DBF_MO.cs" />
     <Compile Include="DPA\dpa_Imp_SmeltProductionPlan.cs" />
     <Compile Include="IRAP\STB006.cs" />
+    <Compile Include="IRAP\TreeViewEntity.cs" />
     <Compile Include="MDM\AndonCallPerson.cs" />
     <Compile Include="FVS\AndonRspedEventInfo.cs" />
     <Compile Include="APS\ManufacturingOrder.cs" />
@@ -84,7 +86,9 @@
     <Compile Include="MDM\DefectRootCause.cs" />
     <Compile Include="MDM\FailureModeByWorkUnit.cs" />
     <Compile Include="MDM\InspectionItem.cs" />
+    <Compile Include="MDM\LineOrWorkCenterForAProduct.cs" />
     <Compile Include="MDM\MFGOperation.cs" />
+    <Compile Include="MDM\OperationOfAProduct.cs" />
     <Compile Include="MDM\ProductionProcessParam.cs" />
     <Compile Include="MDM\ProductRepairMode.cs" />
     <Compile Include="MDM\ProductViaStation.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="MDM\SmeltInspectionItem.cs" />
     <Compile Include="MDM\Tables\Stb057.cs" />
     <Compile Include="MDM\Tables\Stb058.cs" />
+    <Compile Include="MDM\WIFile.cs" />
     <Compile Include="MDM\WIPStation.cs" />
     <Compile Include="MDM\WorkUnit.cs" />
     <Compile Include="MES\BatchByEquipment.cs" />
@@ -117,6 +122,7 @@
     <Compile Include="MES\Inspecting.cs" />
     <Compile Include="MES\LabelFMTStr.cs" />
     <Compile Include="MES\OpenPWOInfo.cs" />
+    <Compile Include="MES\OpenPWOInfoEx.cs" />
     <Compile Include="MES\OpenReworkPWO.cs" />
     <Compile Include="MES\PackageType.cs" />
     <Compile Include="MES\ProducingPWOFromWorkUnit.cs" />
@@ -138,6 +144,7 @@
     <Compile Include="MES\TSHistory.cs" />
     <Compile Include="MES\UncompletedPackage.cs" />
     <Compile Include="MES\WIPContext.cs" />
+    <Compile Include="RIMCS\ERPRealTimeMaterialStore.cs" />
     <Compile Include="SCES\RMTransferForPWO.cs" />
     <Compile Include="SCES\MaterialToDeliver.cs" />
     <Compile Include="MDM\DstDeliveryStoreSite.cs" />

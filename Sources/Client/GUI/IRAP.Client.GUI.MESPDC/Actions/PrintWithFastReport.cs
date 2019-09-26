@@ -70,6 +70,10 @@ namespace IRAP.Client.GUI.MESPDC.Actions
                                     ProductDate = GetAttributeStringValue(child, "ProductDate"),
                                     CustomerSN = GetAttributeStringValue(child, "CustomerSN"),
                                     SupplierCode = GetAttributeStringValue(child, "SupplierCode"),
+                                    ProductPNo = GetAttributeStringValue(child, "ProductPNo"),
+                                    BatchNumber = GetAttributeStringValue(child, "BatchNumber"),
+                                    PWONo = GetAttributeStringValue(child, "PWONo"),
+                                    PWOLineNO = GetAttributeStringValue(child, "PWOLineNo"),
                                 });
                         }
 
@@ -164,6 +168,10 @@ namespace IRAP.Client.GUI.MESPDC.Actions
                             SetReportParamValue(report, "ProductDate", datas[i].ProductDate);
                             SetReportParamValue(report, "CustomerSN", datas[i].CustomerSN);
                             SetReportParamValue(report, "SupplierCode", datas[i].SupplierCode);
+                            SetReportParamValue(report, "ProductPNo", datas[i].ProductPNo);
+                            SetReportParamValue(report, "BatchNumber", datas[i].BatchNumber);
+                            SetReportParamValue(report, "PWONo", datas[i].PWONo);
+                            SetReportParamValue(report, "PWOLineNo", datas[i].PWOLineNO);
 
                             if (report.Prepare())
                             {
@@ -302,6 +310,22 @@ namespace IRAP.Client.GUI.MESPDC.Actions
         /// 客户序列号
         /// </summary>
         public string CustomerSN { get; set; }
+        /// <summary>
+        /// 产品图号
+        /// </summary>
+        public string ProductPNo { get; set; } = "";
+        /// <summary>
+        /// 批次号
+        /// </summary>
+        public string BatchNumber { get; set; } = "";
+        /// <summary>
+        /// 订单号
+        /// </summary>
+        public string PWONo { get; set; } = "";
+        /// <summary>
+        /// 订单行号
+        /// </summary>
+        public string PWOLineNO { get; set; } = "";
 
         public TemplateData Clone()
         {

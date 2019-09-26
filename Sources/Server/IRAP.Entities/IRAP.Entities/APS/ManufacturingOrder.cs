@@ -158,6 +158,39 @@ namespace IRAP.Entities.APS
         {
             get { return atpQuantity; }
         }
+        /// <summary>
+        /// 订单状态描述
+        /// </summary>
+        [IRAPORMMap(ORMMap =false)]
+        public string MOLineStatusString
+        {
+            get
+            {
+                switch (MOLineStatus)
+                {
+                    case 0:
+                        return "新创建";
+                    case 1:
+                        return "已确认";
+                    case 2:
+                        return "已锁定";
+                    case 3:
+                        return "待发布";
+                    case 4:
+                        return "已发布";
+                    case 5:
+                        return "已分单";
+                    case 6:
+                        return "已备料";
+                    case 7:
+                        return "已投产";
+                    case 8:
+                        return "已完工";
+                    default:
+                        return "未知状态";
+                }
+            }
+        }
 
         public ManufacturingOrder Clone()
         {

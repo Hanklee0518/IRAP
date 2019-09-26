@@ -70,6 +70,7 @@
     <Compile Include="frmMessageBox.Designer.cs">
       <DependentUpon>frmMessageBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="FTPHelper.cs" />
     <Compile Include="GenerateBarCode.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="EnumHelper.cs" />

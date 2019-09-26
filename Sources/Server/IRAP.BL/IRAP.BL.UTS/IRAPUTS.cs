@@ -13,17 +13,18 @@ using IRAP.Entities.UTS;
 using IRAPShared;
 using IRAPORM;
 using IRAPDAL;
+using IRAP.Entities.IRAP;
 
 namespace IRAP.BL.UTS
 {
     public class IRAPUTS : IRAPBLLBase
     {
-        private static string className = 
+        private static string className =
             MethodBase.GetCurrentMethod().DeclaringType.FullName;
 
         public IRAPUTS()
         {
-            WriteLog.Instance.WriteLogFileName = 
+            WriteLog.Instance.WriteLogFileName =
                 MethodBase.GetCurrentMethod().DeclaringType.Namespace;
         }
 
@@ -40,13 +41,13 @@ namespace IRAP.BL.UTS
         /// <param name="voucherNo">业务凭证号</param>
         /// <returns>申请到的第一个序列值[long]</returns>
         public IRAPJsonResult ssp_GetSequenceNo(
-            int communityID, 
-            string sequenceCode, 
-            int count, 
-            long sysLogID, 
-            string opNode, 
-            string voucherNo, 
-            out int errCode, 
+            int communityID,
+            string sequenceCode,
+            int count,
+            long sysLogID,
+            string opNode,
+            string voucherNo,
+            out int errCode,
             out string errText)
         {
             string strProcedureName =
@@ -74,7 +75,7 @@ namespace IRAP.BL.UTS
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 IRAP..ssp_GetSequenceNo，输入参数：" +
-                        "CommunityID={0}|SequenceCode={1}|Count={2}|SysLogID={3}"+
+                        "CommunityID={0}|SequenceCode={1}|Count={2}|SysLogID={3}" +
                         "OpNode={4}|VoucherNo={5}",
                         communityID, sequenceCode, count, sysLogID, opNode, voucherNo),
                     strProcedureName);
@@ -123,21 +124,21 @@ namespace IRAP.BL.UTS
         /// 保存万能表单采集的数据
         /// </summary>
         public IRAPJsonResult ssp_OLTP_UDFForm(
-            int communityID, 
-            long transactNo, 
-            long factID, 
-            int ctrlParameter1, 
-            int ctrlParameter2, 
-            int ctrlParameter3, 
-            long sysLogID, 
-            string strParameter1, 
-            string strParameter2, 
-            string strParameter3, 
-            string strParameter4, 
-            string strParameter5, 
-            string strParameter6, 
-            string strParameter7, 
-            string strParameter8, 
+            int communityID,
+            long transactNo,
+            long factID,
+            int ctrlParameter1,
+            int ctrlParameter2,
+            int ctrlParameter3,
+            long sysLogID,
+            string strParameter1,
+            string strParameter2,
+            string strParameter3,
+            string strParameter4,
+            string strParameter5,
+            string strParameter6,
+            string strParameter7,
+            string strParameter8,
             string errMessage,
             out int errCode,
             out string errText)
@@ -166,8 +167,8 @@ namespace IRAP.BL.UTS
                 paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
                 paramList.Add(
                     new IRAPProcParameter(
-                        "@ErrText", 
-                        DbType.String, 
+                        "@ErrText",
+                        DbType.String,
                         ParameterDirection.InputOutput,
                         2147483647)
                     {
@@ -389,7 +390,7 @@ namespace IRAP.BL.UTS
                         "StrParameter8={12}",
                         communityID, ctrlParameter1, ctrlParameter2,
                         ctrlParameter3, sysLogID, strParameter1, strParameter2,
-                        strParameter3, strParameter4, strParameter5, strParameter6, 
+                        strParameter3, strParameter4, strParameter5, strParameter6,
                         strParameter7, strParameter8),
                     strProcedureName);
                 #endregion
@@ -419,9 +420,9 @@ namespace IRAP.BL.UTS
                 catch (Exception error)
                 {
                     errCode = 99000;
-                    errText = 
+                    errText =
                         string.Format(
-                            "调用 IRAP..ssp_PokaYoke_UDFForm 函数发生异常：{0}", 
+                            "调用 IRAP..ssp_PokaYoke_UDFForm 函数发生异常：{0}",
                             error.Message);
                     WriteLog.Instance.Write(errText, strProcedureName);
                     WriteLog.Instance.Write(error.StackTrace, strProcedureName);
@@ -672,24 +673,24 @@ namespace IRAP.BL.UTS
         public IRAPJsonResult usp_SaveFact_Packaging(
             int communityID,
             long transactNo,
-            long factID, 
+            long factID,
             int productLeaf,
             int workUnitLeaf,
             int packagingSpecNo,
             string wipPattern,
-            int layerNumOfPallet, 
-            int cartonNumOfLayer, 
-            int layerNumOfCarton, 
-            int rowNumOfCarton, 
-            int colNumOfCarton, 
-            int layerNumOfBox, 
-            int rowNumOfBox, 
-            int colNumOfBox, 
+            int layerNumOfPallet,
+            int cartonNumOfLayer,
+            int layerNumOfCarton,
+            int rowNumOfCarton,
+            int colNumOfCarton,
+            int layerNumOfBox,
+            int rowNumOfBox,
+            int colNumOfBox,
             string boxSerialNumber,
             string cartonSerialNumber,
-            string layerSerialNumber, 
+            string layerSerialNumber,
             string palletSerialNumber,
-            long sysLogID, 
+            long sysLogID,
             out int errCode,
             out string errText)
         {
@@ -732,11 +733,11 @@ namespace IRAP.BL.UTS
                     string.Format(
                         "调用 IRAPMES..usp_SaveFact_Packaging，输入参数：" +
                         "CommunityID={0}|TransactNo={1}|FactID={2}|" +
-                        "ProductLeaf={3}|WorkUnitLeaf={4}|PackagingSpecNo={5}|"+
-                        "WIPPattern={6}|LayerNumOfPallet={7}|CartonNumOfLayer={8}|"+
-                        "LayerNumOfCarton={9}|RowNumOfCarton={10}|ColNumOfCarton={11}|"+
-                        "LayerNumOfBox={12}|RowNumOfBox={13}|ColNumOfBox={14}|"+
-                        "BoxSerialNumber={15}|CartonSerialNumber={16}|LayerSerialNumber={17}|"+
+                        "ProductLeaf={3}|WorkUnitLeaf={4}|PackagingSpecNo={5}|" +
+                        "WIPPattern={6}|LayerNumOfPallet={7}|CartonNumOfLayer={8}|" +
+                        "LayerNumOfCarton={9}|RowNumOfCarton={10}|ColNumOfCarton={11}|" +
+                        "LayerNumOfBox={12}|RowNumOfBox={13}|ColNumOfBox={14}|" +
+                        "BoxSerialNumber={15}|CartonSerialNumber={16}|LayerSerialNumber={17}|" +
                         "PalletSerialNumber={18}|SysLogID={19}",
                         communityID,
                         transactNo,
@@ -766,9 +767,9 @@ namespace IRAP.BL.UTS
                 {
                     using (IRAPSQLConnection conn = new IRAPSQLConnection())
                     {
-                        IRAPError error = 
+                        IRAPError error =
                             conn.CallProc(
-                                "IRAPMES..usp_SaveFact_Packaging", 
+                                "IRAPMES..usp_SaveFact_Packaging",
                                 ref paramList);
                         errCode = error.ErrCode;
                         errText = error.ErrText;
@@ -779,9 +780,9 @@ namespace IRAP.BL.UTS
                 catch (Exception error)
                 {
                     errCode = 99000;
-                    errText = 
+                    errText =
                         string.Format(
-                            "调用 IRAPMES..usp_SaveFact_Packaging 函数发生异常：{0}", 
+                            "调用 IRAPMES..usp_SaveFact_Packaging 函数发生异常：{0}",
                             error.Message);
                     WriteLog.Instance.Write(errText, strProcedureName);
                     WriteLog.Instance.Write(error.StackTrace, strProcedureName);
@@ -789,6 +790,85 @@ namespace IRAP.BL.UTS
                 #endregion
 
                 return Json(rlt);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 获取一般树视图
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="treeID">树标识</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        /// <param name="includeLeaves">是否包含树叶子</param>
+        /// <param name="entryNode">入口节点</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        /// <returns></returns>
+        public IRAPJsonResult sfn_TreeView(
+            int communityID,
+            int treeID,
+            long sysLogID,
+            bool includeLeaves,
+            int entryNode,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                List<TreeViewEntity> datas = new List<TreeViewEntity>();
+
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TreeID", DbType.Int32, treeID));
+                paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
+                paramList.Add(new IRAPProcParameter("@IncludeLeaves", DbType.Boolean, includeLeaves));
+                paramList.Add(new IRAPProcParameter("@EntryNode", DbType.Int32, entryNode));
+                WriteLog.Instance.Write(
+                    $"调用函数 IRAP..sfn_TreeView，参数：CommunityID={communityID}|" +
+                    $"TreeID={treeID}|SysLogID={sysLogID}|IncludeLeaves={includeLeaves}|" +
+                    $"EntryNode={entryNode}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        string strSQL = "SELECT * " +
+                            "FROM IRAP..sfn_TreeView(" +
+                            "@CommunityID, @TreeID, @SysLogID, "+
+                            "@IncludeLeaves, @EntryNode)";
+
+                        IList<TreeViewEntity> lstDatas =
+                            conn.CallTableFunc<TreeViewEntity>(strSQL, paramList);
+                        datas = lstDatas.ToList();
+                        errCode = 0;
+                        errText = string.Format("调用成功！共获得 {0} 条记录", datas.Count);
+                        WriteLog.Instance.Write(errText, strProcedureName);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText =
+                        string.Format(
+                            "调用 IRAP..sfn_TreeView 函数发生异常：{0}",
+                            error.Message);
+                    WriteLog.Instance.Write(errText, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                }
+                #endregion
+
+                return Json(datas);
             }
             finally
             {

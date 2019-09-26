@@ -32,6 +32,10 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
         private List<BatchPWOInfo> pwos = new List<BatchPWOInfo>();
         private List<InspectionItem> inspectionItems = new List<InspectionItem>();
         private DataTable dtInspection = new DataTable();
+        /// <summary>
+        /// 参数缺省值集
+        /// </summary>
+        private Dictionary<string, string> defaultValues = new Dictionary<string, string>();
 
         public ucQualityInspecting_Furnace()
         {
@@ -287,6 +291,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
             dtInspection.Columns.Clear();
 
             vgrdInspectParams.Rows.Clear();
+            defaultValues.Clear();
 
             foreach (InspectionItem item in items)
             {
@@ -299,6 +304,8 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                 row.Properties.FieldName = colName;
                 row.Height = 35;
                 vgrdInspectParams.Rows.Add(row);
+
+                defaultValues.Add(item.T20Name, item.DefaultValue);
             }
 
             vgrdInspectParams.DataSource = dtInspection;
@@ -469,6 +476,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                     EditStatus.New,
                     splitContainerControl1.Panel2.Text,
                     dtInspection,
+                    defaultValues,
                     -1))
             {
                 if (formEditor.ShowDialog() == DialogResult.OK)
@@ -484,6 +492,15 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
             {
                 XtraMessageBox.Show(
                     "当前生产工单的在制品没有配置检验项",
+                    "",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            if (dtInspection.Rows.Count <= 0)
+            {
+                XtraMessageBox.Show(
+                    "当前没有需要修改的检验项值",
                     "",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -505,6 +522,7 @@ namespace IRAP.Client.GUI.BatchSystem.UserControls
                     EditStatus.Edit,
                     splitContainerControl1.Panel2.Text,
                     dtInspection,
+                    defaultValues,
                     idx))
             {
                 if (formEditor.ShowDialog() == DialogResult.OK)

@@ -44,6 +44,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnErrText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnImport = new DevExpress.XtraEditors.SimpleButton();
@@ -135,6 +136,7 @@
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn8,
+            this.gridColumn1,
             this.gridColumn9,
             this.grdclmnErrCode,
             this.grdclmnErrText});
@@ -242,7 +244,7 @@
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "批次号";
+            this.gridColumn8.Caption = "子项批次号";
             this.gridColumn8.FieldName = "LotNumber";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
@@ -250,6 +252,14 @@
             this.gridColumn8.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "产品批次号";
+            this.gridColumn1.FieldName = "CPLot";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 8;
             // 
             // gridColumn9
             // 
@@ -260,7 +270,7 @@
             this.gridColumn9.OptionsColumn.AllowMove = false;
             this.gridColumn9.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 9;
             // 
             // grdclmnErrText
             // 
@@ -272,7 +282,7 @@
             this.grdclmnErrText.OptionsColumn.AllowMove = false;
             this.grdclmnErrText.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.grdclmnErrText.Visible = true;
-            this.grdclmnErrText.VisibleIndex = 9;
+            this.grdclmnErrText.VisibleIndex = 10;
             // 
             // btnImport
             // 
@@ -353,5 +363,6 @@
         private DevExpress.XtraEditors.SimpleButton btnValidate;
         private DevExpress.XtraEditors.SimpleButton btnOpen;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

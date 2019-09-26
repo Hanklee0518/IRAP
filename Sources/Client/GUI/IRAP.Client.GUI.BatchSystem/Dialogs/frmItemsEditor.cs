@@ -36,15 +36,12 @@ namespace IRAP.Client.GUI.BatchSystem.Dialogs
             EditStatus editStatus,
             string caption,
             DataTable dt,
+            Dictionary<string, string> defaultValues,
             int recordNo) :
             this()
         {
             dtParams = dt;
             this.recordNo = recordNo;
-
-            InitEditorGUI(dtParams, recordNo);
-
-            groupControl1.Text = caption;
 
             this.editStatus = editStatus;
             switch (editStatus)
@@ -56,9 +53,16 @@ namespace IRAP.Client.GUI.BatchSystem.Dialogs
                     Text = "修改";
                     break;
             }
+
+            InitEditorGUI(dtParams, recordNo, defaultValues);
+
+            groupControl1.Text = caption;
         }
 
-        protected virtual void InitEditorGUI(DataTable items, int recordNo)
+        protected virtual void InitEditorGUI(
+            DataTable items, 
+            int recordNo,
+            Dictionary<string, string> defaultValues)
         {
             DataRow dr = null;
             if (recordNo >= 0 && recordNo < items.Rows.Count)
@@ -99,8 +103,23 @@ namespace IRAP.Client.GUI.BatchSystem.Dialogs
                         Size = new Size(300, 26),
                         Parent = groupControl1,
                     };
-                if (dr != null)
-                    textEdit.Text = dr[i].ToString();
+                switch (editStatus)
+                {
+                    case EditStatus.New:
+                        if (defaultValues.ContainsKey(items.Columns[i].Caption))
+                        {
+                            string value = "";
+                            defaultValues.TryGetValue(items.Columns[i].Caption, out value);
+                            textEdit.Text = value;
+                        }
+                        break;
+                    case EditStatus.Edit:
+                        if (dr != null)
+                        {
+                            textEdit.Text = dr[i].ToString();
+                        }
+                        break;
+                }
                 edits.Add(textEdit);
             }
 

@@ -893,6 +893,7 @@ namespace IRAP
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
+                    WIShow.Instance.HideWI();
                     e.Cancel = false;
                 }
                 else
@@ -931,6 +932,28 @@ namespace IRAP
             using (frmSysParams formSysParams = new frmSysParams())
             {
                 formSysParams.ShowDialog();
+            }
+        }
+
+        private void cmdSwitchLoginUser_ItemClick(object sender, BackstageViewItemEventArgs e)
+        {
+            using (frmSwitchLoginUser switchUser = new frmSwitchLoginUser())
+            {
+                if (switchUser.ShowDialog() == DialogResult.OK)
+                {
+                    if (Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) == "en")
+                        message = "{0}-[Login user：{1}{2}]-[{3}]-[{4}]";
+                    else
+                        message = "{0}-[登录用户：{1}{2}]-[{3}]-[{4}]";
+
+                    Text = string.Format(
+                        message,
+                        CurrentSubSystem.Instance.SysInfo.SystemName,
+                        IRAPUser.Instance.UserName,
+                        IRAPUser.Instance.UserCode,
+                        IRAPUser.Instance.Agency.AgencyName,
+                        IRAPUser.Instance.HostName);
+                }
             }
         }
     }

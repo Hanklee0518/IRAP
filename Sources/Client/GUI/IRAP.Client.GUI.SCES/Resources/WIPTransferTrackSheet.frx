@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/07/2014 12:57:33" ReportInfo.Modified="09/06/2018 09:46:54" ReportInfo.CreatorVersion="2013.2.5.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/07/2014 12:57:33" ReportInfo.Modified="07/22/2019 18:30:02" ReportInfo.CreatorVersion="2013.2.5.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,9 +54,10 @@ namespace FastReport
     <Parameter Name="ProductLine" DataType="System.String"/>
     <Parameter Name="DstT106Code" DataType="System.String"/>
     <Parameter Name="OperatorName" DataType="System.String"/>
+    <Parameter Name="SurfacePropertyCode" DataType="System.String"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="210.1" PaperHeight="148.1" RawPaperSize="11" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
-    <PageHeaderBand Name="PageHeader1" Width="718.58" Height="476.28">
+    <PageHeaderBand Name="PageHeader1" Width="718.58" Height="483.84">
       <TextObject Name="Text1" Left="3.78" Width="710.64" Height="47.25" Text="产品进出车间流转卡&#13;&#10;WIP Transfer Track Sheet" HorzAlign="Center" VertAlign="Center" Font="黑体, 14pt"/>
       <TextObject Name="Text2" Left="102.06" Top="9.45" Width="51.03" Height="18.9" Text="CYPR" Font="黑体, 14pt"/>
       <TextObject Name="Text5" Left="5.67" Top="113.4" Width="132.3" Height="37.8" Text="车间名称及代码：&#13;&#10;Workshop Name&amp;Code" VertAlign="Center" Font="新宋体, 9pt"/>
@@ -81,7 +82,7 @@ namespace FastReport
       <TextObject Name="Text21" Left="5.67" Top="215.46" Width="136.08" Height="34.02" Border.Lines="All" Border.LeftLine.Width="1.5" Text="实际提料杆数&#13;&#10;Actual Picked Bars" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text22" Left="408.24" Top="181.44" Width="96.39" Height="34.02" Border.Lines="All" Border.TopLine.Width="1.5" Text="[LotNumber]" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text23" Left="504.63" Top="181.44" Width="107.73" Height="34.02" Border.Lines="All" Border.TopLine.Width="1.5" Text="材质&#13;&#10;Material Texture" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
-      <TextObject Name="Text24" Left="612.36" Top="181.44" Width="96.39" Height="34.02" Border.Lines="All" Border.TopLine.Width="1.5" Border.RightLine.Width="1.5" Text="[MaterialTexture]" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
+      <TextObject Name="Text24" Left="612.36" Top="181.44" Width="96.39" Height="34.02" Border.Lines="All" Border.TopLine.Width="1.5" Border.RightLine.Width="1.5" Text="[MaterialTexture]" HorzAlign="Center" VertAlign="Center" Font="新宋体, 11pt, style=Bold"/>
       <TextObject Name="Text25" Left="141.75" Top="215.46" Width="209.79" Height="34.02" Border.Lines="All" Text="[ActualPickedBars]" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text26" Left="351.54" Top="215.46" Width="107.73" Height="34.02" Border.Lines="All" Text="订单数量&#13;&#10;Order Qty" HorzAlign="Center" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text27" Left="459.27" Top="215.46" Width="249.48" Height="34.02" Border.Lines="All" Border.RightLine.Width="1.5" Text="[OrderQty]" VertAlign="Center" Font="新宋体, 9pt"/>
@@ -123,8 +124,9 @@ namespace FastReport
       <TextObject Name="Text62" Left="264.6" Top="147.42" Width="77.49" Height="37.8" Text="目标库位&#13;&#10;DstStorage" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text63" Left="340.2" Top="147.42" Width="122.85" Height="37.8" Text="[DstT106Code]" VertAlign="Center" Font="新宋体, 9pt"/>
       <TextObject Name="Text64" Left="15.12" Top="461.16" Width="223.02" Height="15.12" Text="保管员：[OperatorName]" VertAlign="Center" Font="新宋体, 9pt"/>
+      <TextObject Name="Text65" Left="612.36" Top="215.46" Width="96.39" Height="34.02" Text="[SurfacePropertyCode]" HorzAlign="Center" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="480.28" Width="718.58"/>
-    <PageFooterBand Name="PageFooter1" Top="484.28" Width="718.58"/>
+    <DataBand Name="Data1" Top="485.03" Width="718.58"/>
+    <PageFooterBand Name="PageFooter1" Top="486.22" Width="718.58"/>
   </ReportPage>
 </Report>

@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Configuration;
 
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 
 using IRAP.Global;
 using IRAP.Client.Global;
@@ -18,6 +19,7 @@ using IRAP.Entities.MDM;
 using IRAP.Entities.SCES;
 using IRAP.Entity.SSO;
 using IRAP.WCF.Client.Method;
+using IRAP.Entities.RIMCS;
 
 namespace IRAP.Client.GUI.SCES
 {
@@ -27,7 +29,7 @@ namespace IRAP.Client.GUI.SCES
             MethodBase.GetCurrentMethod().DeclaringType.FullName;
 
         List<ProductionWorkOrderEx> orders = new List<ProductionWorkOrderEx>();
-    
+
         public frmDeliveryMngmt_30()
         {
             InitializeComponent();
@@ -72,9 +74,9 @@ namespace IRAP.Client.GUI.SCES
                     else
                     {
                         XtraMessageBox.Show(
-                            errText, 
-                            "系统信息", 
-                            MessageBoxButtons.OK, 
+                            errText,
+                            "系统信息",
+                            MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                         return;
                     }
@@ -84,9 +86,9 @@ namespace IRAP.Client.GUI.SCES
                     WriteLog.Instance.Write(error.Message, strProcedureName);
                     WriteLog.Instance.Write(error.StackTrace, strProcedureName);
                     XtraMessageBox.Show(
-                        error.Message, 
-                        "系统信息", 
-                        MessageBoxButtons.OK, 
+                        error.Message,
+                        "系统信息",
+                        MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     return;
                 }
@@ -95,6 +97,42 @@ namespace IRAP.Client.GUI.SCES
             {
                 TWaitting.Instance.CloseWaitForm();
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        private void GetMaterialList(long tf482PK, long factID)
+        {
+            int errCode = 0;
+            string errText = "";
+            List<ERPRealTimeMaterialStore> datas = new List<ERPRealTimeMaterialStore>();
+
+            try
+            {
+                TWaitting.Instance.ShowWaitForm("获取四班实时库存");
+
+                IRAPRIMCSClient.Instance.ufn_GetList_ERPRealTimeMaterialStore(
+                    IRAPUser.Instance.CommunityID,
+                    tf482PK,
+                    factID,
+                    IRAPUser.Instance.SysLogID,
+                    ref datas,
+                    out errCode,
+                    out errText);
+                if (errCode != 0)
+                {
+                    IRAPMessageBox.Instance.ShowErrorMessage(errText);
+                    grdERPStore.DataSource = null;
+                    grdvERPStore.BestFitColumns();
+                }
+                else
+                {
+                    grdERPStore.DataSource = datas;
+                    grdvERPStore.BestFitColumns();
+                }
+            }
+            finally
+            {
+                TWaitting.Instance.CloseWaitForm();
             }
         }
 
@@ -127,7 +165,7 @@ namespace IRAP.Client.GUI.SCES
                 {
                     formNewTips.WindowState = FormWindowState.Maximized;
                     formNewTips.ShowDialog();
-                    IRAPConst.Instance.SaveParams("DeliveryMngmtVersion", "1.0"); 
+                    IRAPConst.Instance.SaveParams("DeliveryMngmtVersion", "1.0");
                 }
             }
         }
@@ -171,8 +209,8 @@ namespace IRAP.Client.GUI.SCES
                     else
                     {
                         XtraMessageBox.Show(
-                            errText, "系统信息", 
-                            MessageBoxButtons.OK, 
+                            errText, "系统信息",
+                            MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                         return;
                     }
@@ -182,9 +220,9 @@ namespace IRAP.Client.GUI.SCES
                     WriteLog.Instance.Write(error.Message, strProcedureName);
                     WriteLog.Instance.Write(error.StackTrace, strProcedureName);
                     XtraMessageBox.Show(
-                        error.Message, 
-                        "系统信息", 
-                        MessageBoxButtons.OK, 
+                        error.Message,
+                        "系统信息",
+                        MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     return;
                 }
@@ -286,11 +324,11 @@ namespace IRAP.Client.GUI.SCES
             {
                 DstDeliveryStoreSite dstStoreSite = cboDstStoreSites.SelectedItem as DstDeliveryStoreSite;
                 string opNode = ((MenuInfo)Tag).OpNode;
-                using (frmMaterialsToDeliver showMaterisl = 
+                using (frmMaterialsToDeliver showMaterisl =
                     new frmMaterialsToDeliver(
-                        orders[index].FactID, 
+                        orders[index].FactID,
                         orders[index].AF482PK,
-                        dstStoreSite, 
+                        dstStoreSite,
                         opNode))
                 {
                     showMaterisl.ShowDialog();
@@ -429,7 +467,7 @@ namespace IRAP.Client.GUI.SCES
                     else
                     {
                         XtraMessageBox.Show(
-                            errText, 
+                            errText,
                             "系统信息",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
@@ -479,7 +517,7 @@ namespace IRAP.Client.GUI.SCES
                         }
                     }
 
-                    if (storeSite== null)
+                    if (storeSite == null)
                     {
                         XtraMessageBox.Show(
                             $"您无权向{pwos[index].T173Name}配送该订单",
@@ -520,9 +558,9 @@ namespace IRAP.Client.GUI.SCES
             if (index >= 0)
             {
                 if (XtraMessageBox.Show(
-                    "请确认是否要删除：\n"+
-                    $"      订单号：{orders[index].MONumber}\n"+
-                    $"      行  号：{orders[index].MOLineNo}\n"+
+                    "请确认是否要删除：\n" +
+                    $"      订单号：{orders[index].MONumber}\n" +
+                    $"      行  号：{orders[index].MOLineNo}\n" +
                     "的订单？",
                     "请确认",
                     MessageBoxButtons.YesNo,
@@ -592,7 +630,7 @@ namespace IRAP.Client.GUI.SCES
         private void btnDeletePWO1_Click(object sender, EventArgs e)
         {
             int index = grdvPWOs.GetFocusedDataSourceRowIndex();
-            
+
             if (index >= 0)
             {
                 List<PWOToDeliverByMaterialCode> pwos =
@@ -667,6 +705,121 @@ namespace IRAP.Client.GUI.SCES
                     "删除订单",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+            }
+        }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            switch (IRAPUser.Instance.CommunityID)
+            {
+                case 60010:
+                case 60030:
+                    mitmCheckERPStoreQty.Visible = true;
+                    break;
+                default:
+                    mitmCheckERPStoreQty.Visible = false;
+                    break;
+            }
+        }
+
+        private void mitmCheckERPStoreQty_Click(object sender, EventArgs e)
+        {
+            int index = 0;
+
+            switch (tcMain.SelectedTabPageIndex)
+            {
+                case 0:
+                    index = grdvOrders.GetFocusedDataSourceRowIndex();
+
+                    if (index >= 0)
+                    {
+                        List<ProductionWorkOrderEx> pwos =
+                            grdvOrders.DataSource as List<ProductionWorkOrderEx>;
+                        if (pwos != null)
+                        {
+                            using (Dialogs.frmShowMaterialInERPStore showStore =
+                                new Dialogs.frmShowMaterialInERPStore(
+                                    pwos[index].FP482PK,
+                                    pwos[index].FactID))
+                            {
+                                showStore.ShowDialog();
+                            }
+                        }
+                    }
+                    break;
+                case 1:
+                    index = grdvPWOs.GetFocusedDataSourceRowIndex();
+
+                    if (index >= 0)
+                    {
+                        List<PWOToDeliverByMaterialCode> pwos =
+                            grdPWOs.DataSource as List<PWOToDeliverByMaterialCode>;
+                        if (pwos != null)
+                        {
+                            using (Dialogs.frmShowMaterialInERPStore showStore =
+                                new Dialogs.frmShowMaterialInERPStore(
+                                    pwos[index].FP482PK,
+                                    pwos[index].FactID))
+                            {
+                                showStore.ShowDialog();
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void grdvOrders_RowClick(object sender, RowClickEventArgs e)
+        {
+            int index = grdvOrders.GetFocusedDataSourceRowIndex();
+
+            if (index >= 0)
+            {
+                List<ProductionWorkOrderEx> pwos =
+                    grdvOrders.DataSource as List<ProductionWorkOrderEx>;
+                if (pwos != null)
+                {
+                    GetMaterialList(
+                        pwos[index].FP482PK,
+                        pwos[index].FactID);
+                }
+                else
+                {
+                    grdERPStore.DataSource = null;
+                    grdvERPStore.BestFitColumns();
+                }
+            }
+            else
+            {
+                grdERPStore.DataSource = null;
+                grdvERPStore.BestFitColumns();
+            }
+        }
+
+        private void grdvPWOs_RowClick(object sender, RowClickEventArgs e)
+        {
+            int index = grdvPWOs.GetFocusedDataSourceRowIndex();
+
+            if (index >= 0)
+            {
+                List<PWOToDeliverByMaterialCode> pwos =
+                    grdPWOs.DataSource as List<PWOToDeliverByMaterialCode>;
+                if (pwos != null)
+                {
+                    GetMaterialList(
+                        pwos[index].FP482PK,
+                        pwos[index].FactID);
+                }
+                else
+                {
+                    grdERPStore.DataSource = null;
+                    grdvERPStore.BestFitColumns();
+                }
+            }
+            else
+            {
+                grdERPStore.DataSource = null;
+                grdvERPStore.BestFitColumns();
             }
         }
     }

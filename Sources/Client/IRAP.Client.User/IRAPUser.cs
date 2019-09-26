@@ -821,5 +821,113 @@ namespace IRAP.Client.User
                 }
             }
         }
+
+        /// <summary>
+        /// 切换登录用户
+        /// </summary>
+        /// <param name="newUserBarCode">用户登录条码</param>
+        public bool SwapLoginUser(string newUserBarCode)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                try
+                {
+                    #region 切换登录用户
+                    WriteLog.Instance.Write("切换登录用户", strProcedureName);
+                    long newSysLogID = 0;
+                    string newUserCode = "";
+                    string newUserName = "";
+                    int newLanguageID = 0;
+                    string newNickName = "";
+                    string newOPhoneNo = "";
+                    string newHPhoneNo = "";
+                    string newMPhoneNo = "";
+                    int errCode = 0;
+                    string errText = "";
+                    IRAPUserClient.Instance.usp_SwapUserLogin(
+                        communityID,
+                        newUserBarCode,
+                        sysLogID,
+                        out newSysLogID,
+                        out newUserCode,
+                        out newUserName,
+                        out newLanguageID,
+                        out newNickName,
+                        out newOPhoneNo,
+                        out newHPhoneNo,
+                        out newMPhoneNo,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format("({0}){1}", errCode, errText),
+                        strProcedureName);
+
+                    if (errCode != 0)
+                    {
+                        throw new Exception(errText);
+                    }
+                    else
+                    {
+                        WriteLog.Instance.Write(
+                            $"登录用户切换成功，新用户：UserCode={newUserCode}|" +
+                            $"UserName={newUserName}|LanguageID={newLanguageID}|" +
+                            $"SysLogID={newSysLogID}|NickName={newNickName}|" +
+                            $"OPhone={newOPhoneNo}|HPhoneNo={newHPhoneNo}" +
+                            $"MPHone={newMPhoneNo}",
+                            strProcedureName);
+                        sysLogID = newSysLogID;
+                        userCode = newUserCode;
+                        userName = newUserName;
+                        languageID = newLanguageID;
+                        nickName = newNickName;
+                        oPhoneNo = newOPhoneNo;
+                        hPhoneNo = newHPhoneNo;
+                        mPhoneNo = newMPhoneNo;
+                    }
+                    #endregion
+
+                    // 登录成功后，将当前语言切换到该用户在系统中配置的语言
+                    switch (this.languageID)
+                    {
+                        case 0:
+                            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                            break;
+                        case 28:
+                            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CHT");
+                            break;
+                        default:
+                            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN");
+                            break;
+                    }
+
+                    return true;
+                }
+                catch (Exception error)
+                {
+                    WriteLog.Instance.Write(error.Message, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                    throw error;
+                }
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 切换登录用户
+        /// </summary>
+        /// <param name="newUserCode">需要切换的登录用户号</param>
+        /// <param name="newUserPWD">登录用户密码</param>
+        public bool SwapLoginUser(
+            string newUserCode,
+            string newUserPWD)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

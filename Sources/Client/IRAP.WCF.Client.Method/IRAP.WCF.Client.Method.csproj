@@ -60,6 +60,7 @@
     <Compile Include="IRAPMESRMMClient.cs" />
     <Compile Include="IRAPMESSmeltClient.cs" />
     <Compile Include="IRAPMESTSClient.cs" />
+    <Compile Include="IRAPRIMCSClient.cs" />
     <Compile Include="IRAPSCESClient.cs" />
     <Compile Include="IRAPSystemClient.cs" />
     <Compile Include="IRAPTreeClient.cs" />

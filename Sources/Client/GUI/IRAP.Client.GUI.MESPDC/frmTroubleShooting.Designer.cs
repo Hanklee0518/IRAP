@@ -84,6 +84,19 @@
             this.riteFailureMode = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.grdTSHistory = new DevExpress.XtraGrid.GridControl();
+            this.grdvTSHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
             this.chkFailOnly = new DevExpress.XtraEditors.CheckEdit();
             this.grdTestDatas = new DevExpress.XtraGrid.GridControl();
@@ -127,19 +140,6 @@
             this.grdclmnMetric31 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnMetric32 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
-            this.grdTSHistory = new DevExpress.XtraGrid.GridControl();
-            this.grdvTSHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -174,15 +174,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.riteFailureMode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdTSHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdvTSHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).BeginInit();
             this.splitContainerControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkFailOnly.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTestDatas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdvTestDatas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.riicboConclusion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdTSHistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdvTSHistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFuncName
@@ -884,6 +884,155 @@
             this.labelControl2.TabIndex = 10;
             this.labelControl2.Text = "<F2> - 新增；<F3> - 修改；<F4> - 删除";
             // 
+            // grdTSHistory
+            // 
+            this.grdTSHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdTSHistory.Location = new System.Drawing.Point(0, 0);
+            this.grdTSHistory.MainView = this.grdvTSHistory;
+            this.grdTSHistory.Name = "grdTSHistory";
+            this.grdTSHistory.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemImageComboBox1});
+            this.grdTSHistory.Size = new System.Drawing.Size(651, 261);
+            this.grdTSHistory.TabIndex = 1;
+            this.grdTSHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grdvTSHistory});
+            // 
+            // grdvTSHistory
+            // 
+            this.grdvTSHistory.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdvTSHistory.Appearance.HeaderPanel.Options.UseFont = true;
+            this.grdvTSHistory.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.grdvTSHistory.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.grdvTSHistory.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.grdvTSHistory.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdvTSHistory.Appearance.Row.Options.UseFont = true;
+            this.grdvTSHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn11,
+            this.gridColumn12,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15});
+            this.grdvTSHistory.GridControl = this.grdTSHistory;
+            this.grdvTSHistory.Name = "grdvTSHistory";
+            this.grdvTSHistory.OptionsView.ColumnAutoWidth = false;
+            this.grdvTSHistory.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn5.Caption = "维修时间";
+            this.gridColumn5.FieldName = "BizDateTime";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "产品编号";
+            this.gridColumn6.FieldName = "ProductNo";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "产品标识";
+            this.gridColumn7.FieldName = "MainWIPCode";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 2;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn8.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn8.Caption = "产品序列号";
+            this.gridColumn8.FieldName = "SerialNumber";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 3;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "位置编号";
+            this.gridColumn9.FieldName = "CompLocCode";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn11.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn11.Caption = "物料代码";
+            this.gridColumn11.FieldName = "MaterialCode";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 5;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn12.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn12.Caption = "失效模式";
+            this.gridColumn12.FieldName = "FailureMode";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 6;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn13.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn13.Caption = "维修模式";
+            this.gridColumn13.FieldName = "RepairMode";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 7;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn14.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn14.Caption = "维修工人";
+            this.gridColumn14.FieldName = "TSOperator";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 8;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn15.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn15.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn15.Caption = "更换料追溯标识";
+            this.gridColumn15.FieldName = "MaterialLabelSN1";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 9;
+            // 
+            // repositoryItemImageComboBox1
+            // 
+            this.repositoryItemImageComboBox1.AutoHeight = false;
+            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBox1.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("通过", "P", -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("失败", "F", -1)});
+            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
+            // 
             // splitContainerControl5
             // 
             this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1333,155 +1482,6 @@
             this.xtraTabPage3.Size = new System.Drawing.Size(1002, 461);
             this.xtraTabPage3.Text = "追溯生产过程(<F9>)";
             // 
-            // grdTSHistory
-            // 
-            this.grdTSHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdTSHistory.Location = new System.Drawing.Point(0, 0);
-            this.grdTSHistory.MainView = this.grdvTSHistory;
-            this.grdTSHistory.Name = "grdTSHistory";
-            this.grdTSHistory.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemImageComboBox1});
-            this.grdTSHistory.Size = new System.Drawing.Size(651, 261);
-            this.grdTSHistory.TabIndex = 1;
-            this.grdTSHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.grdvTSHistory});
-            // 
-            // grdvTSHistory
-            // 
-            this.grdvTSHistory.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grdvTSHistory.Appearance.HeaderPanel.Options.UseFont = true;
-            this.grdvTSHistory.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.grdvTSHistory.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.grdvTSHistory.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.grdvTSHistory.Appearance.Row.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grdvTSHistory.Appearance.Row.Options.UseFont = true;
-            this.grdvTSHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn11,
-            this.gridColumn12,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.gridColumn15});
-            this.grdvTSHistory.GridControl = this.grdTSHistory;
-            this.grdvTSHistory.Name = "grdvTSHistory";
-            this.grdvTSHistory.OptionsView.ColumnAutoWidth = false;
-            this.grdvTSHistory.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn5.Caption = "维修时间";
-            this.gridColumn5.FieldName = "BizDateTime";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "产品编号";
-            this.gridColumn6.FieldName = "ProductNo";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "产品标识";
-            this.gridColumn7.FieldName = "MainWIPCode";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 2;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn8.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn8.Caption = "产品序列号";
-            this.gridColumn8.FieldName = "SerialNumber";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
-            // 
-            // repositoryItemImageComboBox1
-            // 
-            this.repositoryItemImageComboBox1.AutoHeight = false;
-            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageComboBox1.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("通过", "P", -1),
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("失败", "F", -1)});
-            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "位置编号";
-            this.gridColumn9.FieldName = "CompLocCode";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 4;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn11.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn11.Caption = "物料代码";
-            this.gridColumn11.FieldName = "MaterialCode";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 5;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn12.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn12.Caption = "失效模式";
-            this.gridColumn12.FieldName = "FailureMode";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 6;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn13.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn13.Caption = "维修模式";
-            this.gridColumn13.FieldName = "RepairMode";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 7;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn14.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn14.Caption = "维修工人";
-            this.gridColumn14.FieldName = "TSOperator";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 8;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn15.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn15.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridColumn15.Caption = "更换料追溯标识";
-            this.gridColumn15.FieldName = "MaterialLabelSN1";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 9;
-            // 
             // frmTroubleShooting
             // 
             this.Appearance.Options.UseFont = true;
@@ -1528,15 +1528,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.riteFailureMode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdTSHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdvTSHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).EndInit();
             this.splitContainerControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkFailOnly.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTestDatas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdvTestDatas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.riicboConclusion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdTSHistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdvTSHistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -63,6 +63,33 @@ namespace IRAP.Client.SubSystem
             }
         }
 
+        private void ShowCurrentWI()
+        {
+            int t102LeafID = 0;
+            int t107LeafID = 0;
+
+            if (SelectProduct != null)
+            {
+                t102LeafID = SelectProduct.T102LeafID;
+            }
+            if (SelectStation != null)
+            {
+                t107LeafID = SelectStation.T216LeafID;
+            }
+
+            WIShow.Instance.ShowWI(t102LeafID, t107LeafID);
+        }
+
+        private void AfterOptionChanged(object sender, EventArgs e)
+        {
+            ShowCurrentWI();
+
+            if (OptionChanged != null)
+            {
+                OptionChanged(sender, e);
+            }
+        }
+
         public void RefreshOptions()
         {
             string strProcedureName =
@@ -120,6 +147,8 @@ namespace IRAP.Client.SubSystem
                     }
                 }
                 #endregion
+
+                AfterOptionChanged(this, new EventArgs());
             }
             finally
             {
@@ -143,8 +172,7 @@ namespace IRAP.Client.SubSystem
                     cboOptionsOne.Properties.Items.Add(CurrentOptions.Instance.OptionOne);
                     cboOptionsOne.SelectedIndex = 0;
 
-                    if (OptionChanged != null)
-                        OptionChanged(this, new EventArgs());
+                    AfterOptionChanged(this, new EventArgs());
                 }
             }
         }
@@ -165,8 +193,7 @@ namespace IRAP.Client.SubSystem
                     cboOptionsTwo.Properties.Items.Add(CurrentOptions.Instance.OptionTwo);
                     cboOptionsTwo.SelectedIndex = 0;
 
-                    if (OptionChanged != null)
-                        OptionChanged(this, new EventArgs());
+                    AfterOptionChanged(this, new EventArgs());
                 }
             }
         }
@@ -187,8 +214,7 @@ namespace IRAP.Client.SubSystem
             //else
             //    cboOptionsTwo.SelectedIndex = -1;
 
-            if (OptionChanged != null)
-                OptionChanged(this, new EventArgs());
+            AfterOptionChanged(this, new EventArgs());
         }
 
         private void ucOptions_VisibleChanged(object sender, EventArgs e)
@@ -206,7 +232,17 @@ namespace IRAP.Client.SubSystem
                     if (Visible)
                     {
                         if (AvailableWIPStations.Instance.Stations.Count == 0)
+                        {
                             RefreshOptions();
+                        }
+                        else
+                        {
+                            ShowCurrentWI();
+                        }
+                    }
+                    else
+                    {
+                        WIShow.Instance.HideWI();
                     }
                 }
                 finally

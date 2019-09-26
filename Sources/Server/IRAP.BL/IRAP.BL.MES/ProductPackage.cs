@@ -348,6 +348,7 @@ namespace IRAP.BL.MES
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
         public IRAPJsonResult usp_SaveFact_Packaging(
             int communityID,
             long transactNo,
@@ -577,6 +578,80 @@ namespace IRAP.BL.MES
                 #endregion
 
                 return Json(datas);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 成品包装交易复核
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="transactNo">交易号</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        /// <returns></returns>
+        public IRAPJsonResult usp_CheckTran_Packaging(
+            int communityID,
+            long transactNo,
+            long sysLogID,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Clear();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TransactNo", DbType.Int64, transactNo));
+                paramList.Add(new IRAPProcParameter("@OutputStr", DbType.Xml, ParameterDirection.Output, 1048576));
+                paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
+                paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
+                WriteLog.Instance.Write(
+                    $"调用 IRAPMES..usp_CheckTran_Packaging，输入参数：" +
+                    $"CommunityID={communityID}|TransactNo={transactNo}|" +
+                    $"SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        IRAPError error =
+                        conn.CallProc("IRAPMES..usp_CheckTran_Packaging", ref paramList);
+                        errCode = error.ErrCode;
+                        errText = error.ErrText;
+                        string outputStr = paramList[2].Value.ToString();
+                        WriteLog.Instance.Write(
+                            $"OutpuStr={outputStr}",
+                            strProcedureName);
+                        return Json(outputStr);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText =
+                        string.Format(
+                            "调用 IRAPMES..usp_CheckTran_Packaging 过程发生异常：{0}",
+                            error.Message);
+                    return Json(
+                        new IRAPError()
+                        {
+                            ErrCode = errCode,
+                            ErrText = errText,
+                        });
+                }
+                #endregion
             }
             finally
             {

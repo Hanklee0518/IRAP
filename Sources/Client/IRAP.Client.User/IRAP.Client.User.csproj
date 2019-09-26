@@ -135,6 +135,9 @@
   <ItemGroup>
     <None Include="Resources\login.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\芍园IRAP-生产异常事件快速响应软件.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IncBuildNum "$(PROJECTDIR)\Properties\AssemblyInfo.cs" $(ConfigurationName) After</PostBuildEvent>

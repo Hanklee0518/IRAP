@@ -160,8 +160,9 @@ namespace IRAP.Entities.SCES
                 else
                 {
                     return TimeParser.DateDiff(
-                        Tools.ConvertToDateTime(RequestedArrivalTime),
-                        Tools.ConvertToDateTime(MaterialDeliverTime));
+                        Tools.ConvertToDateTime(MaterialDeliverTime),
+                        Tools.ConvertToDateTime(RequestedArrivalTime)
+                        );
                 }
             }
         }
@@ -180,7 +181,14 @@ namespace IRAP.Entities.SCES
                 }
                 else
                 {
-                    return "已配送";
+                    if (ContainerNo != "")
+                    {
+                        return "已配送";
+                    }
+                    else
+                    {
+                        return "已打印未配送";
+                    }
                 }
             }
         }

@@ -346,6 +346,8 @@ namespace IRAP.Client.GUI.BatchSystem.Dialogs
                 edtProductName.Text = data.T102Name;
                 edtBatchNo.Text = data.LotNumber;
                 edtTextureCode.Text = data.Texture;
+
+                e.Cancel = false;
             }
             finally
             {

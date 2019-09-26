@@ -95,6 +95,12 @@
     <Compile Include="Dialogs\frmPWOInProductionEditor.designer.cs">
       <DependentUpon>frmPWOInProductionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\frmPWOInProductionEditor_Ionitriding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frmPWOInProductionEditor_Ionitriding.Designer.cs">
+      <DependentUpon>frmPWOInProductionEditor_Ionitriding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\frmPWOInProductionEditor_QuenchAndTemper.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -243,5 +243,174 @@ namespace IRAP.BL.APS
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
+        /// <summary>
+        /// 制造订单人工分单保存
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="transactNo">交易号</param>
+        /// <param name="factID">事实编号</param>
+        /// <param name="opType">操作类型：1-新排；2-修改</param>
+        /// <param name="moNumber">制造订单号</param>
+        /// <param name="moLineNo">制造订单行号</param>
+        /// <param name="productNo">产品编号</param>
+        /// <param name="t134LeafID">生产线叶标识</param>
+        /// <param name="dispatchedQty">排定生产数量</param>
+        /// <param name="scheduledStartTime">排定生产时间(yyyy-mm-dd hh:mm)</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        public IRAPJsonResult usp_SaveFact_MODispatching(
+            int communityID,
+            long transactNo,
+            long factID,
+            int opType,
+            string moNumber,
+            int moLineNo,
+            string productNo,
+            int t134LeafID,
+            long dispatchedQty,
+            string scheduledStartTime,
+            long sysLogID,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TransactNo", DbType.Int64, transactNo));
+                paramList.Add(new IRAPProcParameter("@FactID", DbType.Int64, factID));
+                paramList.Add(new IRAPProcParameter("@OpType", DbType.Int32, opType));
+                paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
+                paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
+                paramList.Add(new IRAPProcParameter("@ProductNo", DbType.String, productNo));
+                paramList.Add(new IRAPProcParameter("@T134LeafID", DbType.Int32, t134LeafID));
+                paramList.Add(new IRAPProcParameter("@DispatchedQty", DbType.Int64, dispatchedQty));
+                paramList.Add(new IRAPProcParameter("@ScheduledStartTime", DbType.String, scheduledStartTime));
+                paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
+                paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
+                paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
+                WriteLog.Instance.Write(
+                    $"执行存储过程 IRAPAPS..usp_SaveFact_MODispatching，参数：" +
+                    $"CommunityID={communityID}|TransactNo={transactNo}|FactID={factID}|"+
+                    $"OpType={opType}|MONumber={moNumber}|MOLineNo={moLineNo}|"+
+                    $"ProductNo={productNo}|T134LeafID={t134LeafID}|DispatchedQty={dispatchedQty}|"+
+                    $"ScheduledStartTime={scheduledStartTime}|SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                {
+                    IRAPError error =
+                        conn.CallProc("IRAPAPS..usp_SaveFact_MODispatching", ref paramList);
+                    errCode = error.ErrCode;
+                    errText = error.ErrText;
+                    return Json(error);
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                errCode = 99000;
+                errText =
+                    string.Format(
+                        "调用 IRAPAPS..usp_SaveFact_MODispatching 过程发生异常：{0}",
+                        error.Message);
+                return Json(
+                    new IRAPError()
+                    {
+                        ErrCode = errCode,
+                        ErrText = errText,
+                    });
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        /// <summary>
+        /// 根据产品编号查询可供生产物料的数量
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="productNo">产品编号</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        public IRAPJsonResult ufn_GetInfo_MaterialATP(
+            int communityID,
+            string productNo,
+            long sysLogID,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                string.Format(
+                    "{0}.{1}",
+                    className,
+                    MethodBase.GetCurrentMethod().Name);
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                MaterialATP data = new MaterialATP();
+
+                #region 创建数据库调用参数组，并赋值
+                IList<IDataParameter> paramList = new List<IDataParameter>();
+                paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@ProductNo", DbType.String, productNo));
+                paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
+                WriteLog.Instance.Write(
+                    $"调用函数 IRAPAPS..ufn_GetInfo_MaterialATP，参数：" +
+                    $"CommunityID={communityID}|ProductNo={productNo}|SysLogID={sysLogID}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行数据库函数或存储过程
+                try
+                {
+                    using (IRAPSQLConnection conn = new IRAPSQLConnection())
+                    {
+                        string strSQL = "SELECT * " +
+                            "FROM IRAPAPS..ufn_GetInfo_MaterialATP(" +
+                            "@CommunityID, @ProductNo, @SysLogID)";
+
+                        IList<MaterialATP> lstDatas =
+                            conn.CallTableFunc<MaterialATP>(strSQL, paramList);
+                        if (lstDatas.Count > 0)
+                        {
+                            data = lstDatas[0].Clone();
+                            errCode = 0;
+                            errText = "调用成功！";
+                        }
+                        else
+                        {
+                            errCode = 99001;
+                            errText = "未得到可供生产的物料数量";
+                        }
+                        WriteLog.Instance.Write(errText, strProcedureName);
+                    }
+                }
+                catch (Exception error)
+                {
+                    errCode = 99000;
+                    errText =
+                        string.Format(
+                            "调用 IRAPAPS..ufn_GetInfo_MaterialATP 函数发生异常：{0}",
+                            error.Message);
+                    WriteLog.Instance.Write(errText, strProcedureName);
+                    WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+                }
+                #endregion
+
+                return Json(data);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

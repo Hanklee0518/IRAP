@@ -85,6 +85,12 @@
     <Compile Include="frmIRAPMain.Designer.cs">
       <DependentUpon>frmIRAPMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSwitchLoginUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSwitchLoginUser.Designer.cs">
+      <DependentUpon>frmSwitchLoginUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmIRAPMain.en-US.resx">
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmIRAPMain.resx">
       <DependentUpon>frmIRAPMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSwitchLoginUser.resx">
+      <DependentUpon>frmSwitchLoginUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,6 +123,10 @@
     <ProjectReference Include="..\..\Global\IRAP.Global\IRAP.Global.csproj">
       <Project>{325ffd07-7491-45c3-86f3-85f7def4c726}</Project>
       <Name>IRAP.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Server\IRAP.Entities\IRAP.Entities\IRAP.Entities.csproj">
+      <Project>{A10EB27E-6444-44AD-B5FB-2C8F96C04225}</Project>
+      <Name>IRAP.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Server\IRAP.Entities\IRAP.Entity.SSO\IRAP.Entity.SSO.csproj">
       <Project>{da96959d-cdd1-4533-b5e8-cf235c2d1c61}</Project>

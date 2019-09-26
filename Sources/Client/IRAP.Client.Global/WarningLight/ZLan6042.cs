@@ -96,7 +96,7 @@ namespace IRAP.Client.Global.WarningLight
             int port = 4196;
 
             WriteLog.Instance.Write(
-                string.Format("建立 [{0}:{1}] 的 Socket 连接", ipAddress, port),
+                string.Format("正在建立 [{0}:{1}] 的 Socket 连接", ipAddress, port),
                 strProcedureName);
             if (clientSocket == null)
             {
@@ -113,12 +113,15 @@ namespace IRAP.Client.Global.WarningLight
                 {
                     IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ipAddress), port);
                     clientSocket.Connect(ipep);
+                    WriteLog.Instance.Write(
+                        $"ZLan6042控制盒[{ipAddress}:{port}连接成功",
+                        strProcedureName);
                 }
                 catch (SocketException ex)
                 {
                     WriteLog.Instance.Write(
                         string.Format(
-                            "无法连接告警灯控制盒[{0}:{1}]，原因：[{2}]", 
+                            "无法连接ZLan6042控制盒[{0}:{1}]，原因：[{2}]",
                             ipAddress,
                             port,
                             ex.Message),
@@ -129,49 +132,64 @@ namespace IRAP.Client.Global.WarningLight
 
             if (clientSocket.Connected)
             {
-                byte[] data = new byte[12]
+                try
                 {
+                    byte[] data = new byte[12]
+                    {
                         0x00, 0x00, 0x00, 0x00, 0x00, 0x06,
                         0x01, 0x05, 0x00, 0x10, 0x00, 0x00,
-                };
+                    };
 
-                if (red != redStatus)
-                {
-                    WriteLog.Instance.Write("发送控制红灯的继电器触点状态", strProcedureName);
+                    if (red != redStatus)
+                    {
+                        WriteLog.Instance.Write("发送控制红灯的继电器触点状态", strProcedureName);
 
-                    redStatus = red;
+                        redStatus = red;
 
-                    data[9] = 0x10;
-                    SetLightCmdWithStatus(ref data, red);
+                        data[9] = 0x10;
+                        SetLightCmdWithStatus(ref data, red);
 
-                    clientSocket.Send(data, data.Length, SocketFlags.None);
-                    Thread.Sleep(50);
+                        clientSocket.Send(data, data.Length, SocketFlags.None);
+                        Thread.Sleep(50);
+                    }
+
+                    if (yellow != yellowStatus)
+                    {
+                        WriteLog.Instance.Write("发送控制黄灯的继电器触点状态", strProcedureName);
+
+                        yellowStatus = yellow;
+
+                        data[9] = 0x11;
+                        SetLightCmdWithStatus(ref data, yellow);
+
+                        clientSocket.Send(data, data.Length, SocketFlags.None);
+                        Thread.Sleep(50);
+                    }
+
+                    if (green != greenStatus)
+                    {
+                        WriteLog.Instance.Write("发送控制绿灯的继电器触点状态", strProcedureName);
+
+                        greenStatus = green;
+
+                        data[9] = 0x12;
+                        SetLightCmdWithStatus(ref data, green);
+
+                        clientSocket.Send(data, data.Length, SocketFlags.None);
+                        Thread.Sleep(50);
+                    }
                 }
-
-                if (yellow != yellowStatus)
+                catch (Exception error)
                 {
-                    WriteLog.Instance.Write("发送控制黄灯的继电器触点状态", strProcedureName);
-
-                    yellowStatus = yellow;
-
-                    data[9] = 0x11;
-                    SetLightCmdWithStatus(ref data, yellow);
-
-                    clientSocket.Send(data, data.Length, SocketFlags.None);
-                    Thread.Sleep(50);
+                    WriteLog.Instance.Write(
+                        $"发送时发生错误：{error.Message}",
+                        strProcedureName);
                 }
-
-                if (green != greenStatus)
+                finally
                 {
-                    WriteLog.Instance.Write("发送控制绿灯的继电器触点状态", strProcedureName);
-
-                    greenStatus = green;
-
-                    data[9] = 0x12;
-                    SetLightCmdWithStatus(ref data, green);
-
-                    clientSocket.Send(data, data.Length, SocketFlags.None);
-                    Thread.Sleep(50);
+                    clientSocket.Close();
+                    //clientSocket.Dispose();
+                    clientSocket = null;
                 }
             }
         }

@@ -339,7 +339,7 @@ namespace IRAP.Client.GUI.SCES
 
                 if (saveSucccessed)
                 {
-#region 获取当前工单的生产批次号
+                    #region 获取当前工单的生产批次号
                     {
                         int errCode = 0;
                         string errText = "";
@@ -355,9 +355,9 @@ namespace IRAP.Client.GUI.SCES
                             string.Format("({0}){1}", errCode, errText),
                             strProcedureName);
                     }
-#endregion
+                    #endregion
 
-#region 打印
+                    #region 打印
                     Report report = new Report();
                     Report report1 = new Report();
                     MemoryStream ms;
@@ -417,10 +417,12 @@ namespace IRAP.Client.GUI.SCES
 
                     try
                     {
+                        string propertyCode = "";
+
                         switch (IRAPUser.Instance.CommunityID)
                         {
                             case 60023:  // 新康达打印的生产流转卡
-#region 获取生产流传卡打印的要素
+                                #region 获取生产流传卡打印的要素
                                 int errCode = 0;
                                 string errText = "";
                                 List<ProductionFlowCard> datas = new List<ProductionFlowCard>();
@@ -443,9 +445,9 @@ namespace IRAP.Client.GUI.SCES
                                         MessageBoxIcon.Error);
                                     return;
                                 }
-#endregion
+                                #endregion
 
-#region 向内存表中插入记录，以便生成打印内容
+                                #region 向内存表中插入记录，以便生成打印内容
                                 DataSet ds = new DataSet();
                                 DataTable dt = new DataTable();
                                 dt.TableName = "ProductionFlowCard";
@@ -486,13 +488,25 @@ namespace IRAP.Client.GUI.SCES
                                 }
 
                                 ds.Tables.Add(dt);
-#endregion
+                                #endregion
 
                                 report.RegisterData(ds);
                                 report.GetDataSource("ProductionFlowCard").Enabled = true;
 
                                 break;
                             default:    // 仪征打印的生产流转卡
+                                #region 获取物料表面处理特性代码
+                                IRAPDPAClient.Instance.ufn_GetSurfaceProcessingPropertyCodeFromERP_FourthShift(
+                                    IRAPUser.Instance.CommunityID,
+                                    order.ProductNo,
+                                    out propertyCode,
+                                    out errCode,
+                                    out errText);
+                                WriteLog.Instance.Write(
+                                    $"({errCode}){errText}, PropertyCode={propertyCode}", 
+                                    strProcedureName);
+                                #endregion
+
                                 report.Parameters.FindByName("BarCode").Value = order.PWONo;
                                 report.Parameters.FindByName("DeliveryWorkshop").Value = "";
                                 report.Parameters.FindByName("StorehouseCode").Value =
@@ -529,6 +543,7 @@ namespace IRAP.Client.GUI.SCES
                                 report.Parameters.FindByName("FatherMaterialName").Value = order.ProductDesc;
                                 report.Parameters.FindByName("DstT106Code").Value = materials[0].DstT106Code;
                                 report.Parameters.FindByName("OperatorName").Value = IRAPUser.Instance.UserName;
+                                report.Parameters.FindByName("SurfacePropertyCode").Value = propertyCode;
                                 break;
                         }
 
@@ -568,6 +583,7 @@ namespace IRAP.Client.GUI.SCES
                                     dt.Columns.Add("PageNo", typeof(int));
                                     dt.Columns.Add("PageCount", typeof(int));
                                     dt.Columns.Add("ActualQuantity", typeof(string));
+                                    dt.Columns.Add("SurfacePropertyCode", typeof(string));
 
                                     long perContainerQty = materials[0].PerStickQty * materials[0].StickQty;
                                     if (perContainerQty == 0)
@@ -605,7 +621,8 @@ namespace IRAP.Client.GUI.SCES
                                             1,
                                             materials[0].ActualQuantityToDeliver.IntValue != 0 ?
                                                 materials[0].ActualQuantityToDeliver.ToStringWithoutUnitOfMeasure() :
-                                                "");
+                                                "",
+                                            propertyCode);
                                         #endregion
                                     }
                                     else
@@ -665,7 +682,8 @@ namespace IRAP.Client.GUI.SCES
                                                 order.GateWayWC,
                                                 i,
                                                 count,
-                                                materials[0].ActualQuantityToDeliver.IntValue.ToString());
+                                                materials[0].ActualQuantityToDeliver.IntValue.ToString(),
+                                                propertyCode);
                                         }
                                     }
 
@@ -808,7 +826,7 @@ namespace IRAP.Client.GUI.SCES
                     }
 
                     btnClose.PerformClick();
-#endregion
+                    #endregion
                 }
             }
             finally

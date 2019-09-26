@@ -31,6 +31,66 @@ namespace IRAP.WCF.Client.Method
             }
         }
 
+        public List<LeafSetEx> mfn_GetList_ProductLines(
+            int communityID,
+            int scenarioIndex,
+            long sysLogID,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                List<LeafSetEx> lines = new List<LeafSetEx>();
+                sfn_AccessibleLeafSetEx(
+                    communityID,
+                    134,
+                    scenarioIndex,
+                    sysLogID,
+                    ref lines,
+                    out errCode,
+                    out errText);
+                return lines;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
+        public List<LeafSetEx> mfn_GetList_WorkCenters(
+            int communityID, 
+            int scenarioIndex, 
+            long sysLogID, 
+            out int errCode, 
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                List<LeafSetEx> workCenters = new List<LeafSetEx>();
+                sfn_AccessibleLeafSetEx(
+                    communityID, 
+                    211, 
+                    scenarioIndex, 
+                    sysLogID, 
+                    ref workCenters, 
+                    out errCode, 
+                    out errText);
+                return workCenters;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
+
         public void sfn_GetList_JumpToFunctions(
             int communityID,
             int t3LeafID,

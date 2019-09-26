@@ -1,4 +1,5 @@
-﻿using IRAP.Entity.Kanban;
+﻿using IRAP.Entities.IRAP;
+using IRAP.Entity.Kanban;
 using IRAP.Entity.UTS;
 using IRAP.Global;
 using IRAPShared;
@@ -135,7 +136,7 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("sysLogID", sysLogID);
                 WriteLog.Instance.Write(
                     string.Format(
-                        "调用 sfn_GetInfo_LinkedTreeOfImpExp 函数，参数："+
+                        "调用 sfn_GetInfo_LinkedTreeOfImpExp 函数，参数：" +
                         "CommunityID={0}|T19LeafID={1}|SysLogID={2} ",
                         communityID, t19LeafID, sysLogID),
                     strProcedureName);
@@ -575,19 +576,19 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.Write(
                     string.Format(
                         "调用 sfn_IRAPTreeView 函数， " +
-                        "参数：CommunityID={0}|IRAPTreeID={1}|TreeViewType={2}|EntryNode={3}|"+
-                        "DITVCtrlVar={4}|DSTVCtrlBlk={5}|FilterClickStream={6}|"+
+                        "参数：CommunityID={0}|IRAPTreeID={1}|TreeViewType={2}|EntryNode={3}|" +
+                        "DITVCtrlVar={4}|DSTVCtrlBlk={5}|FilterClickStream={6}|" +
                         "SelectClickStream={7}|SysLogID={8}",
-                        communityID, 
+                        communityID,
                         ctrlPara.IRAPTreeID,
-                        ctrlPara.TreeViewType, 
-                        ctrlPara.EntryNode, 
+                        ctrlPara.TreeViewType,
+                        ctrlPara.EntryNode,
                         ctrlPara.DITVCtrlVar,
-                        ctrlPara.DSTVCtrlBlk, 
-                        ctrlPara.FilterClickStream, 
+                        ctrlPara.DSTVCtrlBlk,
+                        ctrlPara.FilterClickStream,
                         ctrlPara.SelectClickStream,
                         sysLogID,
-                        ctrlPara.OrderByMode), 
+                        ctrlPara.OrderByMode),
                     strProcedureName);
                 #endregion
 
@@ -994,5 +995,81 @@ namespace IRAP.WCF.Client.Method
             return null;
         }
 
+        /// <summary>
+        /// 获取一般树视图
+        /// </summary>
+        /// <param name="communityID">社区标识</param>
+        /// <param name="treeID">树标识</param>
+        /// <param name="sysLogID">系统登录标识</param>
+        /// <param name="includeLeaves">是否包含树叶子</param>
+        /// <param name="entryNode">入口节点</param>
+        /// <param name="errCode"></param>
+        /// <param name="errText"></param>
+        /// <returns></returns>
+        public void sfn_TreeView(
+            int communityID,
+            int treeID,
+            long sysLogID,
+            bool includeLeaves,
+            int entryNode,
+            ref List<TreeViewEntity> datas,
+            out int errCode,
+            out string errText)
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                datas.Clear();
+
+                #region 将函数调用参数加入 HashTable 中
+                Hashtable hashParams = new Hashtable();
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("treeID", treeID);
+                hashParams.Add("sysLogID", sysLogID);
+                hashParams.Add("includeLeaves", includeLeaves);
+                hashParams.Add("entryNode", entryNode);
+                WriteLog.Instance.Write(
+                    $"调用 sfn_TreeView，输入参数：CommunityID={communityID}|" +
+                    $"TreeID={treeID}|SysLogID={sysLogID}|includeLeaves={includeLeaves}|" +
+                    $"EntryNode={entryNode}",
+                    strProcedureName);
+                #endregion
+
+                #region 执行存储过程或者函数
+                using (WCFClient client = new WCFClient())
+                {
+                    object rlt = client.WCFRESTFul(
+                        "IRAP.BL.UTS.dll",
+                        "IRAP.BL.UTS.IRAPUTS",
+                        "sfn_TreeView",
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        string.Format("({0}){1}",
+                            errCode,
+                            errText),
+                        strProcedureName);
+
+                    if (errCode == 0)
+                        datas = rlt as List<TreeViewEntity>;
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                errCode = -1001;
+                errText = error.Message;
+                WriteLog.Instance.Write(errText, strProcedureName);
+                WriteLog.Instance.Write(error.StackTrace, strProcedureName);
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

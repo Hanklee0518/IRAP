@@ -59,5 +59,55 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 内标签 {
+            get {
+                object obj = ResourceManager.GetObject("内标签", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 内标签_折行 {
+            get {
+                object obj = ResourceManager.GetObject("内标签_折行", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 外标签 {
+            get {
+                object obj = ResourceManager.GetObject("外标签", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 外标签_折行 {
+            get {
+                object obj = ResourceManager.GetObject("外标签_折行", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 成品包装统一标签 {
+            get {
+                object obj = ResourceManager.GetObject("成品包装统一标签", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

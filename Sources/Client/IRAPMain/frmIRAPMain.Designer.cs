@@ -43,6 +43,7 @@
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.ucOptions = new IRAP.Client.SubSystem.ucOptions();
+            this.cmdSwitchLoginUser = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -77,13 +78,14 @@
             this.backstageViewControl1.ColorScheme = DevExpress.XtraBars.Ribbon.RibbonControlColorScheme.Yellow;
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl1);
             resources.ApplyResources(this.backstageViewControl1, "backstageViewControl1");
+            this.backstageViewControl1.Items.Add(this.cmdSwitchLoginUser);
             this.backstageViewControl1.Items.Add(this.cmdAbout);
             this.backstageViewControl1.Items.Add(this.backstageViewItemSeparator1);
             this.backstageViewControl1.Items.Add(this.cmdQuitSubSystem);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.Ribbon = this.ribbonControl;
             this.backstageViewControl1.SelectedTab = this.cmdAbout;
-            this.backstageViewControl1.SelectedTabIndex = 0;
+            this.backstageViewControl1.SelectedTabIndex = 1;
             // 
             // backstageViewClientControl1
             // 
@@ -159,6 +161,12 @@
             resources.ApplyResources(this.ucOptions, "ucOptions");
             this.ucOptions.Name = "ucOptions";
             // 
+            // cmdSwitchLoginUser
+            // 
+            resources.ApplyResources(this.cmdSwitchLoginUser, "cmdSwitchLoginUser");
+            this.cmdSwitchLoginUser.Name = "cmdSwitchLoginUser";
+            this.cmdSwitchLoginUser.ItemClick += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.cmdSwitchLoginUser_ItemClick);
+            // 
             // frmIRAPMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -199,5 +207,6 @@
         private Client.SubSystem.ucOptions ucOptions;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraBars.BarButtonItem btnItemParams;
+        private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem cmdSwitchLoginUser;
     }
 }

@@ -44,12 +44,12 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnPWORemove = new DevExpress.XtraEditors.SimpleButton();
             this.btnPWOModify = new DevExpress.XtraEditors.SimpleButton();
             this.btnPWONew = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ilstMaterialPreparation)).BeginInit();
@@ -232,6 +232,22 @@
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "小头数量";
+            this.gridColumn1.FieldName = "Quantity2";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 6;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "备注";
+            this.gridColumn6.FieldName = "DisplayRemark";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 7;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnPWORemove);
@@ -278,22 +294,6 @@
             this.btnPWONew.TabIndex = 6;
             this.btnPWONew.Text = "新增";
             this.btnPWONew.Click += new System.EventHandler(this.btnPWONew_Click);
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "小头数量";
-            this.gridColumn1.FieldName = "Quantity2";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 6;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "备注";
-            this.gridColumn6.FieldName = "DisplayRemark";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
             // 
             // frmMaterialPreparation
             // 

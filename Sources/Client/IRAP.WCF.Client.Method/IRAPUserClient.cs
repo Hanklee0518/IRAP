@@ -1224,5 +1224,121 @@ namespace IRAP.WCF.Client.Method
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
             }
         }
+
+        /// <summary>
+        /// 切换当前登录用户（仅用于具有相同机构和相同角色的用户之间）
+        /// </summary>
+        public void usp_SwapUserLogin(
+            int communityID, 
+            string newUserBarCode, 
+            long sysLogID, 
+            out long newSysLogID,
+            out string newUserCode, 
+            out string newUserName,
+            out int newLanguageID,
+            out string newNickName,
+            out string newOPhoneNo,
+            out string newHPhoneNo,
+            out string newMPhoneNo,
+            out int errCode, 
+            out string errText)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            newSysLogID = 0;
+            newUserName = "";
+            newLanguageID = 30;
+            newUserCode = "";
+            newNickName = "";
+            newOPhoneNo = "";
+            newHPhoneNo = "";
+            newMPhoneNo = "";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                #region 将函数参数加入 Hashtable 中
+                Hashtable hashParams = new Hashtable();
+                hashParams.Add("communityID", communityID);
+                hashParams.Add("newUserBarCode", newUserBarCode);
+                hashParams.Add("sysLogID", sysLogID);
+
+                string msg = $"调用 {MethodBase.GetCurrentMethod().Name} ，参数：";
+                foreach (string key in hashParams.Keys)
+                {
+                    msg += $"{key}={hashParams[key]}|";
+                }
+                WriteLog.Instance.Write(msg, strProcedureName);
+                #endregion
+
+                #region 调用应用服务过程，并解析返回值
+                using (WCFClient client = new WCFClient())
+                {
+                    object rlt = client.WCFRESTFul(
+                        "IRAP.BL.SSO.dll",
+                        "IRAP.BL.SSO.IRAPUser",
+                        MethodBase.GetCurrentMethod().Name,
+                        hashParams,
+                        out errCode,
+                        out errText);
+                    WriteLog.Instance.Write(
+                        $"({errCode}){errText}",
+                        strProcedureName);
+
+                    if (errCode == 0)
+                    {
+                        if (rlt is Hashtable)
+                        {
+                            Hashtable rltHash = (Hashtable)rlt;
+
+                            #region 取返回值
+                            try
+                            {
+                                HashtableTools.Instance.GetValue(rltHash, "NewSysLogID", out newSysLogID);
+                                HashtableTools.Instance.GetValue(rltHash, "NewUserCode", out newUserCode);
+                                HashtableTools.Instance.GetValue(rltHash, "NewUserName", out newUserName);
+                                HashtableTools.Instance.GetValue(rltHash, "NewLanguageID", out newLanguageID);
+                                HashtableTools.Instance.GetValue(rltHash, "NewNickName", out newNickName);
+                                HashtableTools.Instance.GetValue(rltHash, "NewOPhoneNo", out newOPhoneNo);
+                                HashtableTools.Instance.GetValue(rltHash, "NewHPhoneNo", out newHPhoneNo);
+                                HashtableTools.Instance.GetValue(rltHash, "NewMPhoneNo", out newMPhoneNo);
+                                WriteLog.Instance.Write(
+                                    $"输出参数：NewSysLogID={newSysLogID}|NewUserCode={newUserCode}|" +
+                                    $"NewUserName={newUserName}|NewLanguageID={newLanguageID}|" +
+                                    $"NewNickName={newNickName}|NewOPhoneNo={newOPhoneNo}|" +
+                                    $"NewHPhoneNo={newHPhoneNo}|NewMPhoneNo={newMPhoneNo}",
+                                    strProcedureName);
+                            }
+                            catch (Exception error)
+                            {
+                                errCode = -1003;
+                                errText = error.Message;
+                                WriteLog.Instance.Write(errText, strProcedureName);
+                                return;
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            errCode = -1002;
+                            errText = $"应用服务 {MethodBase.GetCurrentMethod().Name} 返回的不是 Hashtable！";
+                            WriteLog.Instance.Write(errText, strProcedureName);
+                        }
+                    }
+                }
+                #endregion
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                errCode = -1001;
+                errText = error.Message;
+            }
+            finally
+            {
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
+        }
     }
 }

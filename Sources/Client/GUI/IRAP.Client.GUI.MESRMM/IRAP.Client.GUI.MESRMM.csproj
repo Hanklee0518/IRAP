@@ -65,6 +65,12 @@
     <Compile Include="frmMDMMethod_30.Designer.cs">
       <DependentUpon>frmMDMMethod_30.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmT102R4GUI_30.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmT102R4GUI_30.Designer.cs">
+      <DependentUpon>frmT102R4GUI_30.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmWIShow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,9 +132,13 @@
     <EmbeddedResource Include="frmMDMMethod_30.resx">
       <DependentUpon>frmMDMMethod_30.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmT102R4GUI_30.resx">
+      <DependentUpon>frmT102R4GUI_30.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmWIShow.resx">
       <DependentUpon>frmWIShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
