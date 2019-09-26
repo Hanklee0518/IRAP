@@ -33,6 +33,28 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
             InitializeComponent();
         }
 
+        private DataSet GenerateTempleDataSet()
+        {
+            #region 准备临时表
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            dt.TableName = "DataSource";
+            dt.Columns.Add("Model", typeof(string));
+            dt.Columns.Add("DrawingID", typeof(string));
+            dt.Columns.Add("MaterialCategory", typeof(string));
+            dt.Columns.Add("CartonQty", typeof(string));
+            dt.Columns.Add("CartonProductNo", typeof(string));
+            dt.Columns.Add("LotNumberTitle", typeof(string));
+            dt.Columns.Add("LotNumber", typeof(string));
+            dt.Columns.Add("SupplyCode", typeof(string));
+            dt.Columns.Add("T134AlternateCode", typeof(string));
+            dt.Columns.Add("BarCode", typeof(string));
+            ds.Tables.Add(dt);
+            #endregion
+
+            return ds;
+        }
+
         private void ucPackageLabelPrintAgain_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
@@ -120,81 +142,57 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 }
                 #endregion
 
-                #region 获取内标签打印模板（20190717，打印模板直接从类库的资源中获取）
-                //TemplateContent template = new TemplateContent();
-                //IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                //    IRAPUser.Instance.CommunityID,
-                //    items[0].T117LeafID,
-                //    IRAPUser.Instance.SysLogID,
-                //    ref template,
-                //    out errCode,
-                //    out errText);
-                //WriteLog.Instance.Write($"({errCode}){errText}", strProcedureName);
-                //if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-                //{
-                //    edtBoxNumber.Text = "";
-                //    XtraMessageBox.Show(
-                //        $"无法获取到 [T117LeafID={items[0].T117LeafID}] 的模板",
-                //        "",
-                //        MessageBoxButtons.OK,
-                //        MessageBoxIcon.Error);
-                //    edtBoxNumber.Focus();
-                //    return;
-                //}
+                #region 打印内标签
+
+                DataSet ds = GenerateTempleDataSet();
+                #region 将内标签打印内容添加到打印数据源中
+                foreach (RePrintBoxNumber item in items)
+                {
+                    ds.Tables["DataSource"].Rows.Add(
+                        item.Model,
+                        item.DrawingID,
+                        item.MaterialCategory,
+                        $"{item.MaterialQty} {item.UnitOfMeasure}",
+                        item.BoxMaterialNo,
+                        "筒号：",
+                        item.CylinderID,
+                        item.SupplyCode,
+                        item.T134AlternateCode,
+                        item.CylinderID);
+                }
                 #endregion
 
-                #region 打印内标签
+                #region 加载打印模板
                 Report rpt = new Report();
                 try
                 {
-                    Encoding encoding = Encoding.GetEncoding("GB2312");
-                    int stringLength = encoding.GetBytes(items[0].MaterialCategory).Length;
-
-                    if (stringLength <= 30)
-                    {
-                        Stream ms = new MemoryStream(Properties.Resources.内标签);
-                        rpt.Load(ms);
-                        //rpt.LoadFromString(template.TemplateFMTStr.Trim());
-                    }
-                    else
-                    {
-                        Stream ms = new MemoryStream(Properties.Resources.内标签_折行);
-                        rpt.Load(ms);
-                    }
+                    Stream ms = new MemoryStream(Properties.Resources.成品包装统一标签);
+                    rpt.Load(ms);
                 }
                 catch (Exception error)
                 {
                     WriteLog.Instance.Write(
-                        $"内包装标签打印模板装载失败：{error.Message}，",
+                        $"包装标签打印模板装载失败：{error.Message}，",
                         strProcedureName);
-                    XtraMessageBox.Show(
-                        $"内包装标签打印模板装载失败：{error.Message}，\n" +
-                        "请联系系统开发人员，并发起重打申请！",
-                        "",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    IRAPMessageBox.Instance.ShowErrorMessage(
+                        $"包装标签打印模板装载失败：{error.Message}，\n" +
+                        "请联系系统开发人员，并发起重打申请！");
                     return;
                 }
+                #endregion
 
+                rpt.RegisterData(ds);
+
+                #region 打印
                 PrinterSettings prntSettings = new PrinterSettings();
                 prntSettings.PrinterName = (string)cboPrinters.SelectedItem;
-                //prntSettings.Copies = Convert.ToInt16(items[0].PrintQty);
-
-                rpt.Parameters.FindByName("Model").Value = items[0].Model;
-                rpt.Parameters.FindByName("DrawingID").Value = items[0].DrawingID;
-                rpt.Parameters.FindByName("MaterialCategory").Value = items[0].MaterialCategory;
-                rpt.Parameters.FindByName("BoxQty").Value = $"{items[0].MaterialQty} {items[0].UnitOfMeasure}";
-                rpt.Parameters.FindByName("MaterialCode").Value = items[0].BoxMaterialNo;
-                rpt.Parameters.FindByName("LotNumber").Value = items[0].LotNumber;
-                rpt.Parameters.FindByName("CylinderID").Value = items[0].CylinderID;
-                rpt.Parameters.FindByName("SupplyCode").Value = items[0].SupplyCode;
-                rpt.Parameters.FindByName("T134AlternateCode").Value = items[0].T134AlternateCode;
-                rpt.Parameters.FindByName("BarCode").Value = items[0].CylinderID;
 
                 if (rpt.Prepare())
                 {
                     rpt.PrintPrepared(prntSettings);
                 }
+                #endregion
+
                 #endregion
 
                 XtraMessageBox.Show(
@@ -238,6 +236,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
             string moNumber = "";
             int moLineNo = 0;
 
+            #region 外包装标签内容查询条件校验
             if (rbByCartonNumber.Checked)
             {
                 if (edtCartonNumber.Text.Trim() == "")
@@ -284,6 +283,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                     return;
                 }
             }
+            #endregion
 
             WriteLog.Instance.WriteBeginSplitter(strProcedureName);
             try
@@ -347,102 +347,56 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 #endregion
 
                 #region 打印外标签
-                int t117LeafID = 0;
-                string labelTemplate = "";
 
+                DataSet ds = GenerateTempleDataSet();
+                #region 将外标签打印内容添加到打印数据源中
                 foreach (RePrintCartonNumber item in items)
                 {
-                    //if (t117LeafID != item.T117LeafID)
-                    //{
-                    //    #region 根据 T117LeafID 获取标签打印模板
-                    //    TemplateContent template = new TemplateContent();
-                    //    IRAPMDMClient.Instance.ufn_GetInfo_TemplateFMTStr(
-                    //        IRAPUser.Instance.CommunityID,
-                    //        item.T117LeafID,
-                    //        IRAPUser.Instance.SysLogID,
-                    //        ref template,
-                    //        out errCode,
-                    //        out errText);
-                    //    WriteLog.Instance.Write(
-                    //        $"({errCode}){errText}",
-                    //        strProcedureName);
-                    //    if (errCode != 0 || template.TemplateFMTStr.Trim() == "")
-                    //    {
-                    //        XtraMessageBox.Show(
-                    //            $"无法获取到 [T117LeafID={item.T117LeafID}] 的模板",
-                    //            "",
-                    //            MessageBoxButtons.OK,
-                    //            MessageBoxIcon.Error);
-                    //        labelTemplate = "";
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-                    //        t117LeafID = item.T117LeafID;
-                    //        labelTemplate = template.TemplateFMTStr;
-                    //    }
-                    //    #endregion
-                    //}
-
-                    //if (labelTemplate != "")
-                    //{
-                    Report rpt = new Report();
-                    try
-                    {
-                        Encoding encoding = Encoding.GetEncoding("GB2312");
-                        int stringLength = encoding.GetBytes(item.MaterialCategory).Length;
-
-                        if (stringLength <= 30)
-                        {
-                            Stream ms = new MemoryStream(Properties.Resources.外标签);
-                            rpt.Load(ms);
-                            //rpt.LoadFromString(labelTemplate);
-                        }
-                        else
-                        {
-                            Stream ms = new MemoryStream(Properties.Resources.外标签_折行);
-                            rpt.Load(ms);
-                        }
-                    }
-                    catch (Exception error)
-                    {
-                        WriteLog.Instance.Write(
-                            $"外包装标签打印模板装载失败：{error.Message}，",
-                            strProcedureName);
-                        XtraMessageBox.Show(
-                            $"外包装标签打印模板装载失败：{error.Message}，\n" +
-                            "请联系系统开发人员！",
-                            "",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    #region 打印外包装标签
-                    PrinterSettings prntSettings = new PrinterSettings();
-                    //prntSettings.Copies = Convert.ToInt16(item.PrintQty);
-                    prntSettings.PrinterName = (string)cboPrinters.SelectedItem;
-
-                    rpt.Parameters.FindByName("Model").Value = item.Model;
-                    rpt.Parameters.FindByName("DrawingID").Value = item.DrawingID;
-                    rpt.Parameters.FindByName("MaterialCategory").Value = item.MaterialCategory;
-                    rpt.Parameters.FindByName("CartonQty").Value = $"{item.CartonQty} {item.UnitOfMeasure}";
-                    rpt.Parameters.FindByName("CartonProductNo").Value = item.CartonProductNo;
-                    rpt.Parameters.FindByName("LotNumber").Value = item.LotNumber;
-                    rpt.Parameters.FindByName("SupplyCode").Value = item.SupplyCode;
-                    rpt.Parameters.FindByName("T134AlternateCode").Value = item.T134AlternateCode;
-                    rpt.Parameters.FindByName("BarCode").Value =
-                        $"{item.CartonProductNo}/" +
-                        $"{item.CartonNumber}/" +
-                        $"{item.CartonQty.ToString()}";
-
-                    if (rpt.Prepare())
-                    {
-                        rpt.PrintPrepared(prntSettings);
-                    }
-                    #endregion
-                    //}
+                    ds.Tables["DataSource"].Rows.Add(
+                        item.Model,
+                        item.DrawingID,
+                        item.MaterialCategory,
+                        $"{item.CartonQty} {item.UnitOfMeasure}",
+                        item.CartonProductNo,
+                        "批次号：",
+                        item.LotNumber,
+                        item.SupplyCode,
+                        item.T134AlternateCode,
+                        $@"{item.CartonProductNo}/{item.CartonNumber}/{item.CartonQty}");
                 }
+                #endregion
+
+                #region 加载打印模板
+                Report rpt = new Report();
+                try
+                {
+                    Stream ms = new MemoryStream(Properties.Resources.成品包装统一标签);
+                    rpt.Load(ms);
+                }
+                catch (Exception error)
+                {
+                    WriteLog.Instance.Write(
+                        $"包装标签打印模板装载失败：{error.Message}，",
+                        strProcedureName);
+                    IRAPMessageBox.Instance.ShowErrorMessage(
+                        $"包装标签打印模板装载失败：{error.Message}，\n" +
+                        "请联系系统开发人员，并发起重打申请！");
+                    return;
+                }
+                #endregion
+
+                rpt.RegisterData(ds);
+
+                #region 打印
+                PrinterSettings prntSettings = new PrinterSettings();
+                prntSettings.PrinterName = (string)cboPrinters.SelectedItem;
+
+                if (rpt.Prepare())
+                {
+                    rpt.PrintPrepared(prntSettings);
+                }
+                #endregion
+
                 #endregion
 
                 XtraMessageBox.Show(

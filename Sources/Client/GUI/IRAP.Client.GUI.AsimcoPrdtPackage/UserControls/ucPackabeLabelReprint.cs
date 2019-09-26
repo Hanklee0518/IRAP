@@ -114,6 +114,143 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
         }
 
         /// <summary>
+        /// 使用统一标签模板打印内外包装标签
+        /// </summary>
+        /// <param name="cartonInfo">待重打标签的外包装标签信息</param>
+        private void PrintBatchLabel(WaitRePrintCarton cartonInfo)
+        {
+            string strProcedureName =
+                $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            #region 准备临时表
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            dt.TableName = "DataSource";
+            dt.Columns.Add("Model", typeof(string));
+            dt.Columns.Add("DrawingID", typeof(string));
+            dt.Columns.Add("MaterialCategory", typeof(string));
+            dt.Columns.Add("CartonQty", typeof(string));
+            dt.Columns.Add("CartonProductNo", typeof(string));
+            dt.Columns.Add("LotNumberTitle", typeof(string));
+            dt.Columns.Add("LotNumber", typeof(string));
+            dt.Columns.Add("SupplyCode", typeof(string));
+            dt.Columns.Add("T134AlternateCode", typeof(string));
+            dt.Columns.Add("BarCode", typeof(string));
+            #endregion
+
+            #region 获取外标签打印内容
+            int errCode = 0;
+            string errText = "";
+            #endregion
+
+            #region 将外标签打印内容添加到打印数据源中
+            for (int i = 0; i < cartonInfo.PrintQty; i++)
+            {
+                dt.Rows.Add(
+                    cartonInfo.Model,
+                    cartonInfo.DrawingID,
+                    cartonInfo.MaterialCategory,
+                    $"{cartonInfo.CartonQty} {cartonInfo.UnitOfMeasure}",
+                    cartonInfo.CartonProductNo,
+                    "批次号：",
+                    cartonInfo.LotNumber,
+                    cartonInfo.SupplyCode,
+                    cartonInfo.T134AlternateCode,
+                    $@"{cartonInfo.CartonProductNo}/{cartonInfo.CartonNumber}/{cartonInfo.CartonQty}");
+            }
+            #endregion
+
+            #region 获取内包装标签列表
+            List<BoxOfCarton> boxes = new List<BoxOfCarton>();
+            AsimcoPackageClient.Instance.ufn_GetList_BoxOfCarton(
+                IRAPUser.Instance.CommunityID,
+                cartonInfo.CartonNumber,
+                IRAPUser.Instance.SysLogID,
+                ref boxes,
+                out errCode,
+                out errText);
+            WriteLog.Instance.Write(
+                $"({errCode}){errText}",
+                strProcedureName);
+            if (errCode != 0)
+            {
+                IRAPMessageBox.Instance.ShowErrorMessage(
+                    $"获取标签打印信息时发生错误，请发起重打申请！");
+                XtraMessageBox.Show(
+                    $"错误信息：{errText}",
+                    "",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            if (boxes.Count == 0)
+            {
+                IRAPMessageBox.Instance.ShowErrorMessage(
+                    $"未获取到外包装号 [{cartonInfo.CartonNumber}] 的内包装标签数据，" +
+                    "请联系系统开发人员，并发起重打申请！");
+                return;
+            }
+            #endregion
+
+            foreach (BoxOfCarton box in boxes)
+            {
+                #region 将内标签打印内容添加到打印数据源中
+                for (int i = 0; i < box.PrintQty; i++)
+                {
+                    dt.Rows.Add(
+                        box.Model,
+                        box.DrawingID,
+                        box.MaterialCategory,
+                        $"{box.MaterialQty} {box.UnitOfMeasure}",
+                        box.BoxMaterialNo,
+                        "筒号：",
+                        box.CylinderID,
+                        box.SupplyCode,
+                        box.T134AlternateCode,
+                        box.CylinderID);
+                }
+                #endregion
+            }
+
+            ds.Tables.Add(dt);
+
+            Report rpt = new Report();
+
+            #region 加载打印模板
+            try
+            {
+                Stream ms = new MemoryStream(Properties.Resources.成品包装统一标签);
+                rpt.Load(ms);
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(
+                    $"包装标签打印模板装载失败：{error.Message}，",
+                    strProcedureName);
+                IRAPMessageBox.Instance.ShowErrorMessage(
+                    $"包装标签打印模板装载失败：{error.Message}，\n" +
+                    "请联系系统开发人员，并发起重打申请！");
+                return;
+            }
+            #endregion
+
+            rpt.RegisterData(ds);
+
+            #region 打印包装标签
+            PrinterSettings prntSettings = new PrinterSettings();
+            prntSettings.PrinterName = (string)cboPrinters.SelectedItem;
+
+            if (rpt.Prepare())
+            {
+                rpt.PrintPrepared(prntSettings);
+            }
+            #endregion
+
+            IRAPMessageBox.Instance.ShowInformation("标签打印完成。");
+        }
+
+        /// <summary>
         /// 打印标签
         /// </summary>
         /// <param name="cartonInfo"></param>
@@ -417,7 +554,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 WriteLog.Instance.Write($"({errCode}){errText}", strProcedureName);
                 if (errCode == 0)
                 {
-                    PrintLabel(items[idx]);
+                    PrintBatchLabel(items[idx]);
 
                     XtraMessageBox.Show(
                         "标签打印完成。",
