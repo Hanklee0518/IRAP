@@ -7,8 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 
+using DevExpress.XtraEditors;
+
 using IRAP.Global;
 using IRAP.Entity.SSO;
+using System.Configuration;
+using IRAP.Client.Global;
 
 namespace IRAP.Client.User
 {
@@ -22,6 +26,68 @@ namespace IRAP.Client.User
         public frmLogin()
         {
             InitializeComponent();
+        }
+
+        private bool LoginPWDVerify()
+        {
+            string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
+
+            WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            try
+            {
+                IRAPUser.Instance.Password = edtUserPWD.Text;
+                if (IRAPUser.Instance.IsPWDVerified)
+                {
+                    cboAgencies.Properties.Items.Clear();
+                    cboRoles.Properties.Items.Clear();
+
+                    foreach (AgencyInfo agency in IRAPUser.Instance.AvailableAgencies)
+                    {
+                        cboAgencies.Properties.Items.Add(agency);
+                    }
+                    if (cboAgencies.Properties.Items.Count > 0)
+                        cboAgencies.SelectedIndex = 0;
+                    cboAgencies.Enabled = cboAgencies.Properties.Items.Count > 1;
+
+                    foreach (RoleInfo role in IRAPUser.Instance.AvailableRoles)
+                    {
+                        cboRoles.Properties.Items.Add(role);
+                    }
+                    if (cboRoles.Properties.Items.Count > 0)
+                        cboRoles.SelectedIndex = 0;
+                    cboRoles.Enabled = cboRoles.Properties.Items.Count > 1;
+
+                    btnLogin.Enabled =
+                        ((cboAgencies.SelectedIndex >= 0) &&
+                        (cboRoles.SelectedIndex >= 0));
+                    if (btnLogin.Enabled)
+                        btnLogin.Focus();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception error)
+            {
+                WriteLog.Instance.Write(error.Message, strProcedureName);
+                IRAPMessageBox.Instance.Show(
+                    error.Message,
+                    "错误",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                edtUserPWD.Text = "";
+                edtUserPWD.Focus();
+
+                return false;
+            }
+            finally
+            {
+                chkChangePWD.Enabled = IRAPUser.Instance.IsPWDVerified;
+                WriteLog.Instance.WriteEndSplitter(strProcedureName);
+            }
         }
 
         private void edtUserCode_Leave(object sender, EventArgs e)
@@ -63,6 +129,9 @@ namespace IRAP.Client.User
 
                 if (IRAPUser.Instance.IsLogon)
                 {
+                    IRAPConst.Instance.SaveParams("LoginUser", edtUserCode.Text.Trim());
+                    IRAPConst.Instance.SaveParams("LoginPWD", edtUserPWD.Text.Trim());
+
                     Hide();
 
                     #region 登录成功后，如果用户选择了“修改登录密码”后，进入密码修改界面
@@ -104,63 +173,7 @@ namespace IRAP.Client.User
         {
             if (edtUserPWD.Text != "")
             {
-                string strProcedureName =
-                    string.Format(
-                        "{0}.{1}",
-                        className,
-                        MethodBase.GetCurrentMethod().Name);
-                WriteLog.Instance.WriteBeginSplitter(strProcedureName);
-                try
-                {
-                    IRAPUser.Instance.Password = edtUserPWD.Text;
-                    if (IRAPUser.Instance.IsPWDVerified)
-                    {
-                        cboAgencies.Properties.Items.Clear();
-                        cboRoles.Properties.Items.Clear();
-
-                        foreach (AgencyInfo agency in IRAPUser.Instance.AvailableAgencies)
-                        {
-                            cboAgencies.Properties.Items.Add(agency);
-                        }
-                        if (cboAgencies.Properties.Items.Count > 0)
-                            cboAgencies.SelectedIndex = 0;
-                        cboAgencies.Enabled = cboAgencies.Properties.Items.Count > 1;
-
-                        foreach (RoleInfo role in IRAPUser.Instance.AvailableRoles)
-                        {
-                            cboRoles.Properties.Items.Add(role);
-                        }
-                        if (cboRoles.Properties.Items.Count > 0)
-                            cboRoles.SelectedIndex = 0;
-                        cboRoles.Enabled = cboRoles.Properties.Items.Count > 1;
-
-                        btnLogin.Enabled =
-                            ((cboAgencies.SelectedIndex >= 0) &&
-                            (cboRoles.SelectedIndex >= 0));
-                        if (btnLogin.Enabled)
-                            btnLogin.Focus();
-
-                        e.Cancel = false;
-                    }
-                }
-                catch (Exception error)
-                {
-                    WriteLog.Instance.Write(error.Message, strProcedureName);
-                    IRAPMessageBox.Instance.Show(
-                        error.Message,
-                        "错误",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    edtUserPWD.Text = "";
-                    edtUserPWD.Focus();
-
-                    e.Cancel = true;
-                }
-                finally
-                {
-                    chkChangePWD.Enabled = IRAPUser.Instance.IsPWDVerified;
-                    WriteLog.Instance.WriteEndSplitter(strProcedureName);
-                }
+                e.Cancel = !LoginPWDVerify();
             }
             else
             {
@@ -190,7 +203,7 @@ namespace IRAP.Client.User
             int xOffset;
             int yOffset;
 
-            if (e.Button== MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 xOffset = -e.X;
                 yOffset = -e.Y;
@@ -210,6 +223,38 @@ namespace IRAP.Client.User
         private void cboAgencies_SelectedIndexChanged(object sender, EventArgs e)
         {
             IRAPUser.Instance.SelectAgency(cboAgencies.SelectedIndex);
+        }
+
+        private void frmLogin_Shown(object sender, EventArgs e)
+        {
+            string pwd = "";
+            if (ConfigurationManager.AppSettings["LoginUser"] != null)
+            {
+                edtUserCode.Text = ConfigurationManager.AppSettings["LoginUser"];
+                IRAPUser.Instance.UserCode = edtUserCode.Text;
+            }
+            if (ConfigurationManager.AppSettings["LoginPWD"] != null)
+            {
+                pwd = ConfigurationManager.AppSettings["LoginPWD"];
+                edtUserPWD.Text = pwd;
+            }
+
+            if (edtUserCode.Text.Trim() == "")
+            {
+                edtUserCode.Focus();
+            }
+            else if (edtUserPWD.Text.Trim() == "")
+            {
+                edtUserPWD.Focus();
+            }
+            else
+            {
+                chkChangePWD.Enabled = LoginPWDVerify();
+                if (chkChangePWD.Enabled)
+                {
+                    edtUserPWD.Text = pwd;
+                }
+            }
         }
     }
 }
