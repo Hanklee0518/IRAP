@@ -479,6 +479,6 @@
     <value>frmLogin</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>IRAP.Client.Global.frmCustomBase, IRAP.Client.Global, Version=6.1.159.1325, Culture=neutral, PublicKeyToken=null</value>
+    <value>IRAP.Client.Global.frmCustomBase, IRAP.Client.Global, Version=6.1.159.1338, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

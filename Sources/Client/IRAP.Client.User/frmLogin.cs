@@ -28,11 +28,14 @@ namespace IRAP.Client.User
             InitializeComponent();
         }
 
+        private bool firstShow = true;
+
         private bool LoginPWDVerify()
         {
             string strProcedureName = $"{className}.{MethodBase.GetCurrentMethod().Name}";
 
             WriteLog.Instance.WriteBeginSplitter(strProcedureName);
+            TWaitting.Instance.ShowWaitForm("正在校验密码....");
             try
             {
                 IRAPUser.Instance.Password = edtUserPWD.Text;
@@ -87,6 +90,7 @@ namespace IRAP.Client.User
             {
                 chkChangePWD.Enabled = IRAPUser.Instance.IsPWDVerified;
                 WriteLog.Instance.WriteEndSplitter(strProcedureName);
+                TWaitting.Instance.CloseWaitForm();
             }
         }
 
@@ -227,32 +231,44 @@ namespace IRAP.Client.User
 
         private void frmLogin_Shown(object sender, EventArgs e)
         {
-            string pwd = "";
-            if (ConfigurationManager.AppSettings["LoginUser"] != null)
-            {
-                edtUserCode.Text = ConfigurationManager.AppSettings["LoginUser"];
-                IRAPUser.Instance.UserCode = edtUserCode.Text;
-            }
-            if (ConfigurationManager.AppSettings["LoginPWD"] != null)
-            {
-                pwd = ConfigurationManager.AppSettings["LoginPWD"];
-                edtUserPWD.Text = pwd;
-            }
+        }
 
-            if (edtUserCode.Text.Trim() == "")
+        private void frmLogin_Activated(object sender, EventArgs e)
+        {
+            if (firstShow)
             {
-                edtUserCode.Focus();
-            }
-            else if (edtUserPWD.Text.Trim() == "")
-            {
-                edtUserPWD.Focus();
-            }
-            else
-            {
-                chkChangePWD.Enabled = LoginPWDVerify();
-                if (chkChangePWD.Enabled)
+                try
                 {
-                    edtUserPWD.Text = pwd;
+                    string pwd = "";
+                    if (ConfigurationManager.AppSettings["LoginUser"] != null)
+                    {
+                        edtUserCode.Text = ConfigurationManager.AppSettings["LoginUser"];
+                        IRAPUser.Instance.UserCode = edtUserCode.Text;
+                    }
+                    if (ConfigurationManager.AppSettings["LoginPWD"] != null)
+                    {
+                        pwd = ConfigurationManager.AppSettings["LoginPWD"];
+                    }
+
+                    if (edtUserCode.Text.Trim() == "")
+                    {
+                        edtUserCode.Focus();
+                    }
+                    else
+                    {
+                        edtUserPWD.Focus();
+                        edtUserPWD.Text = pwd;
+                        Application.DoEvents();
+                    }
+
+                    if (edtUserCode.Text.Trim() != "" && edtUserPWD.Text.Trim() != "")
+                    {
+                        LoginPWDVerify();
+                    }
+                }
+                finally
+                {
+                    firstShow = false;
                 }
             }
         }

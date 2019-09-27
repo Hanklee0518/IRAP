@@ -170,10 +170,12 @@
             // 
             this.lblSmallPackageType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSmallPackageType.Appearance.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.lblSmallPackageType.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblSmallPackageType.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lblSmallPackageType.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblSmallPackageType.Location = new System.Drawing.Point(226, 44);
             this.lblSmallPackageType.Name = "lblSmallPackageType";
-            this.lblSmallPackageType.Size = new System.Drawing.Size(174, 19);
+            this.lblSmallPackageType.Size = new System.Drawing.Size(558, 19);
             this.lblSmallPackageType.TabIndex = 3;
             this.lblSmallPackageType.Text = "小包装： XX 层 XX 行 XX 列";
             // 
@@ -187,6 +189,7 @@
             this.lblLargePackageType.Size = new System.Drawing.Size(174, 19);
             this.lblLargePackageType.TabIndex = 4;
             this.lblLargePackageType.Text = "大包装： XX 层 XX 行 XX 列";
+            this.lblLargePackageType.Visible = false;
             // 
             // edtBoxSN
             // 
@@ -674,6 +677,7 @@
             this.layoutControlItemCarton.Size = new System.Drawing.Size(276, 224);
             this.layoutControlItemCarton.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItemCarton.TextVisible = false;
+            this.layoutControlItemCarton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItemPallet
             // 
@@ -683,6 +687,7 @@
             this.layoutControlItemPallet.Size = new System.Drawing.Size(223, 224);
             this.layoutControlItemPallet.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItemPallet.TextVisible = false;
+            this.layoutControlItemPallet.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem8
             // 
@@ -701,6 +706,7 @@
             this.layoutControlItem9.Size = new System.Drawing.Size(275, 30);
             this.layoutControlItem9.Text = "大包装序列号";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(78, 19);
+            this.layoutControlItem9.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItemPalletLayer
             // 
@@ -710,6 +716,7 @@
             this.layoutControlItemPalletLayer.Size = new System.Drawing.Size(224, 30);
             this.layoutControlItemPalletLayer.Text = "托层序列号";
             this.layoutControlItemPalletLayer.TextSize = new System.Drawing.Size(78, 19);
+            this.layoutControlItemPalletLayer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem3
             // 
@@ -846,6 +853,7 @@
             this.lblPalletPackageType.Size = new System.Drawing.Size(198, 19);
             this.lblPalletPackageType.TabIndex = 5;
             this.lblPalletPackageType.Text = "托包装： XX 层 XX 个大包装每层";
+            this.lblPalletPackageType.Visible = false;
             // 
             // frmProductPackage
             // 

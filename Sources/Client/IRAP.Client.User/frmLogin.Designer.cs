@@ -180,6 +180,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmLogin";
             this.ShowInTaskbar = true;
+            this.Activated += new System.EventHandler(this.frmLogin_Activated);
             this.Shown += new System.EventHandler(this.frmLogin_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmLogin_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmLogin_MouseMove);
