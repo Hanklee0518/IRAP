@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRAP-FVS_SPCO", "IRAP-FVS_S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USBPrintDemo", "USBPrintDemo\USBPrintDemo.csproj", "{E5979E6F-B7C8-46FC-BCBB-F7C99AE6C159}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRAP.Service.Client", "IRAP.Service.Client\IRAP.Service.Client.csproj", "{93D05656-7430-4FB4-873D-17C77E99D0EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +353,14 @@ Global
 		{E5979E6F-B7C8-46FC-BCBB-F7C99AE6C159}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5979E6F-B7C8-46FC-BCBB-F7C99AE6C159}.Release|x86.ActiveCfg = Release|Any CPU
 		{E5979E6F-B7C8-46FC-BCBB-F7C99AE6C159}.Release|x86.Build.0 = Release|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Debug|x86.Build.0 = Debug|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{93D05656-7430-4FB4-873D-17C77E99D0EF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
