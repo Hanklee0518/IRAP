@@ -8,8 +8,8 @@
 // 版本	日期					修改人	
 // v0.1	2019/10/10 12:21:31      李智颖
 //----------------------------------------------------------------*/
+using IRAP.Client.Global.Enums;
 using IRAP.Global;
-using IRAP.Service.Client.Enums;
 using IRAP.Service.Client.Utils;
 using Newtonsoft.Json;
 using RestSharp;

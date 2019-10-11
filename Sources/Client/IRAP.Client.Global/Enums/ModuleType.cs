@@ -14,10 +14,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace IRAP.Service.Client.Enums
+namespace IRAP.Client.Global.Enums
 {
     /// <summary>
-    /// 命名空间：IRAP.Service.Client.Enums
+    /// 命名空间：IRAP.Client.Global.Enums
     /// 创 建 者：李智颖
     /// 创建日期：2019/10/10 12:17:11
     /// 枚举名称：ModuleType

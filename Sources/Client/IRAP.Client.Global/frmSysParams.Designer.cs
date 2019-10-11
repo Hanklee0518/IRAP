@@ -51,6 +51,13 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.edtWebAPIUrl = new DevExpress.XtraEditors.ButtonEdit();
+            this.edtWebAPIClientID = new DevExpress.XtraEditors.ButtonEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.cboContentType = new DevExpress.XtraEditors.ImageComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.tcParams)).BeginInit();
             this.tcParams.SuspendLayout();
             this.tpAndonParams.SuspendLayout();
@@ -72,6 +79,11 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTipController
@@ -203,6 +215,7 @@
             // 
             // tpSysParams
             // 
+            this.tpSysParams.Controls.Add(this.groupControl3);
             this.tpSysParams.Controls.Add(this.chkMultInstance);
             this.tpSysParams.Name = "tpSysParams";
             this.tpSysParams.Padding = new System.Windows.Forms.Padding(5);
@@ -339,6 +352,99 @@
             // 
             this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // groupControl3
+            // 
+            this.groupControl3.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl3.Appearance.Options.UseFont = true;
+            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl3.AppearanceCaption.Options.UseFont = true;
+            this.groupControl3.Controls.Add(this.cboContentType);
+            this.groupControl3.Controls.Add(this.labelControl6);
+            this.groupControl3.Controls.Add(this.edtWebAPIClientID);
+            this.groupControl3.Controls.Add(this.labelControl5);
+            this.groupControl3.Controls.Add(this.edtWebAPIUrl);
+            this.groupControl3.Controls.Add(this.labelControl4);
+            this.groupControl3.Location = new System.Drawing.Point(5, 35);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(673, 130);
+            this.groupControl3.TabIndex = 1;
+            this.groupControl3.Text = "WebAPI参数";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl4.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl4.Location = new System.Drawing.Point(9, 36);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(132, 20);
+            this.labelControl4.TabIndex = 1;
+            this.labelControl4.Text = "地址：";
+            // 
+            // edtWebAPIUrl
+            // 
+            this.edtWebAPIUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtWebAPIUrl.Location = new System.Drawing.Point(147, 33);
+            this.edtWebAPIUrl.Name = "edtWebAPIUrl";
+            this.edtWebAPIUrl.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.edtWebAPIUrl.Properties.Appearance.Options.UseFont = true;
+            this.edtWebAPIUrl.Size = new System.Drawing.Size(521, 26);
+            this.edtWebAPIUrl.TabIndex = 2;
+            // 
+            // edtWebAPIClientID
+            // 
+            this.edtWebAPIClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtWebAPIClientID.Location = new System.Drawing.Point(147, 65);
+            this.edtWebAPIClientID.Name = "edtWebAPIClientID";
+            this.edtWebAPIClientID.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.edtWebAPIClientID.Properties.Appearance.Options.UseFont = true;
+            this.edtWebAPIClientID.Size = new System.Drawing.Size(521, 26);
+            this.edtWebAPIClientID.TabIndex = 4;
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl5.Location = new System.Drawing.Point(9, 68);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(132, 20);
+            this.labelControl5.TabIndex = 3;
+            this.labelControl5.Text = "渠道标识：";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl6.Location = new System.Drawing.Point(9, 100);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(132, 20);
+            this.labelControl6.TabIndex = 5;
+            this.labelControl6.Text = "报文格式：";
+            // 
+            // cboContentType
+            // 
+            this.cboContentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboContentType.EditValue = 1;
+            this.cboContentType.Location = new System.Drawing.Point(147, 97);
+            this.cboContentType.Name = "cboContentType";
+            this.cboContentType.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboContentType.Properties.Appearance.Options.UseFont = true;
+            this.cboContentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboContentType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Json", 1, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Xml", 2, -1)});
+            this.cboContentType.Size = new System.Drawing.Size(521, 26);
+            this.cboContentType.TabIndex = 6;
+            // 
             // frmSysParams
             // 
             this.Appearance.Options.UseFont = true;
@@ -373,6 +479,11 @@
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,5 +513,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.ButtonEdit edtPkgDBFImportDictionary;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cboContentType;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.ButtonEdit edtWebAPIClientID;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.ButtonEdit edtWebAPIUrl;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
     }
 }

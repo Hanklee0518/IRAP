@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppOperationLog.cs" />
+    <Compile Include="Enums\ContentType.cs" />
     <Compile Include="Enums\EditStatus.cs" />
+    <Compile Include="Enums\ModuleType.cs" />
     <Compile Include="Enums\ProductionStatus.cs" />
     <Compile Include="frmCustomBase.cs">
       <SubType>Form</SubType>

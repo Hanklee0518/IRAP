@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IRAP.Client.Global.Enums;
+using System;
 using System.Configuration;
 
 namespace IRAP.Client.Global
@@ -73,9 +74,9 @@ namespace IRAP.Client.Global
         {
             get
             {
-                string tmpPath = 
+                string tmpPath =
                     string.Format(
-                        @"{0}Temp\",                                                            
+                        @"{0}Temp\",
                         AppDomain.CurrentDomain.BaseDirectory);
 
                 if (!System.IO.Directory.Exists(tmpPath))
@@ -106,6 +107,10 @@ namespace IRAP.Client.Global
         /// 当前系统登录用户所在的社区标识
         /// </summary>
         public int CommunityID { get; set; }
+        /// <summary>
+        /// WebAPI调用配置参数
+        /// </summary>
+        public WebAPIParams WebAPI { get; private set; } = new WebAPIParams();
 
         private string GetString(string key)
         {
@@ -124,6 +129,70 @@ namespace IRAP.Client.Global
             {
                 try { rlt = Convert.ToBoolean(ConfigurationManager.AppSettings[key]); }
                 catch { rlt = false; }
+            }
+            return rlt;
+        }
+
+        public void SaveParams(string key, string value)
+        {
+            Configuration config =
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (config.AppSettings.Settings[key] == null)
+                config.AppSettings.Settings.Add(key, value);
+            else
+                config.AppSettings.Settings[key].Value = value;
+
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+    }
+
+    public class WebAPIParams
+    {
+        /// <summary>
+        /// WebAPI调用地址
+        /// </summary>
+        public string URL
+        {
+            get { return GetString("WebAPIURL"); }
+            set { SaveParams("WebAPIURL", value); }
+        }
+        /// <summary>
+        /// 渠道标识
+        /// </summary>
+        public string ClientID
+        {
+            get { return GetString("WebAPIClientID"); }
+            set { SaveParams("WebAPIClientID", value); }
+        }
+        /// <summary>
+        /// 报文格式
+        /// </summary>
+        public ContentType ContentType
+        {
+            get
+            {
+                string tmp = GetString("WebAPIContentType");
+                try
+                {
+                    return
+                        (ContentType)Enum.Parse(typeof(ContentType), tmp);
+                }
+                catch { return ContentType.json; }
+            }
+            set
+            {
+                SaveParams("WebAPIContentType", value.ToString());
+            }
+        }
+
+        private string GetString(string key)
+        {
+            string rlt = "";
+            if (ConfigurationManager.AppSettings[key] != null)
+            {
+                rlt = ConfigurationManager.AppSettings[key];
             }
             return rlt;
         }

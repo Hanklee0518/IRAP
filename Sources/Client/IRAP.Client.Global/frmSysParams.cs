@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Configuration;
 
 using DevExpress.XtraEditors.Controls;
+using IRAP.Service.Client.Enums;
+using IRAP.Global;
 
 namespace IRAP.Client.Global
 {
@@ -16,6 +18,20 @@ namespace IRAP.Client.Global
         public frmSysParams()
         {
             InitializeComponent();
+
+            cboContentType.Properties.Items.Clear();
+            cboContentType.Properties.Items.Add(
+                new ImageComboBoxItem()
+                {
+                    Description = EnumHelper.GetDescription(ContentType.json),
+                    Value = ContentType.json,
+                });
+            cboContentType.Properties.Items.Add(
+                new ImageComboBoxItem()
+                {
+                    Description = EnumHelper.GetDescription(ContentType.xml),
+                    Value = ContentType.xml,
+                });
         }
 
         private void InitParams()
@@ -54,6 +70,17 @@ namespace IRAP.Client.Global
                     }
 
                     break;
+            }
+
+            edtWebAPIUrl.Text = IRAPConst.Instance.WebAPI.URL;
+            edtWebAPIClientID.Text = IRAPConst.Instance.WebAPI.ClientID;
+            foreach (ImageComboBoxItem item in cboContentType.Properties.Items)
+            {
+                if ((ContentType)item.Value == IRAPConst.Instance.WebAPI.ContentType)
+                {
+                    cboContentType.SelectedItem = item;
+                    break;
+                }
             }
         }
 
