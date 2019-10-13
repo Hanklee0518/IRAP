@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>创建新类</Title>
+    <Author>李智颖</Author>
+    <Shortcut>newclass</Shortcut>
+    <Description>创建一个新的类，同时增加自动文档</Description>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>ClassName</ID>
+        <Default>Class1</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="CSharp">
+      <![CDATA[
+	/// <summary>
+	/// 命名空间：$rootnamespace$
+	/// 创 建 者：李智颖
+	/// 创建日期：$time$
+	/// 类    名：$ClassName$
+	/// </summary>	
+	public class $ClassName$
+	{
+	}
+      ]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>

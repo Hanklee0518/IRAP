@@ -1,6 +1,6 @@
 ﻿namespace IRAP.Client.GUI.MESPDC.HME
 {
-    partial class frmComponentDisassemble
+    partial class frmComponentClean
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.edtBarCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.lvLogs = new IRAP.Client.Global.GUI.xucIRAPListView();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtBarCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFuncName
@@ -42,7 +42,7 @@
             this.lblFuncName.Appearance.ForeColor = System.Drawing.Color.Green;
             this.lblFuncName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblFuncName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.lblFuncName.Text = "部件拆解";
+            this.lblFuncName.Text = "frmCustomBase";
             // 
             // toolTipController
             // 
@@ -51,23 +51,24 @@
             this.toolTipController.AppearanceTitle.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolTipController.AppearanceTitle.Options.UseFont = true;
             // 
+            // edtBarCode
+            // 
+            this.edtBarCode.Location = new System.Drawing.Point(146, 90);
+            this.edtBarCode.Name = "edtBarCode";
+            this.edtBarCode.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.edtBarCode.Properties.Appearance.Options.UseFont = true;
+            this.edtBarCode.Size = new System.Drawing.Size(388, 28);
+            this.edtBarCode.TabIndex = 4;
+            this.edtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtBarCode_KeyDown);
+            // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelControl1.Location = new System.Drawing.Point(30, 93);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(110, 21);
-            this.labelControl1.TabIndex = 1;
+            this.labelControl1.TabIndex = 3;
             this.labelControl1.Text = "条码扫描：";
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Location = new System.Drawing.Point(146, 90);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Size = new System.Drawing.Size(388, 28);
-            this.textEdit1.TabIndex = 2;
             // 
             // lvLogs
             // 
@@ -79,24 +80,25 @@
             this.lvLogs.Name = "lvLogs";
             this.lvLogs.Padding = new System.Windows.Forms.Padding(5);
             this.lvLogs.Size = new System.Drawing.Size(867, 351);
-            this.lvLogs.TabIndex = 3;
+            this.lvLogs.TabIndex = 5;
             // 
-            // frmComponentDisassemble
+            // frmComponentClean
             // 
             this.Appearance.Options.UseFont = true;
             this.ClientSize = new System.Drawing.Size(891, 495);
             this.Controls.Add(this.lvLogs);
-            this.Controls.Add(this.textEdit1);
+            this.Controls.Add(this.edtBarCode);
             this.Controls.Add(this.labelControl1);
-            this.Name = "frmComponentDisassemble";
-            this.Text = "部件拆解";
+            this.Name = "frmComponentClean";
+            this.Text = "部件清洗";
+            this.Activated += new System.EventHandler(this.frmComponentClean_Activated);
             this.Controls.SetChildIndex(this.panelControl1, 0);
             this.Controls.SetChildIndex(this.labelControl1, 0);
-            this.Controls.SetChildIndex(this.textEdit1, 0);
+            this.Controls.SetChildIndex(this.edtBarCode, 0);
             this.Controls.SetChildIndex(this.lvLogs, 0);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtBarCode.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,8 +106,8 @@
 
         #endregion
 
+        private DevExpress.XtraEditors.TextEdit edtBarCode;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
         private Global.GUI.xucIRAPListView lvLogs;
     }
 }

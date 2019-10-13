@@ -111,6 +111,14 @@ namespace IRAP.Client.Global
         /// WebAPI调用配置参数
         /// </summary>
         public WebAPIParams WebAPI { get; private set; } = new WebAPIParams();
+        /// <summary>
+        /// 华域麦格纳用于进行PIT的地址
+        /// </summary>
+        public string PITUrl
+        {
+            get { return GetString("PITUrl"); }
+            set { SaveParams("PITUrl", value); }
+        }
 
         private string GetString(string key)
         {

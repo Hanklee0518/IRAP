@@ -86,6 +86,22 @@ namespace IRAP.Service.Client
         }
 
         /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="webAPIUrl">WebAPI地址</param>
+        /// <param name="contentType">报文类型</param>
+        /// <param name="clientID">渠道标识</param>
+        public CustomWebAPICall(
+            string webAPIUrl,
+            ContentType contentType,
+            string clientID) : this()
+        {
+            this.webAPIUrl = webAPIUrl;
+            this.contentType = contentType;
+            this.clientID = clientID;
+        }
+
+        /// <summary>
         /// 根据指定的关键字，从应用程序配置文件中读取配置的值，如果没有则返回 defaultValue 中指定的值
         /// </summary>
         /// <param name="key">关键字</param>
@@ -201,7 +217,7 @@ namespace IRAP.Service.Client
                 if (resJson == "")
                 {
                     throw new Exception(
-                        $"[ExCode={exCode}交易的响应报文无法反序列化成响应报文对象");
+                        $"[ExCode={exCode}交易的响应报文内容空白，无法反序列化成响应报文对象");
                 }
 
                 T rtnObject = default(T);
@@ -213,10 +229,11 @@ namespace IRAP.Service.Client
                         break;
                 }
 
-                if (result == null | rtnObject == null)
+                if (result == null || rtnObject == null)
                 {
-                    Exception error = new Exception(
-                        $"[ExCode={ExCode}交易的响应报文无法反序列化成响应报文对象");
+                    Exception error = 
+                        new Exception(
+                            $"[ExCode={ExCode}交易的响应报文无法反序列化成响应报文对象");
                     throw error;
                 }
 
@@ -259,6 +276,8 @@ namespace IRAP.Service.Client
             }
             catch (Exception error)
             {
+                errorMessage.ErrCode = 999998;
+                errorMessage.ErrText = error.Message;
                 WriteLog.Instance.Write(error.Message, strProcedureName);
                 WriteLog.Instance.Write(error.StackTrace, strProcedureName);
                 return false;

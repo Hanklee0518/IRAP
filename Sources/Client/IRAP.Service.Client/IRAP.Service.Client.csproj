@@ -33,8 +33,8 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -53,13 +53,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\CustomRequest.cs" />
+    <Compile Include="Contents\CustomResponse.cs" />
     <Compile Include="CustomWebAPICall.cs" />
     <Compile Include="ErrorMessage.cs" />
+    <Compile Include="Exchange\MES\MR_Clear.cs" />
+    <Compile Include="Exchange\MES\MR_DismantleComponent_NeedQC.cs" />
+    <Compile Include="Exchange\MES\MR_DismantleComponent_Save.cs" />
+    <Compile Include="Exchange\MES\MR_GetSubComponentList.cs" />
+    <Compile Include="Exchange\MES\MR_QC_BatchInfoSave.cs" />
+    <Compile Include="Exchange\MES\MR_QC_GetProductSourceInfo.cs" />
+    <Compile Include="Exchange\MES\MR_QC_NeedDismantle.cs" />
+    <Compile Include="Exchange\MES\MR_QC_Recycle.cs" />
+    <Compile Include="Exchange\MES\MR_QC_Scrap.cs" />
+    <Compile Include="Exchange\MES\MR_Scan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\JSONHelper.cs" />
     <Compile Include="Utils\XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NewClass.snippet" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +85,7 @@
       <Name>IRAP.Client.Global</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

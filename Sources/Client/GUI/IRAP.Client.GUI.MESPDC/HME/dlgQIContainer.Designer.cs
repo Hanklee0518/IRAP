@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.lblDMC = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.edtNGQuantity = new DevExpress.XtraEditors.TextEdit();
+            this.edtGoodQuantity = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.lblContainerNo = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtNGQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtGoodQuantity.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTipController
@@ -58,11 +58,11 @@
             this.groupControl1.Appearance.Options.UseFont = true;
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
-            this.groupControl1.Controls.Add(this.textEdit2);
-            this.groupControl1.Controls.Add(this.textEdit1);
+            this.groupControl1.Controls.Add(this.edtNGQuantity);
+            this.groupControl1.Controls.Add(this.edtGoodQuantity);
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.labelControl2);
-            this.groupControl1.Controls.Add(this.lblDMC);
+            this.groupControl1.Controls.Add(this.lblContainerNo);
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Location = new System.Drawing.Point(12, 12);
             this.groupControl1.Name = "groupControl1";
@@ -71,42 +71,31 @@
             this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "部件信息";
             // 
-            // labelControl2
+            // edtNGQuantity
             // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl2.Location = new System.Drawing.Point(15, 92);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(110, 21);
-            this.labelControl2.TabIndex = 3;
-            this.labelControl2.Text = "合格数：";
+            this.edtNGQuantity.Location = new System.Drawing.Point(131, 140);
+            this.edtNGQuantity.Name = "edtNGQuantity";
+            this.edtNGQuantity.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F);
+            this.edtNGQuantity.Properties.Appearance.Options.UseFont = true;
+            this.edtNGQuantity.Properties.Appearance.Options.UseTextOptions = true;
+            this.edtNGQuantity.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.edtNGQuantity.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.edtNGQuantity.Size = new System.Drawing.Size(154, 28);
+            this.edtNGQuantity.TabIndex = 6;
+            this.edtNGQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.edtGoodQuantity_Validating);
             // 
-            // lblDMC
+            // edtGoodQuantity
             // 
-            this.lblDMC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDMC.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblDMC.Appearance.ForeColor = System.Drawing.Color.Blue;
-            this.lblDMC.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblDMC.Location = new System.Drawing.Point(131, 41);
-            this.lblDMC.Name = "lblDMC";
-            this.lblDMC.Size = new System.Drawing.Size(518, 21);
-            this.lblDMC.TabIndex = 2;
-            this.lblDMC.Text = "XXXXXXXXXXXXXXXXXX";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(15, 41);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(110, 21);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "容器码：";
+            this.edtGoodQuantity.Location = new System.Drawing.Point(131, 89);
+            this.edtGoodQuantity.Name = "edtGoodQuantity";
+            this.edtGoodQuantity.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F);
+            this.edtGoodQuantity.Properties.Appearance.Options.UseFont = true;
+            this.edtGoodQuantity.Properties.Appearance.Options.UseTextOptions = true;
+            this.edtGoodQuantity.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.edtGoodQuantity.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.edtGoodQuantity.Size = new System.Drawing.Size(154, 28);
+            this.edtGoodQuantity.TabIndex = 5;
+            this.edtGoodQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.edtGoodQuantity_Validating);
             // 
             // labelControl3
             // 
@@ -120,23 +109,42 @@
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "不合格数：";
             // 
-            // textEdit1
+            // labelControl2
             // 
-            this.textEdit1.Location = new System.Drawing.Point(131, 89);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F);
-            this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Size = new System.Drawing.Size(154, 28);
-            this.textEdit1.TabIndex = 5;
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl2.Location = new System.Drawing.Point(15, 92);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(110, 21);
+            this.labelControl2.TabIndex = 3;
+            this.labelControl2.Text = "合格数：";
             // 
-            // textEdit2
+            // lblContainerNo
             // 
-            this.textEdit2.Location = new System.Drawing.Point(131, 140);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F);
-            this.textEdit2.Properties.Appearance.Options.UseFont = true;
-            this.textEdit2.Size = new System.Drawing.Size(154, 28);
-            this.textEdit2.TabIndex = 6;
+            this.lblContainerNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblContainerNo.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblContainerNo.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblContainerNo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblContainerNo.Location = new System.Drawing.Point(131, 41);
+            this.lblContainerNo.Name = "lblContainerNo";
+            this.lblContainerNo.Size = new System.Drawing.Size(518, 21);
+            this.lblContainerNo.TabIndex = 2;
+            this.lblContainerNo.Text = "XXXXXXXXXXXXXXXXXX";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("新宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl1.Location = new System.Drawing.Point(15, 41);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(110, 21);
+            this.labelControl1.TabIndex = 1;
+            this.labelControl1.Text = "容器码：";
             // 
             // simpleButton1
             // 
@@ -148,6 +156,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(115, 44);
             this.simpleButton1.TabIndex = 6;
             this.simpleButton1.Text = "确定";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // dlgQIContainer
             // 
@@ -159,8 +168,8 @@
             this.Text = "质量检测-容器";
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtNGQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtGoodQuantity.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,10 +178,10 @@
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl lblDMC;
+        private DevExpress.XtraEditors.LabelControl lblContainerNo;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit edtNGQuantity;
+        private DevExpress.XtraEditors.TextEdit edtGoodQuantity;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }

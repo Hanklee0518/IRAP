@@ -39,6 +39,13 @@
             this.cboControlBoxType = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.tpSysParams = new DevExpress.XtraTab.XtraTabPage();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.cboContentType = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.edtWebAPIClientID = new DevExpress.XtraEditors.ButtonEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.edtWebAPIUrl = new DevExpress.XtraEditors.ButtonEdit();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.chkMultInstance = new DevExpress.XtraEditors.CheckEdit();
             this.tpAsimcoParams = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
@@ -51,13 +58,10 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.edtWebAPIUrl = new DevExpress.XtraEditors.ButtonEdit();
-            this.edtWebAPIClientID = new DevExpress.XtraEditors.ButtonEdit();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.cboContentType = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.tpHMEParams = new DevExpress.XtraTab.XtraTabPage();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.edtPITUrl = new DevExpress.XtraEditors.ButtonEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tcParams)).BeginInit();
             this.tcParams.SuspendLayout();
             this.tpAndonParams.SuspendLayout();
@@ -69,6 +73,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtZLan6042IPAddr.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboControlBoxType.Properties)).BeginInit();
             this.tpSysParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkMultInstance.Properties)).BeginInit();
             this.tpAsimcoParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -79,11 +88,10 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).BeginInit();
+            this.tpHMEParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edtPITUrl.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTipController
@@ -106,7 +114,8 @@
             this.tcParams.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tpSysParams,
             this.tpAndonParams,
-            this.tpAsimcoParams});
+            this.tpAsimcoParams,
+            this.tpHMEParams});
             // 
             // tpAndonParams
             // 
@@ -218,19 +227,112 @@
             this.tpSysParams.Controls.Add(this.groupControl3);
             this.tpSysParams.Controls.Add(this.chkMultInstance);
             this.tpSysParams.Name = "tpSysParams";
-            this.tpSysParams.Padding = new System.Windows.Forms.Padding(5);
+            this.tpSysParams.Padding = new System.Windows.Forms.Padding(10);
             this.tpSysParams.Size = new System.Drawing.Size(683, 424);
             this.tpSysParams.Text = "客户端运行参数";
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl3.Appearance.Options.UseFont = true;
+            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl3.AppearanceCaption.Options.UseFont = true;
+            this.groupControl3.Controls.Add(this.cboContentType);
+            this.groupControl3.Controls.Add(this.labelControl6);
+            this.groupControl3.Controls.Add(this.edtWebAPIClientID);
+            this.groupControl3.Controls.Add(this.labelControl5);
+            this.groupControl3.Controls.Add(this.edtWebAPIUrl);
+            this.groupControl3.Controls.Add(this.labelControl4);
+            this.groupControl3.Location = new System.Drawing.Point(10, 40);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(663, 125);
+            this.groupControl3.TabIndex = 1;
+            this.groupControl3.Text = "WebAPI参数";
+            // 
+            // cboContentType
+            // 
+            this.cboContentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboContentType.EditValue = 1;
+            this.cboContentType.Location = new System.Drawing.Point(147, 97);
+            this.cboContentType.Name = "cboContentType";
+            this.cboContentType.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboContentType.Properties.Appearance.Options.UseFont = true;
+            this.cboContentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboContentType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Json", 1, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Xml", 2, -1)});
+            this.cboContentType.Size = new System.Drawing.Size(511, 26);
+            this.cboContentType.TabIndex = 6;
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl6.Location = new System.Drawing.Point(9, 100);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(132, 20);
+            this.labelControl6.TabIndex = 5;
+            this.labelControl6.Text = "报文格式：";
+            // 
+            // edtWebAPIClientID
+            // 
+            this.edtWebAPIClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtWebAPIClientID.Location = new System.Drawing.Point(147, 65);
+            this.edtWebAPIClientID.Name = "edtWebAPIClientID";
+            this.edtWebAPIClientID.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.edtWebAPIClientID.Properties.Appearance.Options.UseFont = true;
+            this.edtWebAPIClientID.Size = new System.Drawing.Size(511, 26);
+            this.edtWebAPIClientID.TabIndex = 4;
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl5.Location = new System.Drawing.Point(9, 68);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(132, 20);
+            this.labelControl5.TabIndex = 3;
+            this.labelControl5.Text = "渠道标识：";
+            // 
+            // edtWebAPIUrl
+            // 
+            this.edtWebAPIUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtWebAPIUrl.Location = new System.Drawing.Point(147, 33);
+            this.edtWebAPIUrl.Name = "edtWebAPIUrl";
+            this.edtWebAPIUrl.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.edtWebAPIUrl.Properties.Appearance.Options.UseFont = true;
+            this.edtWebAPIUrl.Size = new System.Drawing.Size(511, 26);
+            this.edtWebAPIUrl.TabIndex = 2;
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl4.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl4.Location = new System.Drawing.Point(9, 36);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(132, 20);
+            this.labelControl4.TabIndex = 1;
+            this.labelControl4.Text = "地址：";
             // 
             // chkMultInstance
             // 
             this.chkMultInstance.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkMultInstance.Location = new System.Drawing.Point(5, 5);
+            this.chkMultInstance.Location = new System.Drawing.Point(10, 10);
             this.chkMultInstance.Name = "chkMultInstance";
             this.chkMultInstance.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
             this.chkMultInstance.Properties.Appearance.Options.UseFont = true;
             this.chkMultInstance.Properties.Caption = "允许运行多个实例";
-            this.chkMultInstance.Size = new System.Drawing.Size(673, 24);
+            this.chkMultInstance.Size = new System.Drawing.Size(663, 24);
             this.chkMultInstance.TabIndex = 0;
             // 
             // tpAsimcoParams
@@ -352,98 +454,55 @@
             // 
             this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // groupControl3
+            // tpHMEParams
             // 
-            this.groupControl3.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.groupControl3.Appearance.Options.UseFont = true;
-            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.groupControl3.AppearanceCaption.Options.UseFont = true;
-            this.groupControl3.Controls.Add(this.cboContentType);
-            this.groupControl3.Controls.Add(this.labelControl6);
-            this.groupControl3.Controls.Add(this.edtWebAPIClientID);
-            this.groupControl3.Controls.Add(this.labelControl5);
-            this.groupControl3.Controls.Add(this.edtWebAPIUrl);
-            this.groupControl3.Controls.Add(this.labelControl4);
-            this.groupControl3.Location = new System.Drawing.Point(5, 35);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(673, 130);
-            this.groupControl3.TabIndex = 1;
-            this.groupControl3.Text = "WebAPI参数";
+            this.tpHMEParams.Controls.Add(this.groupControl4);
+            this.tpHMEParams.Name = "tpHMEParams";
+            this.tpHMEParams.Padding = new System.Windows.Forms.Padding(10);
+            this.tpHMEParams.PageVisible = false;
+            this.tpHMEParams.Size = new System.Drawing.Size(683, 424);
+            this.tpHMEParams.Text = "华域麦格纳系统参数";
             // 
-            // labelControl4
+            // groupControl4
             // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl4.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl4.Location = new System.Drawing.Point(9, 36);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(132, 20);
-            this.labelControl4.TabIndex = 1;
-            this.labelControl4.Text = "地址：";
-            // 
-            // edtWebAPIUrl
-            // 
-            this.edtWebAPIUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupControl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtWebAPIUrl.Location = new System.Drawing.Point(147, 33);
-            this.edtWebAPIUrl.Name = "edtWebAPIUrl";
-            this.edtWebAPIUrl.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.edtWebAPIUrl.Properties.Appearance.Options.UseFont = true;
-            this.edtWebAPIUrl.Size = new System.Drawing.Size(521, 26);
-            this.edtWebAPIUrl.TabIndex = 2;
+            this.groupControl4.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.groupControl4.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl4.Appearance.Options.UseBackColor = true;
+            this.groupControl4.Appearance.Options.UseFont = true;
+            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.groupControl4.AppearanceCaption.Options.UseFont = true;
+            this.groupControl4.Controls.Add(this.edtPITUrl);
+            this.groupControl4.Controls.Add(this.labelControl7);
+            this.groupControl4.Location = new System.Drawing.Point(10, 10);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(663, 79);
+            this.groupControl4.TabIndex = 2;
+            this.groupControl4.Text = "PIT";
             // 
-            // edtWebAPIClientID
+            // edtPITUrl
             // 
-            this.edtWebAPIClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.edtPITUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtWebAPIClientID.Location = new System.Drawing.Point(147, 65);
-            this.edtWebAPIClientID.Name = "edtWebAPIClientID";
-            this.edtWebAPIClientID.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.edtWebAPIClientID.Properties.Appearance.Options.UseFont = true;
-            this.edtWebAPIClientID.Size = new System.Drawing.Size(521, 26);
-            this.edtWebAPIClientID.TabIndex = 4;
+            this.edtPITUrl.Location = new System.Drawing.Point(132, 39);
+            this.edtPITUrl.Name = "edtPITUrl";
+            this.edtPITUrl.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.edtPITUrl.Properties.Appearance.Options.UseFont = true;
+            this.edtPITUrl.Size = new System.Drawing.Size(521, 26);
+            this.edtPITUrl.TabIndex = 1;
             // 
-            // labelControl5
+            // labelControl7
             // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl5.Location = new System.Drawing.Point(9, 68);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(132, 20);
-            this.labelControl5.TabIndex = 3;
-            this.labelControl5.Text = "渠道标识：";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl6.Location = new System.Drawing.Point(9, 100);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(132, 20);
-            this.labelControl6.TabIndex = 5;
-            this.labelControl6.Text = "报文格式：";
-            // 
-            // cboContentType
-            // 
-            this.cboContentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboContentType.EditValue = 1;
-            this.cboContentType.Location = new System.Drawing.Point(147, 97);
-            this.cboContentType.Name = "cboContentType";
-            this.cboContentType.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboContentType.Properties.Appearance.Options.UseFont = true;
-            this.cboContentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboContentType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Json", 1, -1),
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Xml", 2, -1)});
-            this.cboContentType.Size = new System.Drawing.Size(521, 26);
-            this.cboContentType.TabIndex = 6;
+            this.labelControl7.Appearance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.labelControl7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl7.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl7.Location = new System.Drawing.Point(14, 42);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(112, 20);
+            this.labelControl7.TabIndex = 0;
+            this.labelControl7.Text = "PIT Url地址：";
             // 
             // frmSysParams
             // 
@@ -468,6 +527,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtZLan6042IPAddr.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboControlBoxType.Properties)).EndInit();
             this.tpSysParams.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkMultInstance.Properties)).EndInit();
             this.tpAsimcoParams.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
@@ -479,11 +543,10 @@
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIUrl.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edtWebAPIClientID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboContentType.Properties)).EndInit();
+            this.tpHMEParams.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.edtPITUrl.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -520,5 +583,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.ButtonEdit edtWebAPIUrl;
         private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraTab.XtraTabPage tpHMEParams;
+        private DevExpress.XtraEditors.GroupControl groupControl4;
+        private DevExpress.XtraEditors.ButtonEdit edtPITUrl;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
     }
 }

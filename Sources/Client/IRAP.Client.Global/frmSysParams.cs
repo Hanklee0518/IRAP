@@ -8,8 +8,8 @@ using System.Windows.Forms;
 using System.Configuration;
 
 using DevExpress.XtraEditors.Controls;
-using IRAP.Service.Client.Enums;
 using IRAP.Global;
+using IRAP.Client.Global.Enums;
 
 namespace IRAP.Client.Global
 {
@@ -70,6 +70,12 @@ namespace IRAP.Client.Global
                     }
 
                     break;
+                case 60037:
+                    tpHMEParams.PageVisible = true;
+
+                    edtPITUrl.Text = IRAPConst.Instance.PITUrl;
+
+                    break;
             }
 
             edtWebAPIUrl.Text = IRAPConst.Instance.WebAPI.URL;
@@ -111,7 +117,17 @@ namespace IRAP.Client.Global
                         edtPkgDBFImportDictionary.Text);
 
                     break;
+                case 60037:
+                    IRAPConst.Instance.PITUrl = edtPITUrl.Text;
+                    break;
             }
+
+            IRAPConst.Instance.WebAPI.URL = edtWebAPIUrl.Text;
+            IRAPConst.Instance.WebAPI.ContentType =
+                cboContentType.SelectedItem == null ?
+                    ContentType.json :
+                    (ContentType)(cboContentType.SelectedItem as ImageComboBoxItem).Value;
+            IRAPConst.Instance.WebAPI.ClientID = edtWebAPIClientID.Text;
         }
 
         private void cboControlBoxType_SelectedIndexChanged(object sender, EventArgs e)

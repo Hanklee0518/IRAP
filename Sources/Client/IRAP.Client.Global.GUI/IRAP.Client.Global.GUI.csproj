@@ -78,6 +78,12 @@
     <Compile Include="Dialogs\frmReadUserIDCard.Designer.cs">
       <DependentUpon>frmReadUserIDCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\frmWebBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frmWebBrowser.Designer.cs">
+      <DependentUpon>frmWebBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ReadUserIDCard.cs" />
     <Compile Include="Dialogs\ShowMessageBox.cs" />
     <Compile Include="frmCustomFuncBase.cs">
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\frmSubTreeLeafEditor.resx">
       <DependentUpon>frmSubTreeLeafEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frmWebBrowser.resx">
+      <DependentUpon>frmWebBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomFuncBase.resx">
       <DependentUpon>frmCustomFuncBase.cs</DependentUpon>
