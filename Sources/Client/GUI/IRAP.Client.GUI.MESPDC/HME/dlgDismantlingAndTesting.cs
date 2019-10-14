@@ -157,6 +157,7 @@ namespace IRAP.Client.GUI.MESPDC.HME
                 {
                     CommunityID = IRAPUser.Instance.CommunityID,
                     SysLogID = IRAPUser.Instance.SysLogID,
+                    DMCNO = lblDMC.Text,
                 };
             foreach (SubComponent c in datas)
             {

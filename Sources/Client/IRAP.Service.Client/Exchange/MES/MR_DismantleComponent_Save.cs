@@ -85,6 +85,10 @@ namespace IRAP.Service.Client.Exchange.MES
         /// </summary>
         public override string ExCode => "IRAP_MES_MR_DismantleComponent_Save";
         /// <summary>
+        /// DMCNO
+        /// </summary>
+        public string DMCNO { get; set; } = "";
+        /// <summary>
         /// 检测结果(报废/释放)
         /// </summary>
         public List<MRDismantleComponentSaveRequestDetail> CompoentList { get; set; }

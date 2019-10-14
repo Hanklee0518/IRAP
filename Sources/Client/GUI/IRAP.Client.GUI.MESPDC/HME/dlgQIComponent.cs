@@ -165,12 +165,22 @@ namespace IRAP.Client.GUI.MESPDC.HME
         private void hyperlinkLabelControl1_Click(object sender, EventArgs e)
         {
             string url =
-                $"microsoft-edge:{IRAPConst.Instance.PITUrl}?" +
+                $"{IRAPConst.Instance.PITUrl}?" +
                 $"SysLogID={IRAPUser.Instance.SysLogID}&" +
                 $"CommunityID={IRAPUser.Instance.CommunityID}&" +
                 $"DMCCode={DMC}";
 
-            Process.Start(url);
+            Process p = new Process();
+            ProcessStartInfo startinfo =
+                new ProcessStartInfo(
+                    @"shell:Appsfolder\Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge",
+                    url);
+            p.EnableRaisingEvents = true;
+            startinfo.RedirectStandardInput = false;
+            startinfo.RedirectStandardOutput = false;
+            startinfo.RedirectStandardError = false;
+            p.StartInfo = startinfo;
+            p.Start();
         }
     }
 }
