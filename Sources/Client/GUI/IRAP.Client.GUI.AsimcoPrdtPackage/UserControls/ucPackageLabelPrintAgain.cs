@@ -282,6 +282,17 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                     edtMOLineNo.Focus();
                     return;
                 }
+
+                if (edtLotNumber.Text.Trim() == "")
+                {
+                    XtraMessageBox.Show(
+                        "请输入批次号！",
+                        "",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    edtLotNumber.Focus();
+                    return;
+                }
             }
             #endregion
 
@@ -297,6 +308,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                     IRAPUser.Instance.CommunityID,
                     moNumber,
                     moLineNo,
+                    edtLotNumber.Text.Trim(),
                     cartonNumber,
                     IRAPUser.Instance.SysLogID,
                     ref items,

@@ -12,6 +12,10 @@ namespace IRAP.Entities.Asimco
         /// </summary>
         public int Ordinal { get; set; }
         /// <summary>
+        /// 交易号
+        /// </summary>
+        public long TransactID { get; set; }
+        /// <summary>
         /// 制造订单号
         /// </summary>
         public string MONumber { get; set; }

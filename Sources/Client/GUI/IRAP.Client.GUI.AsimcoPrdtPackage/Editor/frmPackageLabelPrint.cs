@@ -75,11 +75,14 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
         /// <summary>
         /// 根据订单号和行号获取客户
         /// </summary>
+        /// <param name="transactNo">制造订单交易号</param>
         /// <param name="moNumber"></param>
         /// <param name="moLineNo"></param>
         /// <returns></returns>
         private List<PackageClient> GetCustomersFromPrdt(
-            string moNumber, int moLineNo)
+            long transactNo,
+            string moNumber, 
+            int moLineNo)
         {
             string strProcedureName =
                 $"{className}.{MethodBase.GetCurrentMethod().Name}";
@@ -93,6 +96,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
 
                 AsimcoPackageClient.Instance.ufn_GetList_PackageClient(
                     IRAPUser.Instance.CommunityID,
+                    transactNo,
                     moNumber,
                     moLineNo,
                     IRAPUser.Instance.SysLogID,
@@ -575,6 +579,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
                 #region 获取当前订单可配送的客户清单
                 List<PackageClient> customers =
                     GetCustomersFromPrdt(
+                        mo.TransactID,
                         mo.MONumber,
                         mo.MOLineNo);
 
@@ -654,6 +659,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
 
                     AsimcoPackageClient.Instance.usp_PokaYoke_Package(
                         IRAPUser.Instance.CommunityID,
+                        mo.TransactID,
                         mo.MONumber,
                         mo.MOLineNo,
                         t105LeafID,
@@ -741,6 +747,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.Editor
 
                 AsimcoPackageClient.Instance.usp_SaveFact_PackagePrint(
                     IRAPUser.Instance.CommunityID,
+                    mo.TransactID,
                     mo.MONumber,
                     mo.MOLineNo,
                     0,

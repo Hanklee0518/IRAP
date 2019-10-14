@@ -189,6 +189,7 @@ namespace IRAP.BL.MES
         /// 获取产品供给客户清单
         /// </summary>
         /// <param name="communityID"></param>
+        /// <param name="transactID">交易号</param>
         /// <param name="moNumber">制造订单号</param>
         /// <param name="moLineNo">制造订单行号</param>
         /// <param name="sysLogID"></param>
@@ -197,6 +198,7 @@ namespace IRAP.BL.MES
         /// <returns></returns>
         public IRAPJsonResult ufn_GetList_PackageClient(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             long sysLogID,
@@ -215,6 +217,7 @@ namespace IRAP.BL.MES
                 #region 创建数据库调用参数组，并赋值
                 IList<IDataParameter> paramList = new List<IDataParameter>();
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TransactID", DbType.Int64, transactID));
                 paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
                 paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
                 paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
@@ -227,7 +230,7 @@ namespace IRAP.BL.MES
                     {
                         string strSQL = "SELECT * " +
                             "FROM IRAPMDM..ufn_GetList_PackageClient(" +
-                            "@CommunityID, @MONumber, @MOLineNo, @SysLogID) " +
+                            "@CommunityID, @TransactID, @MONumber, @MOLineNo, @SysLogID) " +
                             "ORDER BY Ordinal";
 
                         string msg = $"{strSQL} 参数：";
@@ -586,6 +589,7 @@ namespace IRAP.BL.MES
         /// 根据订单和产线，预打印标签供后面成套检验
         /// </summary>
         /// <param name="communityID">社区标识</param>
+        /// <param name="transactID">制造订单交易号</param>
         /// <param name="moNumber">销售订单号</param>
         /// <param name="moLineNo">销售订单行号</param>
         /// <param name="numberOfBox">内箱产品数量</param>
@@ -599,6 +603,7 @@ namespace IRAP.BL.MES
         /// <returns>TransactNo(打印交易号)</returns>
         public IRAPJsonResult usp_SaveFact_PackagePrint(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             long numberOfBox,
@@ -619,6 +624,7 @@ namespace IRAP.BL.MES
                 #region 创建数据库调用参数组，并赋值
                 IList<IDataParameter> paramList = new List<IDataParameter>();
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TransactID", DbType.Int64, transactID));
                 paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
                 paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
                 paramList.Add(new IRAPProcParameter("@NumberOfBox", DbType.Int64, numberOfBox));
@@ -632,7 +638,8 @@ namespace IRAP.BL.MES
                 paramList.Add(new IRAPProcParameter("@ErrText", DbType.String, ParameterDirection.Output, 400));
                 WriteLog.Instance.Write(
                     "执行存储过程 IRAPMES..usp_SaveFact_PackagePrint，" +
-                    $"参数：CommunityID={communityID}|MONumber={moNumber}|" +
+                    $"参数：CommunityID={communityID}|TransactID={transactID}|"+
+                    $"MONumber={moNumber}|" +
                     $"MOLineNo={moLineNo}|NumberOfBox={numberOfBox}|" +
                     $"CartonNumber={cartonNumber}|T105LeafID={t105LeafID}|"+
                     $"T134LeafID={t134LeafID}|BoxNumber={boxNumber}|" +
@@ -794,6 +801,7 @@ namespace IRAP.BL.MES
         /// <param name="communityID"></param>
         /// <param name="moNumber">订单号</param>
         /// <param name="moLineNo">订单行号</param>
+        /// <param name="lotNumber">批次号</param>
         /// <param name="cartonNumber">外箱号（默认空白）</param>
         /// <param name="sysLogID"></param>
         /// <param name="errCode"></param>
@@ -803,6 +811,7 @@ namespace IRAP.BL.MES
             int communityID,
             string moNumber,
             int moLineNo,
+            string lotNumber,
             string cartonNumber,
             long sysLogID,
             out int errCode,
@@ -819,6 +828,7 @@ namespace IRAP.BL.MES
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
                 paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
                 paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
+                paramList.Add(new IRAPProcParameter("@LotNumber", DbType.String, lotNumber));
                 paramList.Add(new IRAPProcParameter("@CartonNumber", DbType.String, cartonNumber));
                 paramList.Add(new IRAPProcParameter("@SysLogID", DbType.Int64, sysLogID));
                 paramList.Add(new IRAPProcParameter("@ErrCode", DbType.Int32, ParameterDirection.Output, 4));
@@ -1087,8 +1097,10 @@ namespace IRAP.BL.MES
         /// 输入外包装数更新内包装数量
         /// </summary>
         /// <param name="communityID"></param>
+        /// <param name="transactID">制造订单交易号</param>
         /// <param name="moNumber">订单号</param>
         /// <param name="moLineNo">订单行号</param>
+        /// <param name="t105LeafID">客户叶标识</param>
         /// <param name="cartonNumber">外箱数量</param>
         /// <param name="sysLogID"></param>
         /// <param name="errCode"></param>
@@ -1096,6 +1108,7 @@ namespace IRAP.BL.MES
         /// <returns></returns>
         public IRAPJsonResult usp_PokaYoke_Package(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             int t105LeafID,
@@ -1113,6 +1126,7 @@ namespace IRAP.BL.MES
                 #region 创建数据库调用参数组，并赋值
                 IList<IDataParameter> paramList = new List<IDataParameter>();
                 paramList.Add(new IRAPProcParameter("@CommunityID", DbType.Int32, communityID));
+                paramList.Add(new IRAPProcParameter("@TransactID", DbType.Int64, transactID));
                 paramList.Add(new IRAPProcParameter("@MONumber", DbType.String, moNumber));
                 paramList.Add(new IRAPProcParameter("@MOLineNo", DbType.Int32, moLineNo));
                 paramList.Add(new IRAPProcParameter("@T105LeafID", DbType.Int32, t105LeafID));

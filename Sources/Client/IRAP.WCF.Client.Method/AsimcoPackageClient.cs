@@ -188,6 +188,7 @@ namespace IRAP.WCF.Client.Method
         /// 获取产品供给客户清单
         /// </summary>
         /// <param name="communityID"></param>
+        /// <param name="transactID">制造订单交易号</param>
         /// <param name="moNumber">制造订单号</param>
         /// <param name="moLineNo">制造订单行号</param>
         /// <param name="sysLogID"></param>
@@ -196,6 +197,7 @@ namespace IRAP.WCF.Client.Method
         /// <returns></returns>
         public void ufn_GetList_PackageClient(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             long sysLogID,
@@ -218,6 +220,7 @@ namespace IRAP.WCF.Client.Method
                 Hashtable hashParams = new Hashtable();
 
                 hashParams.Add("communityID", communityID);
+                hashParams.Add("transactID", transactID);
                 hashParams.Add("moNumber", moNumber);
                 hashParams.Add("moLineNo", moLineNo);
                 hashParams.Add("sysLogID", sysLogID);
@@ -570,6 +573,7 @@ namespace IRAP.WCF.Client.Method
         /// 根据订单和产线，预打印标签供后面成套检验
         /// </summary>
         /// <param name="communityID">社区标识</param>
+        /// <param name="transactID">交易号</param>
         /// <param name="moNumber">销售订单号</param>
         /// <param name="moLineNo">销售订单行号</param>
         /// <param name="numberOfBox">内箱产品数量</param>
@@ -583,6 +587,7 @@ namespace IRAP.WCF.Client.Method
         /// <returns>TransactNo(打印交易号)</returns>
         public void usp_SaveFact_PackagePrint(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             long numberOfBox,
@@ -606,6 +611,7 @@ namespace IRAP.WCF.Client.Method
                 #region 将函数参数加入 Hashtable 中
                 Hashtable hashParams = new Hashtable();
                 hashParams.Add("communityID", communityID);
+                hashParams.Add("transactID", transactID);
                 hashParams.Add("moNumber", moNumber);
                 hashParams.Add("moLineNo", moLineNo);
                 hashParams.Add("numberOfBox", numberOfBox);
@@ -765,6 +771,7 @@ namespace IRAP.WCF.Client.Method
         /// <param name="communityID"></param>
         /// <param name="moNumber">订单号</param>
         /// <param name="moLineNo">订单行号</param>
+        /// <param name="lotNumber">批次号</param>
         /// <param name="cartonNumber">外箱号（默认空白）</param>
         /// <param name="sysLogID"></param>
         /// <param name="errCode"></param>
@@ -774,6 +781,7 @@ namespace IRAP.WCF.Client.Method
             int communityID,
             string moNumber,
             int moLineNo,
+            string lotNumber,
             string cartonNumber,
             long sysLogID,
             ref List<RePrintCartonNumber> datas,
@@ -797,6 +805,7 @@ namespace IRAP.WCF.Client.Method
                 hashParams.Add("communityID", communityID);
                 hashParams.Add("moNumber", moNumber);
                 hashParams.Add("moLineNo", moLineNo);
+                hashParams.Add("lotNumber", lotNumber);
                 hashParams.Add("cartonNumber", cartonNumber);
                 hashParams.Add("sysLogID", sysLogID);
 
@@ -974,6 +983,7 @@ namespace IRAP.WCF.Client.Method
         /// 输入外包装数更新内包装数量
         /// </summary>
         /// <param name="communityID"></param>
+        /// <param name="transactID">制造订单交易号</param>
         /// <param name="moNumber">订单号</param>
         /// <param name="moLineNo">订单行号</param>
         /// <param name="t105LeafID">客户叶标识</param>
@@ -985,6 +995,7 @@ namespace IRAP.WCF.Client.Method
         /// <returns></returns>
         public void usp_PokaYoke_Package(
             int communityID,
+            long transactID,
             string moNumber,
             int moLineNo,
             int t105LeafID,
@@ -1005,6 +1016,7 @@ namespace IRAP.WCF.Client.Method
                 #region 将函数参数加入 Hashtable 中
                 Hashtable hashParams = new Hashtable();
                 hashParams.Add("communityID", communityID);
+                hashParams.Add("transactID", transactID);
                 hashParams.Add("moNumber", moNumber);
                 hashParams.Add("moLineNo", moLineNo);
                 hashParams.Add("t105LeafID", t105LeafID);
