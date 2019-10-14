@@ -32,6 +32,6 @@ using System.Runtime.InteropServices;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.2.18.162")]
-[assembly: AssemblyFileVersion("6.2.1014.162")]
-[assembly: AssemblyInformationalVersion("6.2.18.162")]
+[assembly: AssemblyVersion("6.2.18.163")]
+[assembly: AssemblyFileVersion("6.2.1014.163")]
+[assembly: AssemblyInformationalVersion("6.2.18.163")]

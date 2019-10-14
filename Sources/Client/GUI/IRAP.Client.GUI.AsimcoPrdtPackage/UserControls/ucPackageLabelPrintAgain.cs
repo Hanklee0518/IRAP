@@ -216,6 +216,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 edtCartonNumber.Enabled = true;
                 edtMONumber.Enabled = false;
                 edtMOLineNo.Enabled = false;
+                edtLotNumber.Enabled = false;
                 edtCartonNumber.Focus();
             }
             else
@@ -223,6 +224,7 @@ namespace IRAP.Client.GUI.AsimcoPrdtPackage.UserControls
                 edtCartonNumber.Enabled = false;
                 edtMONumber.Enabled = true;
                 edtMOLineNo.Enabled = true;
+                edtLotNumber.Enabled = true;
                 edtMONumber.Focus();
             }
         }
