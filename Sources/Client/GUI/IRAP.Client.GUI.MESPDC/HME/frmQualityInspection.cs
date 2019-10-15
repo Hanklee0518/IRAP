@@ -55,20 +55,29 @@ namespace IRAP.Client.GUI.MESPDC.HME
                                         DMCNO = edtBarCode.Text.Trim(),
                                     };
 
-                                tradeGetPSI.Do();
-                                if (tradeGetPSI.Error.ErrCode != 0)
+                                if (tradeGetPSI.Do())
                                 {
-                                    throw new Exception(tradeGetPSI.Error.ErrText);
+                                    if (tradeGetPSI.Error.ErrCode != 0)
+                                    {
+                                        throw new Exception(tradeGetPSI.Error.ErrText);
+                                    }
+
+                                    using (dlgQIComponent component = new dlgQIComponent())
+                                    {
+                                        component.DMC = tradeGetPSI.Request.DMCNO;
+                                        component.SourceInfo = tradeGetPSI.Response.Output.ProductionLine;
+                                        component.ComponentType = trade.Response.Output.ComponentType;
+                                        component.Log = lvLogs;
+
+                                        component.ShowDialog();
+                                    }
                                 }
-
-                                using (dlgQIComponent component = new dlgQIComponent())
+                                else
                                 {
-                                    component.DMC = tradeGetPSI.Request.DMCNO;
-                                    component.SourceInfo = tradeGetPSI.Response.Output.ProductionLine;
-                                    component.ComponentType = trade.Response.Output.ComponentType;
-                                    component.Log = lvLogs;
-
-                                    component.ShowDialog();
+                                    lvLogs.WriteLog(
+                                        tradeGetPSI.Error.ErrCode,
+                                        tradeGetPSI.Error.ErrText,
+                                        DateTime.Now);
                                 }
                                 break;
                             case "Batch":

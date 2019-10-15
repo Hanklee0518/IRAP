@@ -161,6 +161,7 @@ namespace IRAP.Service.Client
                     Exception error = new Exception(errText);
                     error.Data["ErrCode"] = 999999;
                     error.Data["ErrText"] = errText;
+                    WriteLog.Instance.Write(errText, strProcedureName);
                     throw error;
             }
 
@@ -173,6 +174,7 @@ namespace IRAP.Service.Client
                     Exception error = new Exception(errText);
                     error.Data["ErrCode"] = 999999;
                     error.Data["ErrText"] = errText;
+                    WriteLog.Instance.Write(errText, strProcedureName);
                     throw error;
             }
 
@@ -262,18 +264,20 @@ namespace IRAP.Service.Client
                     }
 
                     result = JsonConvert.DeserializeObject<ErrorMessage>(resJson);
+                    string errorText = "";
                     if (result == null)
                     {
-                        throw new Exception($"网络异常：{error.Message}");
+                        errorText = $"网络异常：{error.Message}";
                     }
                     else
                     {
-                        throw
-                            new Exception(
+                        errorText =
                                 $"{(int)errorResponse.StatusCode}:" +
                                 $"{errorResponse.StatusDescription}|" +
-                                $"{result.ErrText}");
+                                $"{result.ErrText}";
                     }
+
+                    throw new Exception(errorText);
                 }
                 #endregion
 
@@ -281,8 +285,8 @@ namespace IRAP.Service.Client
 
                 if (resJson == "")
                 {
-                    throw new Exception(
-                        $"[ExCode={exCode}交易的响应报文内容空白，无法反序列化成响应报文对象");
+                    string errorText = $"[ExCode={exCode}交易的响应报文内容空白，无法反序列化成响应报文对象";
+                    throw new Exception(errorText);
                 }
 
                 T rtnObject = default(T);
@@ -311,7 +315,10 @@ namespace IRAP.Service.Client
             {
                 error.Data["ErrCode"] = 999999;
                 error.Data["ErrText"] = error.Message;
-                throw new Exception($"URL:[{url}]|ErrorMessage:[{error.Message}]");
+
+                string errorText = $"URL:[{url}]|ErrorMessage:[{error.Message}]";
+                WriteLog.Instance.Write(errorText, strProcedureName);
+                throw new Exception(errorText);
             }
             finally
             {
@@ -341,6 +348,10 @@ namespace IRAP.Service.Client
             }
             catch (Exception error)
             {
+                if (errorMessage== null)
+                {
+                    errorMessage = new ErrorMessage();
+                }
                 errorMessage.ErrCode = 999998;
                 errorMessage.ErrText = error.Message;
                 WriteLog.Instance.Write(error.Message, strProcedureName);
