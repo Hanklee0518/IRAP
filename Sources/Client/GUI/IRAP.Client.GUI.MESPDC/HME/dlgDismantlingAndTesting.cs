@@ -19,14 +19,13 @@ namespace IRAP.Client.GUI.MESPDC.HME
     {
         private string className = MethodBase.GetCurrentMethod().DeclaringType.FullName;
         private string dmcCode = "";
-        private xucIRAPListView log = null;
 
         public dlgDismantlingAndTesting()
         {
             InitializeComponent();
         }
 
-        public xucIRAPListView Log { get; set; }
+        public xucIRAPListView Log { get; set; } = null;
         public string DMC
         {
             get { return dmcCode; }
@@ -161,7 +160,7 @@ namespace IRAP.Client.GUI.MESPDC.HME
                 };
             foreach (SubComponent c in datas)
             {
-                trade.Request.CompoentList.Add(
+                trade.Request.ComponentList.Add(
                     new MRDismantleComponentSaveRequestDetail()
                     {
                         NO = c.NO,
@@ -172,9 +171,9 @@ namespace IRAP.Client.GUI.MESPDC.HME
             try
             {
                 trade.Do();
-                if (log != null)
+                if (Log != null)
                 {
-                    log.WriteLog(trade.Error.ErrCode, trade.Error.ErrText, DateTime.Now);
+                    Log.WriteLog(trade.Error.ErrCode, trade.Error.ErrText, DateTime.Now);
                 }
 
                 Close();

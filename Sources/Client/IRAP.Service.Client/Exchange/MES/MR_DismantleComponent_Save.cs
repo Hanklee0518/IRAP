@@ -91,7 +91,7 @@ namespace IRAP.Service.Client.Exchange.MES
         /// <summary>
         /// 检测结果(报废/释放)
         /// </summary>
-        public List<MRDismantleComponentSaveRequestDetail> CompoentList { get; set; }
+        public List<MRDismantleComponentSaveRequestDetail> ComponentList { get; set; }
             = new List<MRDismantleComponentSaveRequestDetail>();
     }
 

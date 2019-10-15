@@ -16,9 +16,12 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace IRAP.Service.Client
@@ -190,27 +193,89 @@ namespace IRAP.Service.Client
                 #endregion
 
                 WriteLog.Instance.Write($"请求报文：[{content}]", strProcedureName);
+                string resJson = "";
 
-                var client = new RestClient(url)
+                #region 使用 RestSharp 调用 WebAPI 失败
+                //var client = new RestClient(url)
+                //{
+                //    ReadWriteTimeout = 60000,
+                //};
+                //var request = new RestRequest(Method.POST);
+                //request.AddHeader("cache-control", "no-cache");
+                //request.AddHeader("Connection", "keep-alive");
+                //request.AddHeader("Content-Length", $"{content.Length}");
+                //request.AddHeader("Accept-Encoding", "gzip, deflate");
+                //request.AddHeader("Host", "10.230.69.59:5015");
+                //request.AddHeader("Postman-Token", "f610bc52-ec7b-4bcd-99c6-0b734009b39e,8be1c10c-7042-409e-a50a-713cd2e8dd8b");
+                //request.AddHeader("Cache-Control", "no-cache");
+                //request.AddHeader("Accept", "*/*");
+                //request.AddHeader("User-Agent", "PostmanRuntime/7.16.3");
+                //request.AddHeader("Content-Type", "application/json");
+                //request.AddParameter("undefined", content, ParameterType.RequestBody);
+
+                //IRestResponse response = client.Execute(request);
+                //Thread.Sleep(50);
+                //Application.DoEvents();
+
+                //string resJson = response.Content;
+                #endregion
+
+                #region 使用 HttpClient 调用 WebAPI
+                ServicePointManager.DefaultConnectionLimit = 1024;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.KeepAlive = false;
+                request.AllowAutoRedirect = true;
+                request.Proxy = null;
+                request.CookieContainer = new CookieContainer();
+                request.Timeout = 300000;
+                try
                 {
-                    ReadWriteTimeout = 60000,
-                };
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("Connection", "keep-alive");
-                request.AddHeader("Content-Length", "63");
-                request.AddHeader("Accept-Encoding", "gzip, deflate");
-                request.AddHeader("Host", "192.168.100.134:5010");
-                request.AddHeader("Postman-Token", "ef26d571-72f9-4b60-be3d-5826334f2c6d,0fb0b7c2-e065-48d2-aefa-24001431fb5a");
-                request.AddHeader("Cache-Control", "no-cache");
-                request.AddHeader("Accept", "*/*");
-                request.AddHeader("User-Agent", "PostmanRuntime/7.15.2");
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("undefined", content, ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                Application.DoEvents();
+                    var stream = request.GetRequestStream();
+                    byte[] bodyBytes = Encoding.UTF8.GetBytes(content);
+                    stream.Write(bodyBytes, 0, bodyBytes.Length);
+                    stream.Flush();
+                    stream.Close();
 
-                string resJson = response.Content;
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    using (
+                        StreamReader reader =
+                            new StreamReader(
+                                response.GetResponseStream(),
+                                Encoding.UTF8))
+                    {
+                        resJson = reader.ReadToEnd();
+                    }
+                    response.Close();
+                }
+                catch (WebException error)
+                {
+                    HttpWebResponse errorResponse = (HttpWebResponse)error.Response;
+                    using (
+                        StreamReader reader =
+                            new StreamReader(
+                                errorResponse.GetResponseStream(),
+                                Encoding.UTF8))
+                    {
+                        resJson = reader.ReadToEnd();
+                    }
+
+                    result = JsonConvert.DeserializeObject<ErrorMessage>(resJson);
+                    if (result == null)
+                    {
+                        throw new Exception($"网络异常：{error.Message}");
+                    }
+                    else
+                    {
+                        throw
+                            new Exception(
+                                $"{(int)errorResponse.StatusCode}:" +
+                                $"{errorResponse.StatusDescription}|" +
+                                $"{result.ErrText}");
+                    }
+                }
+                #endregion
 
                 WriteLog.Instance.Write($"响应报文：[{resJson}]", strProcedureName);
 
@@ -231,7 +296,7 @@ namespace IRAP.Service.Client
 
                 if (result == null || rtnObject == null)
                 {
-                    Exception error = 
+                    Exception error =
                         new Exception(
                             $"[ExCode={ExCode}交易的响应报文无法反序列化成响应报文对象");
                     throw error;
@@ -271,7 +336,7 @@ namespace IRAP.Service.Client
             try
             {
                 Communicate(out errorMessage);
-                WriteLog.Instance.Write($"[({errorMessage.ErrCode}){errorMessage.ErrText}");
+                WriteLog.Instance.Write($"[({errorMessage.ErrCode}){errorMessage.ErrText}", strProcedureName);
                 return errorMessage.ErrCode == 0;
             }
             catch (Exception error)

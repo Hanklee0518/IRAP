@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            this.grdclmnType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.lblDMC = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -38,21 +38,20 @@
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.grdSubComponents = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.tsmiScrap = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRelease = new System.Windows.Forms.ToolStripMenuItem();
             this.grdvSubComponents = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.grdclmnOrdinal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnLotNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.grdclmnType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdclmnQCStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiScrap = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRelease = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSubComponents)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdvSubComponents)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdvSubComponents)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTipController
@@ -61,6 +60,18 @@
             this.toolTipController.Appearance.Options.UseFont = true;
             this.toolTipController.AppearanceTitle.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolTipController.AppearanceTitle.Options.UseFont = true;
+            // 
+            // grdclmnType
+            // 
+            this.grdclmnType.AppearanceCell.Options.UseTextOptions = true;
+            this.grdclmnType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.grdclmnType.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.grdclmnType.Caption = "对应类型";
+            this.grdclmnType.FieldName = "Type";
+            this.grdclmnType.Name = "grdclmnType";
+            this.grdclmnType.Visible = true;
+            this.grdclmnType.VisibleIndex = 3;
+            this.grdclmnType.Width = 202;
             // 
             // labelControl1
             // 
@@ -147,6 +158,29 @@
             this.grdSubComponents.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdvSubComponents});
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiScrap,
+            this.tsmiRelease});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(101, 48);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // tsmiScrap
+            // 
+            this.tsmiScrap.Name = "tsmiScrap";
+            this.tsmiScrap.Size = new System.Drawing.Size(100, 22);
+            this.tsmiScrap.Text = "报废";
+            this.tsmiScrap.Click += new System.EventHandler(this.tsmiScrap_Click);
+            // 
+            // tsmiRelease
+            // 
+            this.tsmiRelease.Name = "tsmiRelease";
+            this.tsmiRelease.Size = new System.Drawing.Size(100, 22);
+            this.tsmiRelease.Text = "释放";
+            this.tsmiRelease.Click += new System.EventHandler(this.tsmiRelease_Click);
+            // 
             // grdvSubComponents
             // 
             this.grdvSubComponents.Appearance.HeaderPanel.Font = new System.Drawing.Font("新宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -162,17 +196,18 @@
             this.grdclmnLotNumber,
             this.grdclmnType,
             this.grdclmnQCStatus});
-            gridFormatRule1.ApplyToRow = true;
-            gridFormatRule1.Column = this.grdclmnType;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue1.Value1 = "精追";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            this.grdvSubComponents.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ApplyToRow = true;
+            gridFormatRule2.Column = this.grdclmnType;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue2.Value1 = "精追";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            this.grdvSubComponents.FormatRules.Add(gridFormatRule2);
             this.grdvSubComponents.GridControl = this.grdSubComponents;
             this.grdvSubComponents.Name = "grdvSubComponents";
+            this.grdvSubComponents.OptionsBehavior.Editable = false;
             this.grdvSubComponents.OptionsSelection.MultiSelect = true;
             this.grdvSubComponents.OptionsView.ColumnAutoWidth = false;
             this.grdvSubComponents.OptionsView.ShowGroupPanel = false;
@@ -206,18 +241,6 @@
             this.grdclmnLotNumber.VisibleIndex = 2;
             this.grdclmnLotNumber.Width = 234;
             // 
-            // grdclmnType
-            // 
-            this.grdclmnType.AppearanceCell.Options.UseTextOptions = true;
-            this.grdclmnType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.grdclmnType.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.grdclmnType.Caption = "对应类型";
-            this.grdclmnType.FieldName = "Type";
-            this.grdclmnType.Name = "grdclmnType";
-            this.grdclmnType.Visible = true;
-            this.grdclmnType.VisibleIndex = 3;
-            this.grdclmnType.Width = 202;
-            // 
             // grdclmnQCStatus
             // 
             this.grdclmnQCStatus.AppearanceCell.Options.UseTextOptions = true;
@@ -229,29 +252,6 @@
             this.grdclmnQCStatus.Visible = true;
             this.grdclmnQCStatus.VisibleIndex = 4;
             this.grdclmnQCStatus.Width = 239;
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiScrap,
-            this.tsmiRelease});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(101, 48);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
-            // 
-            // tsmiScrap
-            // 
-            this.tsmiScrap.Name = "tsmiScrap";
-            this.tsmiScrap.Size = new System.Drawing.Size(100, 22);
-            this.tsmiScrap.Text = "报废";
-            this.tsmiScrap.Click += new System.EventHandler(this.tsmiScrap_Click);
-            // 
-            // tsmiRelease
-            // 
-            this.tsmiRelease.Name = "tsmiRelease";
-            this.tsmiRelease.Size = new System.Drawing.Size(100, 22);
-            this.tsmiRelease.Text = "释放";
-            this.tsmiRelease.Click += new System.EventHandler(this.tsmiRelease_Click);
             // 
             // dlgDismantlingAndTesting
             // 
@@ -267,8 +267,8 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSubComponents)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdvSubComponents)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdvSubComponents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

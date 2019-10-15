@@ -21,7 +21,6 @@ namespace IRAP.Client.GUI.MESPDC.HME
         public dlgCDOptions()
         {
             InitializeComponent();
-
         }
 
         public string DMC
