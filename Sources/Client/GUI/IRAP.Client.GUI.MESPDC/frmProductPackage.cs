@@ -2837,6 +2837,10 @@ namespace IRAP.Client.GUI.MESPDC
                                         //if (!string.IsNullOrEmpty(OutputStr))
                                         //PrintLabel(objPackageType.T117LabelID_Carton, cartonSerialNumber, OutputStr);
                                     }
+                                    else
+                                    {
+                                        return;
+                                    }
                                 }
                                 if (objPackageType.T117LabelID_Layer > 0)
                                 {
