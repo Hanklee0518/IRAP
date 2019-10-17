@@ -26,7 +26,7 @@ using IRAP.WCF.Client.Method;
 
 namespace IRAP_FVS_Kanban
 {
-    public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class frmMain1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         private static string className =
             MethodBase.GetCurrentMethod().DeclaringType.FullName;
@@ -50,20 +50,20 @@ namespace IRAP_FVS_Kanban
         private string message = "";
         private string caption = "";
 
-        public frmMain()
+        public frmMain1()
         {
             InitializeComponent();
 
             ShowInTaskbar = false;
         }
 
-        public frmMain(int screenIndex, int productIndex) : this()
+        public frmMain1(int screenIndex, int productIndex) : this()
         {
             monitorIndex = screenIndex;
             sysLogIDIndex = productIndex;
         }
 
-        public frmMain(KanbanScreen screen) : this()
+        public frmMain1(KanbanScreen screen) : this()
         {
             _screen = screen;
         }
@@ -97,7 +97,7 @@ namespace IRAP_FVS_Kanban
                     out errCode,
                     out errText);
                 WriteLog.Instance.Write(
-                    string.Format("({0}){1}", errCode, errText), 
+                    string.Format("({0}){1}", errCode, errText),
                     strProcedureName);
                 if (errCode == 0)
                 {
@@ -467,7 +467,7 @@ namespace IRAP_FVS_Kanban
             }
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void frmMain1_Load(object sender, EventArgs e)
         {
             string strProcedureName =
                 string.Format(
@@ -533,7 +533,7 @@ namespace IRAP_FVS_Kanban
             }
         }
 
-        private void frmMain_Shown(object sender, EventArgs e)
+        private void frmMain1_Shown(object sender, EventArgs e)
         {
             string strProcedureName =
                 string.Format(
@@ -572,9 +572,9 @@ namespace IRAP_FVS_Kanban
             {
                 WriteLog.Instance.Write(error.Message, strProcedureName);
                 MessageBox.Show(
-                    error.Message, 
-                    "系统信息", 
-                    MessageBoxButtons.OK, 
+                    error.Message,
+                    "系统信息",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             finally

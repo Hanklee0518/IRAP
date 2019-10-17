@@ -1,6 +1,6 @@
 ﻿namespace IRAP_FVS_Kanban
 {
-    partial class frmMain
+    partial class frmMain1
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@
             this.ribbonStatusBar.Size = new System.Drawing.Size(995, 27);
             this.ribbonStatusBar.Visible = false;
             // 
-            // frmMain
+            // frmMain1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(995, 515);
@@ -81,11 +81,11 @@
             this.IsMdiContainer = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmMain";
+            this.Name = "frmMain1";
             this.Ribbon = this.ribbonControl;
             this.StatusBar = this.ribbonStatusBar;
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Shown += new System.EventHandler(this.frmMain_Shown);
+            this.Load += new System.EventHandler(this.frmMain1_Load);
+            this.Shown += new System.EventHandler(this.frmMain1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
